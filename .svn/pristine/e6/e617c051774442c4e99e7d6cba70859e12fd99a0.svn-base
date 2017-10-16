@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "A propos";
+}
+<h2><strong style="color:#E95325;">À</strong> propos</h2>
+<h3>Un projet pour nos enfants.</h3>
+<br />
+
+<p>
+    L'objectif du projet est de développer une plateforme collaborative déstinée aux professeurs.
+    Nous souhaitons leur offrir une solution de partage pour leurs cours au format PDF.
+    Nous souhaitons rappeler que l'accès aux services est gratuit. Un accès premium est disponible afin
+    de nous aider financièrement.
+</p>
+<br />
+

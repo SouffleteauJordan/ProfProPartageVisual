@@ -1,0 +1,84 @@
+﻿@model ProfProPartage.ViewModel.ViewModelFicheCoursList
+
+@{
+    ViewData["Title"] = "Catalogue";
+}
+
+<div class="titleTopPage">
+    <div class="mini-box">
+        <h2><strong style="color:#E95325;">C</strong>atalogue des fiches de cours</h2>
+        <h3>Un filtre est à votre disposition pour faciliter votre recherche</h3>
+    </div>
+</div>
+
+<div class="content-listFiche">
+    <div class="col-md-12">
+        <div id="Filter">
+            <div id="contentFilter">
+                <ul>
+                    <li>
+                        <button class="active btnP btnNiv btnMat" id="all">Show All</button>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <button class="btnP btnNiv" id="CP">CP</button>
+                    </li>
+                    <li>
+                        <button class="btnP btnNiv" id="CE1">CE1</button>
+                    </li>
+                    <li>
+                        <button class="btnP btnNiv" id="CE2">CE2</button>
+                    </li>
+                    <li>
+                        <button class="btnP btnNiv" id="CM1">CM1</button>
+                    </li>
+                    <li>
+                        <button class="btnP btnNiv" id="CM2">CM2</button>
+                    </li>
+                    <li>
+                        <h4><small class="subTitle">(Niveau)</small></h4>
+                    </li>
+                </ul>
+                <hr class="line" style="width: 70%; color: black; height: 1px; background-color:brown; opacity:0.6; margin-top:3px; margin-bottom:9px; display:none" />
+                <ul id="FilterMatiere"></ul>
+                <hr class="line" style="width: 70%; color: black; height: 1px; background-color:brown; opacity:0.6; margin-top:3px; margin-bottom:9px;display:none" />
+                <ul id="FilterTheme"></ul>
+            </div>
+        </div>
+        <div class="spacer"></div>
+
+        <div id="parent">
+
+            @Html.Partial("listFiche", Model.ListFic)
+        </div>
+
+        <div class="spacer"></div>
+
+        <div class="modal fade" id="PDFViewer" tabindex="-1" role="dialog" aria-labelledby="PDFViewerLabel" aria-hidden="true">
+            <div id="PDFDialog" class="modal-dialog">
+                <div id="PDFModal" class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="PDFViewerLabel">Modal title</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="wrap">
+                            <div id="left_div">
+                                <div id="IframePDF">
+                                    <iframe frameborder="0"></iframe>
+                                </div>
+                            </div><div id="right_div">
+                                <div id="contentPDF"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="footerPDF">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <a id="btnDownload" class="btn btn-primary" download>Download</a>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    </div>
+</div>

@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Contact";
+}
+<h2><strong style="color:#E95325;">C</strong>ontact</h2>
+<h3>Nous contacter.</h3>
+<br />
+<address>
+    <p>Actuellement, nous somme disponible uniquement par mail.</p></br>
+    Merci.
+</address>
+
+<address>
+    <strong>Administrateur :</strong> <a href="loic.souffleteau@gmail.com">loic.souffleteau@gmail.com</a><br />
+    <strong>Concepteur et Développeur :</strong> <a href="jordan.souffleteau@gmail.com">jordan.souffleteau@gmail.com</a>
+</address>
