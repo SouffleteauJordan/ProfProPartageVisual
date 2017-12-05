@@ -20,7 +20,15 @@ namespace AppProfProPartage.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            ViewBag.Message = "Les fiches de cours sont classé par niveau, matière puis thème";
+
+            List<FicheCours> listFiche = new List<FicheCours>();
+
+            FicheCoursBll FicheCoursBll = _businessLocator.FicheCoursBll;
+            listFiche = FicheCoursBll.GetAllFicheCours();
+            ViewModelFicheCoursList vm = new ViewModelFicheCoursList(listFiche);
+
+            return View(vm);
         }
 
         public ActionResult About()
@@ -30,7 +38,6 @@ namespace AppProfProPartage.Controllers
             return View();
         }
 
-        [Authorize]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

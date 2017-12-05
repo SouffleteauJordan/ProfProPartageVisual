@@ -91,22 +91,22 @@ namespace AppProfProPartage.Controllers
                 if (Request.Files[upload].ContentLength == 0) continue;
                 string filename = Path.GetFileName(Request.Files[upload].FileName);
                 string pathToSave = Server.MapPath("~/Files/");
-                Request.Files[upload].SaveAs(Path.Combine(pathToSave, filename));
+                Request.Files[upload].SaveAs(Path.Combine(pathToSave, filename.Replace(" ", "_").Replace("-", "_")));
 
                 string niveau = HttpContext.Request.Form["niveau"];
                 string matiere = HttpContext.Request.Form["matiere"];
                 string theme = HttpContext.Request.Form["theme"];
                 string description = HttpContext.Request.Form["description"];
-                doc = new Files("/Files/" + filename, "/Files/" + filename.Replace(".pdf", "") + ".jpg", filename, Request.Files[upload].ContentLength, "/Files/" + filename, "/Files/" + filename, niveau, matiere, theme, description);
+                doc = new Files("/Files/" + filename.Replace(".pdf", "").Replace(" ", "_").Replace("-", "_"), "/Files/" + filename.Replace(".pdf", "").Replace(" ", "_").Replace("-", "_") + ".jpg", filename, Request.Files[upload].ContentLength, "/Files/" + filename.Replace(".pdf", "").Replace(" ", "_").Replace("-", "_"), "/Files/" + filename.Replace(".pdf", "").Replace(" ", "_").Replace("-", "_"), niveau, matiere, theme, description);
 
                 PdfDocument pdf_doc = new PdfDocument();
                 pdf_doc.LoadFromStream(Request.Files[upload].InputStream);
                 Bitmap img = pdf_doc.SaveAsImage(0);
-                img.Save(Path.Combine(pathToSave, filename.Replace(".pdf", "")) + ".jpg", ImageFormat.Jpeg);
+                img.Save(Path.Combine(pathToSave, filename.Replace(" ", "_").Replace("-", "_").Replace(".pdf", "")) + ".jpg", ImageFormat.Jpeg);
                 fileList.Add(doc);
 
                 FicheCoursInvalideBll FicheCoursInvalideBll = _businessLocator.FicheCoursInvalideBll;
-                FicheCoursInvalideBll.AddFicheCoursInvalideAsync(new FicheCoursInvalide() {Description = description, Titre = doc.name, Niveau = doc.niveau, Matiere = doc.matiere, Theme = doc.theme, UrlPDF = doc.url, UrlJPG = "/Files/"+ filename.Replace(".pdf", "") + ".jpg", Temperature = 0, UserId=User.Identity.GetUserId()});
+                FicheCoursInvalideBll.AddFicheCoursInvalideAsync(new FicheCoursInvalide() {Description = description, Titre = doc.name, Niveau = doc.niveau, Matiere = doc.matiere, Theme = doc.theme, UrlPDF = "/Files/" + filename.Replace(" ", "_").Replace("-", "_"), UrlJPG = "/Files/"+ filename.Replace(" ", "_").Replace("-", "_").Replace(".pdf", "") + ".jpg", Temperature = 0, UserId=User.Identity.GetUserId()});
             }
             listFiles list = new listFiles(fileList);
             JsonResult res = Json(list);

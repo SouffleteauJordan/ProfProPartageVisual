@@ -19,7 +19,7 @@ namespace AppProfProPartage.Controllers
         }
 
 
-        [System.Web.Mvc.Authorize(Roles = "admin")]
+        [System.Web.Mvc.Authorize(Roles = "Admin")]
         public ActionResult AdminPanel()
         {
             List<FicheCoursInvalide> listFicheInvalide = new List<FicheCoursInvalide>();

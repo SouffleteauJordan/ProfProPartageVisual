@@ -8,6 +8,7 @@ using Owin;
 using ProfProPartage.ViewModel.Model;
 using ProfProPartage.Dal;
 using Microsoft.Owin.Security;
+using System.Net.Http;
 
 namespace AppProfProPartage.ViewModel
 {
@@ -87,8 +88,8 @@ namespace AppProfProPartage.ViewModel
 
             app.UseFacebookAuthentication(new Microsoft.Owin.Security.Facebook.FacebookAuthenticationOptions()
             {
-                AppId = "187947824971350",
-                AppSecret  = "ca1e8f15a4906eb2a1ec8eb3a6051cd8"
+                AppId = "1932699450327301",
+                AppSecret = "a4c18a60261648ae61dadb729e54a145"
 
             });
 
@@ -99,7 +100,6 @@ namespace AppProfProPartage.ViewModel
             });
         }
 
-        
         //private static bool IsAjaxRequest(IOwinRequest request)
         //{
         //    IReadableStringCollection query = request.Query;

@@ -16,7 +16,7 @@
     </head>
 <body>
     <div id="fond"></div>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div id="header-menu" class="navbar navbar-inverse navbar-fixed-top">
         <div class="container menu">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -27,35 +27,38 @@
                 </button>
                 <a href="/" id="Ic" class="navbar-brand"><strong style="color:#39cf09;">P</strong>rof<strong style="color:#fa2420;">P</strong>ro<strong style="color:#ffa500;">P</strong>artage</a>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Accueil", "Index", "Home")</li>   
-                    <li>@Html.ActionLink("Catalogue", "Catalogue", "Catalogue")</li>
-                    @if (ViewContext.HttpContext.User.IsInRole("admin"))
+            <div id="bar-menu" class="stroke navbar-collapse collapse">
+                <ul id="menu-elem" class="nav navbar-nav">
+                    <li class="elem-menu"><a class="elem" href="@Url.Action("Index","Home", null)"><span class="elem glyphicon glyphicon-home"></span>Accueil</a></li>
+                    <!--<li class="elem-menu"><a class="elem" href="@Url.Action("Catalogue","Catalogue", null)"><span class="elem glyphicon glyphicon-book"></span>Catalogue</a></li>-->
+                    <li class="elem-menu"><a class="elem" href="@Url.Action("Import","FicheCours", null)"><span class="elem glyphicon glyphicon-cloud-upload"></span>Importer des PDF</a></li>
+                    <li class="elem-menu"><a class="elem" href="@Url.Action("About","Home", null)"><span class="elem glyphicon glyphicon-info-sign"></span>A propos</a></li>
+                    <li class="elem-menu"><a class="elem" href="@Url.Action("Contact","Home", null)"><span class="elem glyphicon glyphicon-send"></span>Contact</a></li>
+                    @if (ViewContext.HttpContext.User.IsInRole("Admin"))
                     {
-                        <li>@Html.ActionLink("Panneau d'administration", "AdminPanel", "Admin")</li>
+                        <li class="elem-menu"><a class="elem" href="@Url.Action("AdminPanel", "Admin", null)"><span class="elem glyphicon glyphicon-briefcase"></span>Panneau d'administration</a></li>
                     }
-                    <li>@Html.ActionLink("Importer des PDF", "Import", "FicheCours")</li>
-                    <li>@Html.ActionLink("A propos", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
-    <div class="container body-content ">
-        <div class="rightClip">
-            <div class="leftClip">
-            </div>
-        </div>
+
+    @RenderSection("Banner", required: false)
+
+    <div id="contenu-page">
         @RenderBody()
         <footer>
+            <div class="fb-like"
+                 data-share="true"
+                 data-width="450"
+                 data-show-faces="true">
+            </div>
             <p>&copy; @DateTime.Now.Day/@DateTime.Now.Month/@DateTime.Now.Year - Les <strong style="color:#39cf09;">P</strong>rofs sont des <strong style="color:#fa2420;">P</strong>ros du <strong style="color:#ffa500;">P</strong>artage</p>
         </footer>
-        <div class="post-it-note"></div>
     </div>
 
-    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery-3.2.1.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/site.js"></script>
     <script src="~/Scripts/modernizr-2.6.2.js"></script>

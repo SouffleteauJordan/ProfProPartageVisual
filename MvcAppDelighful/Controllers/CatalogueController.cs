@@ -19,7 +19,7 @@ namespace AppProfProPartage.Controllers
         {
             _businessLocator = ((BusinessLocator)System.Web.HttpContext.Current.Items["BusinessLocator"]);
         }
-
+        
         public ActionResult Catalogue()
         {
             ViewBag.Message = "Les fiches de cours sont classé par niveau, matière puis thème";

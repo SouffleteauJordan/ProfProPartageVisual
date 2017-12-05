@@ -1,76 +1,187 @@
-﻿@{
-    ViewData["Title"] = "Accueil";
+﻿@model ProfProPartage.ViewModel.ViewModelFicheCoursList
+
+@{
+    ViewData["Title"] = "Index";
 }
+<div id="Filter">
+    <div id="contentFilter">
+        <dl class="dropdown2">
+            <dt>
+                <a href="#">
+                    <span class="hida">Niveau</span>
+                    <p class="multiSel"></p>
+                </a>
+            </dt>
+            <dd>
+                <div class="mutliSelect">
+                    <ul>
+                        <label for="CP">
+                            <input type="checkbox" value="CP" id="CP" />CP
+                        </label>
+                        <label for="CE1">
+                            <input type="checkbox" value="CE1" id="CE1" />CE1
+                        </label>
+                        <label for="CE2">
+                            <input type="checkbox" value="CE2" id="CE2" />CE2
+                        </label>
+                        <label for="CM1">
+                            <input type="checkbox" value="CM1" id="CM1" />CM1
+                        </label>
+                        <label for="CM2">
+                            <input type="checkbox" value="CM2" id="CM2" />CM2
+                        </label>
+                    </ul>
+                </div>
+            </dd>
+        </dl>
 
-
-
-    <div id="jumbo" class="jumbotron" style="margin-top:10px; position:relative;">
-        <h1>Les <strong style="color:#39cf09;">P</strong>rofs sont des <strong style="color:#fa2420;">P</strong>ros du <strong style="color:#ffa500;">P</strong>artage</h1>
-        <blockquote class="pull-right">
-            <p>Aucun de nous ne sait ce que nous savons tous, ensemble.</p>
-            <small>by <cite>Euripide, dramaturge</cite></small>
-        </blockquote>
-     </div>
-    <div class="spacer"></div>
-    <div class="spacer"></div>
-
-<div class="row">
-    <div class="col-lg-12" style="text-align:center;">
-        <div class="mini-box">
-            <h1>Une solution...</h1>
-        </div>
+        <form>
+            <div class="multiselect">
+                <div class="selectBox" onclick="showCheckNiveau()">
+                    <select>
+                        <option>Niveau</option>
+                    </select>
+                    <div class="overSelect"></div>
+                </div>
+                <div id="checkNiveau" class="checkboxes">
+                    <label for="CP">
+                        <input type="checkbox" id="CP" />CP
+                    </label>
+                    <label for="CE1">
+                        <input type="checkbox" id="CE1" />CE1
+                    </label>
+                    <label for="CE2">
+                        <input type="checkbox" id="CE2" />CE2
+                    </label>
+                    <label for="CM1">
+                        <input type="checkbox" id="CM1" />CM1
+                    </label>
+                    <label for="CM2">
+                        <input type="checkbox" id="CM2" />CM2
+                    </label>
+                </div>
+            </div>
+        </form>
+        <form>
+            <div class="multiselect">
+                <div class="selectBox" onclick="showCheckMatiere()">
+                    <select>
+                        <option>Matière</option>
+                    </select>
+                    <div class="overSelect"></div>
+                </div>
+                <div id="checkMatiere" class="checkboxes">
+                    <label for="CP">
+                        <input type="checkbox" id="CP" />CP
+                    </label>
+                    <label for="CE1">
+                        <input type="checkbox" id="CE1" />CE1
+                    </label>
+                    <label for="CE2">
+                        <input type="checkbox" id="CE2" />CE2
+                    </label>
+                    <label for="CM1">
+                        <input type="checkbox" id="CM1" />CM1
+                    </label>
+                    <label for="CM2">
+                        <input type="checkbox" id="CM2" />CM2
+                    </label>
+                </div>
+            </div>
+        </form>
+        <form>
+            <div class="multiselect">
+                <div class="selectBox" onclick="showCheckTheme()">
+                    <select>
+                        <option>Thème</option>
+                    </select>
+                    <div class="overSelect"></div>
+                </div>
+                <div id="checkTheme" class="checkboxes">
+                    <label for="CP">
+                        <input type="checkbox" id="CP" />CP
+                    </label>
+                    <label for="CE1">
+                        <input type="checkbox" id="CE1" />CE1
+                    </label>
+                    <label for="CE2">
+                        <input type="checkbox" id="CE2" />CE2
+                    </label>
+                    <label for="CM1">
+                        <input type="checkbox" id="CM1" />CM1
+                    </label>
+                    <label for="CM2">
+                        <input type="checkbox" id="CM2" />CM2
+                    </label>
+                </div>
+            </div>
+        </form>
+        <ul>
+            <li>
+                <button class="active btnP btnNiv btnMat" id="all">Show All</button>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <checkbox class="btnP btnNiv" id="CP">CP</checkbox>
+            </li>
+            <li>
+                <button class="btnP btnNiv" id="CE1">CE1</button>
+            </li>
+            <li>
+                <button class="btnP btnNiv" id="CE2">CE2</button>
+            </li>
+            <li>
+                <button class="btnP btnNiv" id="CM1">CM1</button>
+            </li>
+            <li>
+                <button class="btnP btnNiv" id="CM2">CM2</button>
+            </li>
+            <li>
+                <h4><small class="subTitle">(Niveau)</small></h4>
+            </li>
+        </ul>
+        <hr class="line" style="width: 70%; color: black; height: 1px; background-color:brown; opacity:0.6; margin-top:3px; margin-bottom:9px; display:none" />
+        <ul id="FilterMatiere"></ul>
+        <hr class="line" style="width: 70%; color: black; height: 1px; background-color:brown; opacity:0.6; margin-top:3px; margin-bottom:9px;display:none" />
+        <ul id="FilterTheme"></ul>
+    </div>
+</div>
+<div class="content-listFiche">
+    <div class="col-md-12">
         <div class="spacer"></div>
-    </div>
 
+        <div id="parent">
 
-    <div class="col-lg-12" style="text-align:center; ">
-        <div class="col-md-4">
-            <div class="mini-box">
-                <h3><strong style="color:#39cf09;">Unique !</strong></h3>
-                <img class="img-index" src="~/Images/book.png" />
-                <div class="spacer"></div>
-                <p style="padding-left:10px; padding-right:10px;" class="text-justify">
-                    Chacun des utilisateurs du site contribue à l'expenssion des connaissances mise à disposition.<br />
-                    Nous mettons à votre disposition une solution de partage pour vos cours au format PDF.<br />
-                    La fonctionnalité d'upload de fichier vous permet de facilement et rapidement déposer vos cours.<br />
-                    Il est possible de trouver tout aussi facilement une fiche de cour sur la matière et le thème voulu.
-                </p>
-            </div>
+            @Html.Partial("listFiche", Model.ListFic)
         </div>
 
-        <div class="col-md-4">
-            <div class="mini-box">
-                <h3><strong style="color:#fa2420;">Communautaire !</strong></h3>
-                <img class="img-index" src="~/Images/share.png" />
-                <div class="spacer"></div>
-                <p style="padding-left:10px; padding-right:10px;" class="text-justify">
-                    Comme tout les sites collaboratif, le nombre d'utilisateur influence la qualité d'un service, c'est pourquoi nous vous invitons
-                    à parler de nous sur les réseaux sociaux ou de vive voix.
-                </p>
-            </div>
-        </div>
+        <div class="spacer"></div>
 
-        <div class="col-md-4">
-            <div class="mini-box">
-                <h3><strong style="color:#ffa500;">Gratuite !</strong></h3>
-                <img class="img-index" src="~/Images/gratuit.png" />
-                <div class="spacer"></div>
-                <p style="padding-left:10px; padding-right:10px;" class="text-justify">
-                    L'accès à nos services est entièrement gratuit<br />
-                    Cependant, un accès premium est disponible afin de nous aider financièrement au maintient du site.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div class="spacer"></div>
-    <div class="spacer"></div>
-    <div class="spacer"></div>
-    <div class="spacer"></div>
-
-    <div class="col-lg-12">
-        <div id="ListeNews">
-            <ul></ul>
-        </div>
+        <div class="modal fade" id="PDFViewer" tabindex="-1" role="dialog" aria-labelledby="PDFViewerLabel" aria-hidden="true">
+            <div id="PDFDialog" class="modal-dialog">
+                <div id="PDFModal" class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="PDFViewerLabel">Modal title</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="wrap">
+                            <div id="left_div">
+                                <div id="IframePDF">
+                                    <iframe frameborder="0"></iframe>
+                                </div>
+                            </div><div id="right_div">
+                                <div id="contentPDF"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="footerPDF">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <a id="btnDownload" class="btn btn-primary" download>Download</a>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
     </div>
 </div>

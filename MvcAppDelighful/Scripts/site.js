@@ -39,9 +39,9 @@ var Theme_List_CE2_CM1_CM2 = [
     ["Outils pour la classe", "Travail en autonomie", "Logiciels"],
 ];
 
-var $btnsNiv = $('.btnNiv').click(function () {
-    $('#FilterMatiere').empty();
-    $('#FilterTheme').empty();
+var $btnsNiv = $('#checkNiveau').click(function () {
+    $('#checkMatiere').empty();
+    $('#checkTheme').empty();
     mat = "all";
     the = "all";
 
@@ -192,3 +192,73 @@ String.prototype.replaceAll = function (search, replacement) {
     var target = this;
     return target.replace(new RegExp(search, 'g'), replacement);
 };
+
+var expanded = false;
+
+function showCheckNiveau() {
+    var checkboxes = document.getElementById("checkNiveau");
+    if (!expanded) {
+        checkboxes.style.display = "block";
+        expanded = true;
+    } else {
+        checkboxes.style.display = "none";
+        expanded = false;
+    }
+}
+function showCheckMatiere() {
+    var checkboxes = document.getElementById("checkMatiere");
+    if (!expanded) {
+        checkboxes.style.display = "block";
+        expanded = true;
+    } else {
+        checkboxes.style.display = "none";
+        expanded = false;
+    }
+}
+function showCheckTheme() {
+    var checkboxes = document.getElementById("checkTheme");
+    if (!expanded) {
+        checkboxes.style.display = "block";
+        expanded = true;
+    } else {
+        checkboxes.style.display = "none";
+        expanded = false;
+    }
+}
+
+$(".dropdown2 dt a").on('click', function () {
+    $(".dropdown2 dd ul").slideToggle('fast');
+});
+
+$(".dropdown2 dd ul li a").on('click', function () {
+    $(".dropdown2 dd ul").hide();
+});
+
+function getSelectedValue(id) {
+    return $("#" + id).find("dt a span.value").html();
+}
+
+$(document).bind('click', function (e) {
+    var $clicked = $(e.target);
+    if (!$clicked.parents().hasClass("dropdown2")) $(".dropdown2 dd ul").hide();
+});
+
+$('.mutliSelect input[type="checkbox"]').on('click', function () {
+
+    var title = $(this).closest('.mutliSelect').find('input[type="checkbox"]').val(),
+        title = $(this).val() + ",";
+
+    if ($(this).is(':checked')) {
+        var html = '<span title="' + title + '">' + title + '</span>';
+        $('.multiSel').append(html);
+        $(".hida").hide();
+    } else {
+        $('span[title="' + title + '"]').remove();
+        var ret = $(".hida");
+        $('.dropdown2 dt a').append(ret);
+
+    }
+    if ($('.multiSel').text() == "") {
+        $('.multiSel').append("Niveau");
+    }
+});

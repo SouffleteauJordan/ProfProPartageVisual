@@ -12,6 +12,7 @@ using ProfProPartage.ViewModel.Model;
 using ProfProPartage.ViewModel;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Practices.Unity;
+using Unity.Attributes;
 
 namespace AppProfProPartage.ViewModel.Controllers
 {

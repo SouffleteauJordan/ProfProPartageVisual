@@ -15,7 +15,7 @@ namespace ProfProPartage.Dal
     {
 
         public DbContextProfProPartage()
-            : base("DbProfProPartage")
+            : base("ProfProPartageAzure")
         {
         }
 
