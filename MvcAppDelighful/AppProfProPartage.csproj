@@ -427,6 +427,9 @@
     <Content Include="Content\css\uikit.min.css" />
     <Content Include="Content\dragdrop.css" />
     <Content Include="Content\dropzone.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\infragistics.css" />
+    <Content Include="Content\infragistics.theme.css" />
     <Content Include="Content\jquery.fileupload-ui.css" />
     <Content Include="Content\jquery.fileupload.css" />
     <Content Include="Content\site.min.css" />

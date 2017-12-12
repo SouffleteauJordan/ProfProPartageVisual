@@ -3,148 +3,21 @@
 @{
     ViewData["Title"] = "Index";
 }
+
 <div id="Filter">
     <div id="contentFilter">
-        <dl class="dropdown2">
-            <dt>
-                <a href="#">
-                    <span class="hida">Niveau</span>
-                    <p class="multiSel"></p>
-                </a>
-            </dt>
-            <dd>
-                <div class="mutliSelect">
-                    <ul>
-                        <label for="CP">
-                            <input type="checkbox" value="CP" id="CP" />CP
-                        </label>
-                        <label for="CE1">
-                            <input type="checkbox" value="CE1" id="CE1" />CE1
-                        </label>
-                        <label for="CE2">
-                            <input type="checkbox" value="CE2" id="CE2" />CE2
-                        </label>
-                        <label for="CM1">
-                            <input type="checkbox" value="CM1" id="CM1" />CM1
-                        </label>
-                        <label for="CM2">
-                            <input type="checkbox" value="CM2" id="CM2" />CM2
-                        </label>
-                    </ul>
-                </div>
-            </dd>
-        </dl>
+        <div class="spacer"></div>
+        <div id="checkboxSelectComboNiv"></div>
+        <div id="checkboxSelectComboMat"></div>
+        <div id="checkboxSelectComboThe"></div>
 
-        <form>
-            <div class="multiselect">
-                <div class="selectBox" onclick="showCheckNiveau()">
-                    <select>
-                        <option>Niveau</option>
-                    </select>
-                    <div class="overSelect"></div>
-                </div>
-                <div id="checkNiveau" class="checkboxes">
-                    <label for="CP">
-                        <input type="checkbox" id="CP" />CP
-                    </label>
-                    <label for="CE1">
-                        <input type="checkbox" id="CE1" />CE1
-                    </label>
-                    <label for="CE2">
-                        <input type="checkbox" id="CE2" />CE2
-                    </label>
-                    <label for="CM1">
-                        <input type="checkbox" id="CM1" />CM1
-                    </label>
-                    <label for="CM2">
-                        <input type="checkbox" id="CM2" />CM2
-                    </label>
-                </div>
+        <div id="itemData">
+            <div id="table">
+                <ul id="tableNiv" class="tableSelected"></ul>
+                <ul id="tableMat" class="tableSelected"></ul>
+                <ul id="tableThe" class="tableSelected"></ul>
             </div>
-        </form>
-        <form>
-            <div class="multiselect">
-                <div class="selectBox" onclick="showCheckMatiere()">
-                    <select>
-                        <option>Matière</option>
-                    </select>
-                    <div class="overSelect"></div>
-                </div>
-                <div id="checkMatiere" class="checkboxes">
-                    <label for="CP">
-                        <input type="checkbox" id="CP" />CP
-                    </label>
-                    <label for="CE1">
-                        <input type="checkbox" id="CE1" />CE1
-                    </label>
-                    <label for="CE2">
-                        <input type="checkbox" id="CE2" />CE2
-                    </label>
-                    <label for="CM1">
-                        <input type="checkbox" id="CM1" />CM1
-                    </label>
-                    <label for="CM2">
-                        <input type="checkbox" id="CM2" />CM2
-                    </label>
-                </div>
-            </div>
-        </form>
-        <form>
-            <div class="multiselect">
-                <div class="selectBox" onclick="showCheckTheme()">
-                    <select>
-                        <option>Thème</option>
-                    </select>
-                    <div class="overSelect"></div>
-                </div>
-                <div id="checkTheme" class="checkboxes">
-                    <label for="CP">
-                        <input type="checkbox" id="CP" />CP
-                    </label>
-                    <label for="CE1">
-                        <input type="checkbox" id="CE1" />CE1
-                    </label>
-                    <label for="CE2">
-                        <input type="checkbox" id="CE2" />CE2
-                    </label>
-                    <label for="CM1">
-                        <input type="checkbox" id="CM1" />CM1
-                    </label>
-                    <label for="CM2">
-                        <input type="checkbox" id="CM2" />CM2
-                    </label>
-                </div>
-            </div>
-        </form>
-        <ul>
-            <li>
-                <button class="active btnP btnNiv btnMat" id="all">Show All</button>
-            </li>
-        </ul>
-        <ul>
-            <li>
-                <checkbox class="btnP btnNiv" id="CP">CP</checkbox>
-            </li>
-            <li>
-                <button class="btnP btnNiv" id="CE1">CE1</button>
-            </li>
-            <li>
-                <button class="btnP btnNiv" id="CE2">CE2</button>
-            </li>
-            <li>
-                <button class="btnP btnNiv" id="CM1">CM1</button>
-            </li>
-            <li>
-                <button class="btnP btnNiv" id="CM2">CM2</button>
-            </li>
-            <li>
-                <h4><small class="subTitle">(Niveau)</small></h4>
-            </li>
-        </ul>
-        <hr class="line" style="width: 70%; color: black; height: 1px; background-color:brown; opacity:0.6; margin-top:3px; margin-bottom:9px; display:none" />
-        <ul id="FilterMatiere"></ul>
-        <hr class="line" style="width: 70%; color: black; height: 1px; background-color:brown; opacity:0.6; margin-top:3px; margin-bottom:9px;display:none" />
-        <ul id="FilterTheme"></ul>
+        </div>
     </div>
 </div>
 <div class="content-listFiche">
