@@ -210,13 +210,7 @@ function changeFiche(Theme) {
     $("#" + Theme).addClass('active');
 }
 
-function removeFilter(key) {
-    var t = document.querySelectorAll("[data-value='" + key + "']")[0];
-    console.log(t);
-    $(t).trigger('click');
-}
-
-$('a.PDFViewerButton').on('click', function (e) {
+$('div.PDFViewerButton').on('click', function (e) {
     var src = $(this).attr('data-src');
     var height = $(window).height() * 0.7;
     var width = "766px";
@@ -274,7 +268,7 @@ $(function () {
             width: 300,
             dataSource: Niveau_List,
             textKey: "data",
-            valueKey: "data",
+            valueKey: "key",
             multiSelection: {
                 enabled: true,
                 showCheckboxes: true
@@ -312,7 +306,7 @@ $(function () {
                 $("#tableMat").empty();
                 $("#tableThe").empty();
                 $.each(listNivSelected, function (key, value) {
-                    $("#tableNiv").append("<li class='divSelected'><span class='choixSelected label label-warning'><div class='icon-remove' onclick='javascript:removeFilter(\"" + value.key + "\");' aria-hidden='true'></div> " + value.data + " </span></li>");
+                    $("#tableNiv").append("<li id='" + value.key + "' class='divSelected'><a class='btnFilter btnFilter-icon btnFilter-filter' href='#' onclick='javascript:removeFilter(\"" + value.key + "\");'><i class='fa fa-close'></i><span>" + value.data + "</span></a></li>");
                 });
 
 
@@ -328,8 +322,8 @@ $(function () {
         $("#checkboxSelectComboMat").igCombo({
             width: 300,
             dataSource: [],
-            textKey: "key",
-            valueKey: "data",
+            textKey: "data",
+            valueKey: "key",
             disabled: true,
             multiSelection: {
                 enabled: true,
@@ -368,7 +362,7 @@ $(function () {
                 $("#tableMat").empty();
                 $("#tableThe").empty();
                 $.each(listMatSelected, function (key, value) {
-                    $("#tableMat").append("<li class='divSelected'><span class='choixSelected label label-warning'><div class='icon-remove' onclick='javascript:removeFilter('" + value.key + "');' aria-hidden='true'></div> " + value.data + " </span></li>");
+                    $("#tableMat").append("<li id='" + value.key + "' class='divSelected'><a class='btnFilter btnFilter-icon btnFilter-filter' href='#' onclick='javascript:removeFilter(\"" + value.key + "\");'><i class='fa fa-close'></i><span>" + value.data + "</span></a></li>");
                 });
             },
             itemsRendered: function (evt, ui) {
@@ -383,7 +377,7 @@ $(function () {
             width: 300,
             dataSource: [],
             textKey: "data",
-            valueKey: "data",
+            valueKey: "key",
             disabled: true,
             parentComboKey: "matiere",
             parentCombo: "#checkboxSelectComboMat",
@@ -408,17 +402,14 @@ $(function () {
                         $("#state").css("display", "none");
                         $("#district").css("display", "block");
                     }
-
                     filteredCascDistrict = dsCascDistrict.filter(function (district) {
                         return district.keyCountry == itemData.valCountry;
                     });
                 }
-
                 var $comboDistrict = $("#comboDistrict");
                 $comboDistrict.igCombo("deselectAll", {}, true);
                 $comboDistrict.igCombo("option", "dataSource", filteredCascDistrict);
                 $comboDistrict.igCombo("dataBind");
-
                 var disableChildCombo = filteredCascDistrict.length == 0;
                 $comboDistrict.igCombo("option", "disabled", disableChildCombo);
                 */
@@ -428,7 +419,7 @@ $(function () {
 
                 $("#tableThe").empty();
                 $.each(listTheSelected, function (key, value) {
-                    $("#tableThe").append("<li class='divSelected'><span class='choixSelected label label-warning'><div class='icon-remove' onclick='javascript:removeFilter('" + value.key + "');' aria-hidden='true'></div> " + value.data + " </span></li>");
+                    $("#tableThe").append("<li id='" + value.key + "' class='divSelected'><a class='btnFilter btnFilter-icon btnFilter-filter' href='#' onclick='javascript:removeFilter(\"" + value.key + "\");'><i class='fa fa-close'></i><span>" + value.data + "</span></a></li>");
                 });
             },
             itemsRendered: function (evt, ui) {
@@ -439,3 +430,35 @@ $(function () {
     });
 });
 
+function removeFilter(key) {
+    var $checkboxSelectComboNiv = $("#checkboxSelectComboNiv");
+    var $checkboxSelectComboMat = $("#checkboxSelectComboMat");
+    var $checkboxSelectComboThe = $("#checkboxSelectComboThe");
+
+    $checkboxSelectComboNiv.igCombo("deselectByValue", key);
+    $checkboxSelectComboMat.igCombo("deselectByValue", key);
+    $checkboxSelectComboThe.igCombo("deselectByValue", key);
+
+    var NivSize = $checkboxSelectComboNiv.igCombo("selectedItems")
+    if (NivSize != null)
+        NivSize = $checkboxSelectComboNiv.igCombo("selectedItems").length;
+
+    var MatSize = $checkboxSelectComboMat.igCombo("selectedItems");
+    if (MatSize != null)
+        MatSize = $checkboxSelectComboNiv.igCombo("selectedItems").length;
+
+    var TheSize = $checkboxSelectComboThe.igCombo("selectedItems");
+    if (TheSize != null)
+        TheSize = $checkboxSelectComboNiv.igCombo("selectedItems").length;
+
+    console.log(NivSize);
+    console.log(MatSize);
+    console.log(TheSize);
+
+    if (NivSize < 1)
+        $checkboxSelectComboMat.igCombo("option", "disabled", true);
+    if (MatSize < 1)
+        $checkboxSelectComboThe.igCombo("option", "disabled", true);
+
+    $("#" + key).remove();
+}

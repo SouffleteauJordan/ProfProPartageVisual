@@ -18,10 +18,9 @@
         <link rel="stylesheet" href="~/Content/font-awesome.css" />
         <link href="https://cdn-na.infragistics.com/igniteui/latest/css/themes/infragistics/infragistics.theme.css" rel="stylesheet"/>
         <link href="https://cdn-na.infragistics.com/igniteui/latest/css/structure/infragistics.css" rel="stylesheet"/>
-        <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     </head>
 <body>
-    <div id="fond"></div>
     <div id="header-menu" class="navbar navbar-inverse navbar-fixed-top">
         <div class="container menu">
             <div class="navbar-header">
@@ -51,29 +50,37 @@
     </div>
 
     @RenderSection("Banner", required: false)
-
-    <div id="contenu-page">
-        @RenderBody()
-        <footer>
-            <div class="fb-like"
-                 data-share="true"
-                 data-width="450"
-                 data-show-faces="true">
+    
+    <div id="container-page">
+        <div class="layout">
+            <div id="border-left-page"></div>
+            <div id="contenu-page">
+                @RenderBody()
             </div>
-            <p>&copy; @DateTime.Now.Day/@DateTime.Now.Month/@DateTime.Now.Year - Les <strong style="color:#39cf09;">P</strong>rofs sont des <strong style="color:#fa2420;">P</strong>ros du <strong style="color:#ffa500;">P</strong>artage</p>
-        </footer>
+            <div id="border-right-page"></div>
+        </div>
+        <div class="layout">
+             <footer id="footer">
+                <div class="fb-like"
+                     data-share="true"
+                     data-width="450"
+                     data-show-faces="true">
+                </div>
+                <p>&copy; @DateTime.Now.Day/@DateTime.Now.Month/@DateTime.Now.Year - Les <strong style="color:#39cf09;">P</strong>rofs sont des <strong style="color:#fa2420;">P</strong>ros du <strong style="color:#ffa500;">P</strong>artage</p>
+            </footer>
+        </div>
     </div>
 
-    <script src="~/Scripts/jquery-3.2.1.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
-    <script src="~/Scripts/site.js"></script>
-    <script src="~/Scripts/modernizr-2.6.2.js"></script>
-    <script src="https://igniteui.com/js/modernizr.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
-    <script src="https://cdn-na.infragistics.com/igniteui/latest/js/infragistics.core.js"></script>
-    <script src="https://cdn-na.infragistics.com/igniteui/latest/js/infragistics.lob.js"></script>
+        <script src="~/Scripts/jquery-3.2.1.js"></script>
+        <script src="~/Scripts/bootstrap.js"></script>
+        <script src="~/Scripts/site.js"></script>
+        <script src="~/Scripts/modernizr-2.6.2.js"></script>
+        <script src="https://igniteui.com/js/modernizr.min.js"></script>
+        <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+        <script src="https://cdn-na.infragistics.com/igniteui/latest/js/infragistics.core.js"></script>
+        <script src="https://cdn-na.infragistics.com/igniteui/latest/js/infragistics.lob.js"></script>
 
-    @RenderSection("scripts", required: false)
+        @RenderSection("scripts", required: false)
 </body>
 </html>

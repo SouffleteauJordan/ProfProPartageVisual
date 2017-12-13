@@ -427,9 +427,6 @@
     <Content Include="Content\css\uikit.min.css" />
     <Content Include="Content\dragdrop.css" />
     <Content Include="Content\dropzone.css" />
-    <Content Include="Content\font-awesome.css" />
-    <Content Include="Content\infragistics.css" />
-    <Content Include="Content\infragistics.theme.css" />
     <Content Include="Content\jquery.fileupload-ui.css" />
     <Content Include="Content\jquery.fileupload.css" />
     <Content Include="Content\site.min.css" />
@@ -646,8 +643,6 @@
     <Content Include="Views\Shared\_Layout2.cshtml" />
     <Content Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
     <Content Include="Views\Home\About2.cshtml" />
-    <Content Include="Views\Catalogue\listFiche.cshtml" />
-    <Content Include="Views\Catalogue\Catalogue.cshtml" />
     <Content Include="Views\Admin\ListeFicheInvalide.cshtml" />
     <Content Include="Views\Admin\listFicheInvalide.cshtml" />
     <Content Include="Views\Admin\AdminPanel.cshtml" />
