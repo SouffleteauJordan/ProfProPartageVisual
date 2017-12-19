@@ -17,35 +17,18 @@
             <div class="col-md-12">
                 <div id="Filter">
                     <div id="contentFilter">
-                        <ul>
-                            <li>
-                                <button class="active btnP btnNiv btnMat" id="all">Show All</button>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li>
-                                <button class="btnP btnNiv" id="CP">CP</button>
-                            </li>
-                            <li>
-                                <button class="btnP btnNiv" id="CE1">CE1</button>
-                            </li>
-                            <li>
-                                <button class="btnP btnNiv" id="CE2">CE2</button>
-                            </li>
-                            <li>
-                                <button class="btnP btnNiv" id="CM1">CM1</button>
-                            </li>
-                            <li>
-                                <button class="btnP btnNiv" id="CM2">CM2</button>
-                            </li>
-                            <li>
-                                <div class="subTitle">(Niveau)</div>
-                            </li>
-                        </ul>
-                        <hr class="line" style="width: 70%; color: black; height: 1px; background-color:brown; opacity:0.6; margin-top:3px; margin-bottom:9px; display:none" />
-                        <ul id="FilterMatiere"></ul>
-                        <hr class="line" style="width: 70%; color: black; height: 1px; background-color:brown; opacity:0.6; margin-top:3px; margin-bottom:9px;display:none" />
-                        <ul id="FilterTheme"></ul>
+                        <div class="spacer"></div>
+                        <div id="checkboxSelectComboNiv"></div>
+                        <div id="checkboxSelectComboMat"></div>
+                        <div id="checkboxSelectComboThe"></div>
+
+                        <div id="itemData">
+                            <div id="table">
+                                <ul id="tableNiv" class="tableSelected"></ul>
+                                <ul id="tableMat" class="tableSelected"></ul>
+                                <ul id="tableThe" class="tableSelected"></ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="spacer"></div>
@@ -113,7 +96,7 @@
         var id = idF;
         $.ajax({
             url: '@Url.Action("RefuserFicheInvalide", "Admin")',
-            type: 'GET',
+            type: 'POST',
             dataType: 'json',
             cache: false,
             data: { id: id },

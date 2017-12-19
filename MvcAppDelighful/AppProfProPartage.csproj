@@ -81,8 +81,8 @@
       <HintPath>..\packages\Microsoft.Owin.4.0.0-preview1\lib\net451\Microsoft.Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.0-preview1\lib\net451\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Owin.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -438,17 +438,21 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\ajax-loader.gif" />
     <Content Include="Images\bas.png" />
+    <Content Include="Images\blackfond.jpg" />
     <Content Include="Images\book.png" />
     <Content Include="Images\Classe2.png" />
     <Content Include="Images\clip-left.png" />
     <Content Include="Images\clip-right.png" />
+    <Content Include="Images\content-bg.gif" />
     <Content Include="Images\croix.png" />
     <Content Include="Images\gratuit.png" />
     <Content Include="Images\loading.gif" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\ppp.ico" />
+    <Content Include="Images\PPP.png" />
     <Content Include="Images\progressbar.gif" />
     <Content Include="Images\share.png" />
+    <Content Include="Images\titre.jpg" />
     <Content Include="Images\ui-icons_f08000_256x240.png" />
     <Content Include="Images\update.png" />
     <Content Include="Images\valide.png" />
@@ -464,6 +468,7 @@
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Files\Planning.pdf" />
     <Content Include="Files\rapport.pdf" />
+    <Content Include="Scripts\infragistics.core.js" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -491,6 +496,7 @@
     <Content Include="Scripts\Custom\BookmarksScript.js" />
     <Content Include="Scripts\dropzone.js" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
+    <Content Include="Scripts\infragistics.lob.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
     <Content Include="Scripts\jquery-3.2.1.slim.js" />

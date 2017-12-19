@@ -238,14 +238,15 @@ $('div.PDFViewerButton').on('click', function (e) {
 
     $("#PDFViewerLabel").html(title);
 
-    $("#contentPDF").append("<label> Niveau : </label><p>" + niveau + " </p>");
-    $("#contentPDF").append("<label> Matiere : </label><p>" + matiere + " </p>");
-    $("#contentPDF").append("<label> Theme : </label><p>" + theme + " </p>");
-    $("#contentPDF").append("<label> Température : </label><p>" + temperature + " </p>");
-    $("#contentPDF").append("<label> Description : </label><p>" + description.replaceAll("_", " ") + " </p>");
+    $("#contentPDF").append("<div class='row'><span><label class='gate'> Niveau : </label></span><span><label class=''>" + niveau + " </label></span></div></br>");
+    $("#contentPDF").append("<label class='labelInfo'> Matiere : </label><label class='labelData'>" + matiere + " </label></br>");
+    $("#contentPDF").append("<label class='labelInfo'> Theme : </label><label class='labelData'>" + theme + " </label></br>");
+    $("#contentPDF").append("<label class='labelInfo'> Température : </label><label class='labelData'>" + temperature + " </label></br>");
+    $("#contentPDF").append("<label class='labelInfo'> Description : </label><label class='labelData'>" + description.replaceAll("_", " ") + " </label></br>");
 
 
 });
+
 
 $('#PDFViewer').bind('hidden.bs.modal', function () {
     $("#contentPDF").empty();
@@ -305,10 +306,12 @@ $(function () {
                 $("#tableNiv").empty();
                 $("#tableMat").empty();
                 $("#tableThe").empty();
+
                 $.each(listNivSelected, function (key, value) {
                     $("#tableNiv").append("<li id='" + value.key + "' class='divSelected'><a class='btnFilter btnFilter-icon btnFilter-filter' href='#' onclick='javascript:removeFilter(\"" + value.key + "\");'><i class='fa fa-close'></i><span>" + value.data + "</span></a></li>");
                 });
 
+                changeFilter();
 
             },
             itemsRendered: function (evt, ui) {
@@ -364,6 +367,8 @@ $(function () {
                 $.each(listMatSelected, function (key, value) {
                     $("#tableMat").append("<li id='" + value.key + "' class='divSelected'><a class='btnFilter btnFilter-icon btnFilter-filter' href='#' onclick='javascript:removeFilter(\"" + value.key + "\");'><i class='fa fa-close'></i><span>" + value.data + "</span></a></li>");
                 });
+
+                changeFilter();
             },
             itemsRendered: function (evt, ui) {
                 ui.owner.deselectAll();
@@ -421,6 +426,8 @@ $(function () {
                 $.each(listTheSelected, function (key, value) {
                     $("#tableThe").append("<li id='" + value.key + "' class='divSelected'><a class='btnFilter btnFilter-icon btnFilter-filter' href='#' onclick='javascript:removeFilter(\"" + value.key + "\");'><i class='fa fa-close'></i><span>" + value.data + "</span></a></li>");
                 });
+
+                changeFilter();
             },
             itemsRendered: function (evt, ui) {
                 ui.owner.deselectAll();
@@ -429,6 +436,127 @@ $(function () {
 
     });
 });
+
+function changeFilter() {
+    var listNivClass = "";
+    var listMatClass = "";
+    var listTheClass = "";
+    var itemsNiv = $("#checkboxSelectComboNiv").igCombo("selectedItems");
+    var itemsMat = $("#checkboxSelectComboMat").igCombo("selectedItems");
+    var itemsThe = $("#checkboxSelectComboThe").igCombo("selectedItems");
+
+    var find = "";
+    var finded = false;
+    
+    if (itemsThe != null) {
+        $.each(itemsNiv, function (keyNiv, valueNiv) {
+            $.each(itemsMat, function (keyMat, valueMat) {
+                $.each(itemsThe, function (keyThe, valueThe) {
+                    $.each(Theme_List, function (keyList, valueList) {
+                        console.log("Value mat/key: " + valueMat.data.key + "/" + valueThe.data.key + " -- list mat/key: " + valueList.mat + "/" + valueList.key);
+                        if (valueList.mat == valueMat.data.key && valueList.key == valueThe.data.key) {
+                            if (find != "") {
+                                if (!find.endsWith(", "))
+                                    find = find + ", ." + valueNiv.data.key + "." + valueMat.data.key + "." + valueThe.data.key;
+                                else
+                                    find = find + " ." + valueNiv.data.key + "." + valueMat.data.key + "." + valueThe.data.key;
+                            } else {
+                                find = find + " ." + valueNiv.data.key + "." + valueMat.data.key + "." + valueThe.data.key;
+                            }
+                            finded = true;
+                        }
+                    });
+                    if (!finded) {
+                        if (find != "") {
+                            if (!find.endsWith(", "))
+                                find = find + ", ." + valueNiv.data.key + "." + valueMat.data.key;
+                            else
+                                find = find + " ." + valueNiv.data.key + "." + valueMat.data.key;
+                        } else {
+                            find = find + " ." + valueNiv.data.key + "." + valueMat.data.key;
+                        }
+                    }
+                    finded = false;
+                });
+            });
+        });
+    } else if (itemsMat != null) {
+        $.each(itemsNiv, function (keyNiv, valueNiv) {
+            $.each(itemsMat, function (keyMat, valueMat) {
+                if (find != "") {
+                    if (!find.endsWith(", "))
+                        find = find + ", ." + valueNiv.data.key + "." + valueMat.data.key;
+                    else
+                        find = find + " ." + valueNiv.data.key + "." + valueMat.data.key;
+                } else {
+                    find = find + " ." + valueNiv.data.key + "." + valueMat.data.key;
+                }
+            });
+        });
+    } else if (itemsNiv != null) {
+        $.each(itemsNiv, function (keyNiv, valueNiv) {
+            if (find != "") {
+                if (!find.endsWith(", "))
+                    find = find + ", ." + valueNiv.data.key;
+                else
+                    find = find + " ." + valueNiv.data.key;
+            } else {
+                find = find + " ." + valueNiv.data.key;
+            }
+        });
+    } else {
+        find = ".box";
+    }
+
+
+    /*if (itemsNiv != null) {
+        $.each(itemsNiv, function (keyNiv, valueNiv) {
+            if(find != "")
+                find = find + ", ";
+            if (itemsMat != null) {
+                $.each(itemsMat, function (keyMat, valueMat) {
+                    if (find != "")
+                        if (!find.endsWith(", "))
+                            find = find + ", ";
+                    if (itemsThe != null) {
+                        $.each(itemsThe, function (keyThe, valueThe) {
+                            $.each(Theme_List, function (keyList, valueList) {
+                                if (valueList.mat == valueMat.data.key && valueList.key == valueThe.data.key) {
+                                    find = find + " ." + valueNiv.data.key + "." + valueMat.data.key + "." + valueThe.data.key;
+                                    finded = true;
+                                }
+                            });
+                            if (!finded) {
+                                find = find + " ." + valueNiv.data.key + "." + valueMat.data.key;
+                            }
+                        });
+                    } else {
+                        find = find + " ." + valueNiv.data.key + "." + valueMat.data.key;
+                    }
+                });
+            } else {
+                find = find + " ." + valueNiv.data.key;
+            }
+        });
+    }*/
+
+    /*if (itemsMat != null) {
+        $.each(itemsMat, function (key, value) {
+            listMatClass = listMatClass + " ." + value.data.key;
+        });
+        find = find + ", " + listMatClass
+    }
+
+    if (itemsThe != null) {
+        $.each(itemsThe, function (key, value) {
+            listTheClass = listTheClass + " ." + value.data.key;
+        });
+        find = find + ", " + listTheClass
+    }*/
+
+    var $el = $("#parent").find(find).fadeIn(450);
+    $('#parent > div').not($el).hide();
+}
 
 function removeFilter(key) {
     var $checkboxSelectComboNiv = $("#checkboxSelectComboNiv");
@@ -461,4 +589,5 @@ function removeFilter(key) {
         $checkboxSelectComboThe.igCombo("option", "disabled", true);
 
     $("#" + key).remove();
+    changeFilter();
 }

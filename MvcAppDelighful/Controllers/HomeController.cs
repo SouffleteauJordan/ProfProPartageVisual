@@ -27,7 +27,7 @@ namespace AppProfProPartage.Controllers
             FicheCoursBll FicheCoursBll = _businessLocator.FicheCoursBll;
             listFiche = FicheCoursBll.GetAllFicheCours();
             ViewModelFicheCoursList vm = new ViewModelFicheCoursList(listFiche);
-
+                
             return View(vm);
         }
 
