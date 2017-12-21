@@ -212,8 +212,10 @@ function changeFiche(Theme) {
 
 $('div.PDFViewerButton').on('click', function (e) {
     var src = $(this).attr('data-src');
-    var height = $(window).height() * 0.7;
-    var width = "766px";
+    //var height = document.body.clientHeight * 0.75;
+    var height = $(window).height() - 200;
+    //var height = document.body.clientHeight - "350";
+    var width = "100%";
     var title = $(this).attr('title');
     var niveau = $(this).attr('niveau');
     var matiere = $(this).attr('matiere');
@@ -238,23 +240,92 @@ $('div.PDFViewerButton').on('click', function (e) {
 
     $("#PDFViewerLabel").html(title);
 
-    $("#contentPDF").append("<div class='row'><span><label class='gate'> Niveau : </label></span><span><label class=''>" + niveau + " </label></span></div></br>");
-    $("#contentPDF").append("<label class='labelInfo'> Matiere : </label><label class='labelData'>" + matiere + " </label></br>");
-    $("#contentPDF").append("<label class='labelInfo'> Theme : </label><label class='labelData'>" + theme + " </label></br>");
-    $("#contentPDF").append("<label class='labelInfo'> Température : </label><label class='labelData'>" + temperature + " </label></br>");
-    $("#contentPDF").append("<label class='labelInfo'> Description : </label><label class='labelData'>" + description.replaceAll("_", " ") + " </label></br>");
+    $("#dataPDF").append("<label> Niveau : </label><p>" + niveau + " </p>");
+    $("#dataPDF").append("<label> Matiere : </label><p>" + matiere + " </p>");
+    $("#dataPDF").append("<label> Theme : </label><p>" + theme + " </p>");
+    $("#dataPDF").append("<label> Température : </label><p>" + temperature + " </p>");
+    $("#dataPDF").append("<label> Nombre de vote : </label><p>" + 150 + " </p>");
+    $("#dataPDF").append("<label> Nombre de telechargemnt : </label><p>" + 56 + " </p>");
+    $("#dataPDF").append("<label> Auteur : </label><p>" + "toto" + " </p>");
+    //$("#dataPDF").append("<label> Description : </label><p>" + description.replaceAll("_", " ") + " </p>");
 
+    $("#dataPDF").append('<div id="chart">Energy data from:<br /><a href="http://www.eia.gov" target="_blank">U.S. Energy Information Administration (September 2012) </a></div>');
+    initAnalyseFile();
 
+    $("#PDFViewer iframe").height(height - 78);
+    $("#PDFViewer #contentPDF").height(height - 78);
+    $("#PDFViewer #dataPDF").height(height - 78);
+    $("#PDFModal").height(height + 150);
+
+    /*
+    $("#PDFViewer iframe").height(height - 200);
+    $("#PDFViewer #contentPDF").height(height - 200);
+    $("#PDFViewer #dataPDF").height(height - 200);
+    $("#PDFModal").height(height);
+    */
 });
+var data = [
+    { "Mois": "Janvier", "nbrDown": 400, "Pop2025": 1394 },
+    { "Mois": "Fevrier", "nbrDown": 350, "Pop2025": 1396 },
+    { "Mois": "Mars", "nbrDown": 322, "Pop2025": 351 },
+    { "Mois": "Avril", "nbrDown": 256, "Pop2025": 277 },
+    { "Mois": "Mai", "nbrDown": 204, "Pop2025": 218 },
+    { "Mois": "Juin", "nbrDown": 215, "Pop2025": 1394 },
+    { "Mois": "Juillet", "nbrDown": 175, "Pop2025": 1396 },
+    { "Mois": "Aout", "nbrDown": 260, "Pop2025": 351 },
+    { "Mois": "Septembre", "nbrDown": 570, "Pop2025": 277 },
+    { "Mois": "Octobre", "nbrDown": 460, "Pop2025": 218 },
+    { "Mois": "Novembre", "nbrDown": 380, "Pop2025": 277 },
+    { "Mois": "Decembre", "nbrDown": 204, "Pop2025": 218 }
+];
 
+
+function initAnalyseFile() {
+    $("#chart").igDataChart({
+        width: "500px",
+        height: "450px",
+        title: "Popularité",
+        subtitle: "Nombre de téléchargement par mois depuis la création de la fiche",
+        dataSource: data,
+        axes: [
+            {
+                name: "NameAxis",
+                type: "categoryX",
+                title: "Country",
+                label: "Mois"
+            },
+            {
+                name: "PopulationAxis",
+                type: "numericY",
+                minimumValue: 0,
+                title: "Nbr de téléchargement",
+            }
+        ],
+        series: [
+            {
+                name: "NbrTelechargement",
+                type: "column",
+                isHighlightingEnabled: true,
+                isTransitionInEnabled: true,
+                xAxis: "NameAxis",
+                yAxis: "PopulationAxis",
+                valueMemberPath: "nbrDown"
+            }
+        ]
+    });
+}
 
 $('#PDFViewer').bind('hidden.bs.modal', function () {
     $("#contentPDF").empty();
+    $("#dataPDF").empty();
 });
 
 $(window).resize(function () {
-    $("#PDFViewer iframe").height($("#PDFViewer").height() - 200);
-    $("#PDFModal").height($("#PDFViewer").height() - 60);
+    var height = $(window).height() - 200;
+    $("#PDFViewer iframe").height(height - 78);
+    $("#PDFViewer #contentPDF").height(height - 78);
+    $("#PDFViewer #dataPDF").height(height - 78);
+    $("#PDFModal").height(height + 150);
 });
 
 String.prototype.replaceAll = function (search, replacement) {
@@ -270,6 +341,9 @@ $(function () {
             dataSource: Niveau_List,
             textKey: "data",
             valueKey: "key",
+            locale: {
+                placeHolder: "Filtre par niveau(x)"
+            },
             multiSelection: {
                 enabled: true,
                 showCheckboxes: true
@@ -328,6 +402,9 @@ $(function () {
             textKey: "data",
             valueKey: "key",
             disabled: true,
+            locale: {
+                placeHolder: "Filtre par matière(s)"
+            },
             multiSelection: {
                 enabled: true,
                 showCheckboxes: true
@@ -386,6 +463,9 @@ $(function () {
             disabled: true,
             parentComboKey: "matiere",
             parentCombo: "#checkboxSelectComboMat",
+            locale: {
+                placeHolder: "Filtre par thème(s)"
+            },
             grouping: {
                 key: 'mat',
                 dir: 'asc'
@@ -447,7 +527,7 @@ function changeFilter() {
 
     var find = "";
     var finded = false;
-    
+
     if (itemsThe != null) {
         $.each(itemsNiv, function (keyNiv, valueNiv) {
             $.each(itemsMat, function (keyMat, valueMat) {

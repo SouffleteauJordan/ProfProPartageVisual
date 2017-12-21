@@ -95,7 +95,7 @@ namespace ProfProPartage.Bll
                     FicheCoursInvalide ficInvalide = context.Entry(ficI).Entity;
                     //List<Keyword> Key = context.Entry(keywords).Entity;
 
-                    context.Fiches.Add(new FicheCours() { Id = ficInvalide.Id, Description = ficInvalide.Description, Matiere = ficInvalide.Matiere, Niveau = ficInvalide.Niveau, Temperature = ficInvalide.Temperature, Theme = ficInvalide.Theme, Titre = ficInvalide.Titre, UrlJPG = ficInvalide.UrlJPG, UrlPDF = ficInvalide.UrlPDF, User = ficInvalide.User, UserId = ficInvalide.UserId });
+                    context.Fiches.Add(new FicheCours() { Id = ficInvalide.Id, Description = ficInvalide.Description, Matiere = ficInvalide.Matiere, Niveau = ficInvalide.Niveau, Temperature = ficInvalide.Temperature, Theme = ficInvalide.Theme, Titre = ficInvalide.Titre, UrlJPG = ficInvalide.UrlJPG, UrlPDF = ficInvalide.UrlPDF, User = ficInvalide.User, UserId = ficInvalide.UserId, DateAjout = DateTime.Now, NombreTelechargement = 0});
                     DeleteFicheCoursInvalide(id);
                     //context.Keywords.AddRange(Key);
 

@@ -5,6 +5,7 @@
 /// <reference path="custom/bookmarksscript.js" />
 /// <reference path="dropzone.js" />
 /// <reference path="infragistics.core.js" />
+/// <reference path="infragistics.dv.js" />
 /// <reference path="infragistics.lob.js" />
 /// <reference path="jquery.fileupload.js" />
 /// <reference path="jquery.fileupload-angular.js" />

@@ -30,29 +30,73 @@
             @Html.Partial("listFiche", Model.ListFic)
         </div>
 
-        <div class="spacer"></div>
 
-        <div class="modal fade" id="PDFViewer" tabindex="-1" role="dialog" aria-labelledby="PDFViewerLabel" aria-hidden="true">
+        <div class="modal fade" id="PDFViewer" tabindex="-1" role="dialog" aria-labelledby="PDFViewerLabel" aria-hidden="true" style="display: none;">
             <div id="PDFDialog" class="modal-dialog">
-                <div id="PDFModal" class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="PDFViewerLabel">Modal title</h4>
-                    </div>
+                <div id="PDFModal" class="modal-content" style="height: 543px;">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="PDFViewerLabel">eval</h4>
                     <div class="modal-body">
-                        <div id="wrap">
-                            <div id="left_div">
-                                <div id="IframePDF">
-                                    <iframe frameborder="0"></iframe>
+                        <div class="tabs tabs-style-shape">
+                            <nav>
+                                <ul>
+                                    <li class="tab active">
+                                        <a href="#pdfDoc" data-toggle="tab">
+                                            <svg viewBox="0 0 80 60" preserveAspectRatio="none"><use xlink:href="#tabshape"></use></svg>
+                                            <span>Fiche PDF</span>
+                                        </a>
+                                    </li>
+                                    <li class="tab">
+                                        <a href="#pdfData" data-toggle="tab">
+                                            <svg viewBox="0 0 80 60" preserveAspectRatio="none"><use xlink:href="#tabshape"></use></svg>
+                                            <svg viewBox="0 0 80 60" preserveAspectRatio="none"><use xlink:href="#tabshape"></use></svg>
+                                            <span>Métadonnées</span>
+                                        </a>
+                                    </li>
+                                    <li class="tab">
+                                        <a href="#pdfContent" data-toggle="tab">
+                                            <svg viewBox="0 0 80 60" preserveAspectRatio="none"><use xlink:href="#tabshape"></use></svg>
+                                            <svg viewBox="0 0 80 60" preserveAspectRatio="none"><use xlink:href="#tabshape"></use></svg>
+                                            <span>Description</span>
+                                        </a>
+                                    </li>
+                                    <li class="tab">
+                                        <a href="#section-shape-4" data-toggle="tab">
+                                            <svg viewBox="0 0 80 60" preserveAspectRatio="none"><use xlink:href="#tabshape"></use></svg>
+                                            <svg viewBox="0 0 80 60" preserveAspectRatio="none"><use xlink:href="#tabshape"></use></svg>
+                                            <span>Portfolio</span>
+                                        </a>
+                                    </li>
+                                    <li class="tab">
+                                        <a href="#section-shape-5" data-toggle="tab">
+                                            <svg viewBox="0 0 80 60" preserveAspectRatio="none"><use xlink:href="#tabshape"></use></svg>
+                                            <span>Contact</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="modal-header">
+                            <div id="wrap">
+                                <div class="tab-content">
+                                    <div id="pdfDoc" class="tab-pane active">
+                                        <div id="IframePDF">
+                                            <iframe></iframe>
+                                        </div>
+                                    </div>
+                                    <div id="pdfData" class="tab-pane">
+                                        <div id="dataPDF"></div>
+                                    </div>
+                                    <div id="pdfContent" class="tab-pane">
+                                        <div id="contentPDF"></div>
+                                    </div>
                                 </div>
-                            </div><div id="right_div">
-                                <div id="contentPDF"></div>
                             </div>
                         </div>
                     </div>
                     <div id="footerPDF">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        <a id="btnDownload" class="btn btn-primary" download>Download</a>
+                        <a id="btnDownload" class="btn btn-primary" download="" href="/Files/eval_CE2_conj_present.pdf">Download</a>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->

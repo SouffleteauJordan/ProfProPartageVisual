@@ -496,6 +496,7 @@
     <Content Include="Scripts\Custom\BookmarksScript.js" />
     <Content Include="Scripts\dropzone.js" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
+    <Content Include="Scripts\infragistics.dv.js" />
     <Content Include="Scripts\infragistics.lob.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />

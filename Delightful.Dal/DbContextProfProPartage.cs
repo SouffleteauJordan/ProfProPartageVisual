@@ -18,6 +18,7 @@ namespace ProfProPartage.Dal
             : base("ProfProPartageAzure")
         {
         }
+        
 
         public DbSet<FicheCours> Fiches { get; set; }
         public DbSet<FicheCoursInvalide> FichesInvalide { get; set; }
