@@ -1,23 +1,22 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-    {
-    @Html.AntiForgeryToken()
-
-    <ul id="menu-elem2" class="nav navbar-nav navbar-right">
-        <li class="elem-menu">
-            @Html.ActionLink("Bonjour " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li class="elem-menu"><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>
-    }
-}
+    <li class="nav-top-item">
+        <a class="nav-top-link" href="Manage/Index">
+            <span class="visible-desktop">Bonjour @User.Identity.GetUserName()</span>
+            <i class="icon ic-account"></i><span class="notification"></span>
+        </a>
+    </li>
+    <li class="nav-top-item">
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "nav-top-link" }))
+        {
+        @Html.AntiForgeryToken()
+        <a href="javascript:document.getElementById('logoutForm').submit()"><i class="glyphicon glyphicon-off" style="font-size:22px; height:27px; vertical-align: middle;"></i></a>
+        }
+    </li>
+}   
 else
 {
-    <ul id="menu-elem2" class="nav navbar-nav navbar-right">
-        <li class="elem-menu"><a class="elem" href="@Url.Action("Register","Account", new { @id = "registerLink"})"><span class="elem glyphicon glyphicon-floppy-open"></span>S'enregistrer</a></li>
-        <li class="elem-menu"><a class="elem" href="@Url.Action("Login","Account", new { @id = "loginLink"})"><span class="elem glyphicon glyphicon-user"></span>Se connecter</a></li>
-
-    </ul>
+<li class="nav-top-item"><a class="nav-top-link" href="@Url.Action("Register","Account", new { @id = "registerLink"})"><span class="elem glyphicon glyphicon-floppy-open" style="font-size:22px; height:27px; vertical-align: middle; margin-right:7px;"></span>S'enregistrer</a></li>
+<li class="nav-top-item"><a class="nav-top-link" href="@Url.Action("Login","Account", new { @id = "loginLink"})"><span class="elem glyphicon glyphicon-user" style="font-size:22px; height:27px; vertical-align: middle; margin-right:7px;"></span>Se connecter</a></li>
 }

@@ -415,6 +415,13 @@ namespace AppProfProPartage.ViewModel.Controllers
             return View();
         }
 
+        public ActionResult MesStatistiques()
+        {
+            ViewBag.Message = "Your statistics page.";
+
+            return View();
+        }
+
         [HttpPost]
         public ApplicationUser getUser()
         {

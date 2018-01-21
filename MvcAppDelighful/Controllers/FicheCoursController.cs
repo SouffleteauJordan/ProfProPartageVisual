@@ -66,9 +66,17 @@ namespace AppProfProPartage.Controllers
             return View();
         }
 
+        [System.Web.Mvc.Authorize]
+        public ActionResult MesFiches()
+        {
+            ViewBag.Message = "Your files page.";
+
+            return View();
+        }
+
         //
         // GET: /Bookmark/Create
-         [System.Web.Mvc.Authorize(Roles="admin")]
+        [System.Web.Mvc.Authorize(Roles="admin")]
         public ActionResult Create()
         {
             return View();
@@ -237,5 +245,4 @@ namespace AppProfProPartage.Controllers
             this.description = description;
         }
     }
-
 }

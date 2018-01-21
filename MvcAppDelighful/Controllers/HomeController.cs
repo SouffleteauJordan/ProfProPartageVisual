@@ -46,6 +46,13 @@ namespace AppProfProPartage.Controllers
             return View();
         }
 
+        public ActionResult Help()
+        {
+            ViewBag.Message = "Your help page.";
+
+            return View();
+        }
+
         [HttpPost]
         public ActionResult getUser(string id)
         {
