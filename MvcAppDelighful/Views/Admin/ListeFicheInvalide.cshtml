@@ -4,36 +4,27 @@
     ViewData["Title"] = "Accueil";
 }
 
+<div id="Filter">
+    <div id="contentFilter">
+        <div class="spacer"></div>
+        <div id="checkboxSelectComboNiv"></div>
+        <div id="checkboxSelectComboMat"></div>
+        <div id="checkboxSelectComboThe"></div>
+
+        <div id="itemData">
+            <div id="table">
+                <ul id="tableNiv" class="tableSelected"></ul>
+                <ul id="tableMat" class="tableSelected"></ul>
+                <ul id="tableThe" class="tableSelected"></ul>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="content-listFiche">
     <div class="col-md-12">
-
-        <button class="active btnP btnNiv btnMat" id="all">Show All</button>
-
-        <br />
-
-        <button class="btnP btnNiv" id="CP">CP</button>
-        <button class="btnP btnNiv" id="CE1">CE1</button>
-        <button class="btnP btnNiv" id="CE2">CE2</button>
-        <button class="btnP btnNiv" id="CM1">CM1</button>
-        <button class="btnP btnNiv" id="CM2">CM2</button>
-
-        <br />
-
-        <button class="btnP btnMat" id="Francais">Francais</button>
-        <button class="btnP btnMat" id="Maths">Maths</button>
-        <button class="btnP btnMat" id="Anglais">Anglais</button>
-        <button class="btnP btnMat" id="DcvrtdMonde">Decouverte du monde</button>
-        <button class="btnP btnMat" id="Sport">Sport</button>
-        <button class="btnP btnMat" id="InstCivMoral">Instruction civique et morale</button>
-        <button class="btnP btnMat" id="PraHistArts">Pratique et histoire des arts</button>
-        <button class="btnP btnMat" id="JeuxEduc">Jeux educatifs</button>
-        <button class="btnP btnMat" id="Outils">Outils</button>
-        <button class="btnP btnMat" id="EventAnnee">Evenements de l'annee</button>
-
         <div class="spacer"></div>
 
         <div id="parent">
-
             @Html.Partial("listFicheInvalide", Model.ListFic)
         </div>
 
@@ -49,7 +40,7 @@
                     <div class="modal-body">
                         <div id="wrap">
                             <div id="left_div">
-                                <div id="IframePDF" >
+                                <div id="IframePDF">
                                     <iframe frameborder="0"></iframe>
                                 </div>
                             </div><div id="right_div">
@@ -59,7 +50,7 @@
                     </div>
                     <div id="footerPDF">
                         <button type="button" class="btn btn-danger" onclick="javascript: RefuserFicheInvalide();">Refuser</button>
-                        <button type="button" class="btn btn-success" onclick="javascript: ValiderFicheInvalide();" >Valider</button>
+                        <button type="button" class="btn btn-success" onclick="javascript: ValiderFicheInvalide();">Valider</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -77,7 +68,6 @@
             cache: false,
             data: { id: id },
             success: function () {
-                alert("ok");
             }
         });
     }
@@ -91,7 +81,6 @@
             cache: false,
             data: { id: id },
             success: function () {
-                alert("ok");
             }
         });
     }

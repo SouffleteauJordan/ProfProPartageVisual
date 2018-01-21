@@ -210,27 +210,72 @@ function changeFiche(Theme) {
     $("#" + Theme).addClass('active');
 }
 
-function removeFilter(key) {
-    var t = document.querySelectorAll("[data-value='" + key + "']")[0];
-    console.log(t);
-    $(t).trigger('click');
-}
+$('div.PDFViewerButton').on('click', function (e) {
 
-$('a.PDFViewerButton').on('click', function (e) {
+    var UserId = $(this).attr('UserId');
+    var UserName = $(this).attr('UserName');
+    var User;
+
+    $.ajax({
+        type: "POST",
+        url: "/Home/getUser",
+        data: '{id: "'+ UserId + '"}',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (user) {
+            console.log(user);
+            var jour = new Date(parseInt(user.DateNaissance.replace("/Date(", "").replace(")/", ""), 10)).getDate();
+            var mois = new Date(parseInt(user.DateNaissance.replace("/Date(", "").replace(")/", ""), 10)).getMonth() + 1;
+            var année = new Date(parseInt(user.DateNaissance.replace("/Date(", "").replace(")/", ""), 10)).getFullYear();
+            var DateNaissance = jour + "/" + mois + "/" + année;
+
+            var jour = new Date(parseInt(user.DateInscription.replace("/Date(", "").replace(")/", ""), 10)).getDate();
+            var mois = new Date(parseInt(user.DateInscription.replace("/Date(", "").replace(")/", ""), 10)).getMonth() + 1;
+            var année = new Date(parseInt(user.DateInscription.replace("/Date(", "").replace(")/", ""), 10)).getFullYear();
+            var DateInscription = jour + "/" + mois + "/" + année;
+
+            $("#contentPDF").append("<label> Pseudo : </label><p>" + user.UserName + " </p>");
+            $("#contentPDF").append("<label> Nom : </label><p>" + user.Nom + " </p>");
+            $("#contentPDF").append("<label> Prenom : </label><p>" + user.Prenom + " </p>");
+            $("#contentPDF").append("<label> DateNaissance : </label><p>" + DateNaissance + " </p>");
+            $("#contentPDF").append("<label> DateInscription : </label><p>" + DateInscription + " </p>");
+            $("#contentPDF").append("<label> NombreFicheUpload : </label><p>" + user.NombreFicheUpload + " </p>");
+            $("#contentPDF").append("<label> Experience : </label><p>" + user.Experience + " </p>");
+            $("#contentPDF").append("<label> Level : </label><p>" + user.Level + " </p>");
+            $("#contentPDF").append("<label> Titre : </label><p>" + user.Titre + " </p>");
+            $("#contentPDF").append("<label> NombreTelechargement : </label><p>" + user.NombreTelechargement + " </p>");
+        },
+        failure: function (response) {
+            console.log(response.responseText);
+        },
+        error: function (response) {
+            console.log(response.responseText);
+        }
+    });
+    
+    
     var src = $(this).attr('data-src');
-    var height = $(window).height() * 0.7;
-    var width = "766px";
+    //var height = document.body.clientHeight * 0.75;
+
+    var height = $(window).height() - 200;
+    //var height = document.body.clientHeight - "350";
+    var width = "100%";
     var title = $(this).attr('title');
     var niveau = $(this).attr('niveau');
     var matiere = $(this).attr('matiere');
     var theme = $(this).attr('theme');
     var temperature = $(this).attr('temperature');
     var description = $(this).attr('description');
+    var DateAjout = $(this).attr('DateAjout');
+    var NombreTelechargement = $(this).attr('NombreTelechargement');
+    var NombreVote = $(this).attr('NombreVote');
+    var UserName = $(this).attr('UserName');
+    var UserId = $(this).attr('UserId');
     idF = $(this).attr('idFiche');
 
     $("#PDFViewer iframe").attr({
         'src': src,
-        'height': height,
+        'height': height - 78,
         'width': width
     });
 
@@ -244,22 +289,91 @@ $('a.PDFViewerButton').on('click', function (e) {
 
     $("#PDFViewerLabel").html(title);
 
-    $("#contentPDF").append("<label> Niveau : </label><p>" + niveau + " </p>");
-    $("#contentPDF").append("<label> Matiere : </label><p>" + matiere + " </p>");
-    $("#contentPDF").append("<label> Theme : </label><p>" + theme + " </p>");
-    $("#contentPDF").append("<label> Température : </label><p>" + temperature + " </p>");
-    $("#contentPDF").append("<label> Description : </label><p>" + description.replaceAll("_", " ") + " </p>");
+    $("#dataPDF").append("<label> Niveau : </label><p>" + niveau + " </p>");
+    $("#dataPDF").append("<label> Matiere : </label><p>" + matiere + " </p>");
+    $("#dataPDF").append("<label> Theme : </label><p>" + theme + " </p>");
+    $("#dataPDF").append("<label> Température : </label><p>" + temperature + " </p>");
+    $("#dataPDF").append("<label> DateAjout : </label><p>" + DateAjout + " </p>");
+    $("#dataPDF").append("<label> Nombre de telechargemnt : </label><p>" + NombreTelechargement + " </p>");
+    $("#dataPDF").append("<label> Auteur : </label><p>" + UserName + " </p>");
+    $("#dataPDF").append("<label> Auteur identifiant : </label><p>" + UserId + " </p>");
+   
 
+    initAnalyseFile();
 
 });
+
+$('document').ready(function () {
+    var height = $(window).height() - 200;
+    $("#PDFViewer iframe").height(height - 78);
+    $("#PDFViewer #contentPDF").height(height - 78);
+    $("#PDFViewer #dataPDF").height(height - 78);
+    $("#PDFModal").height(height + 150);
+});
+
+
+var data = [
+    { "Mois": "Janvier", "nbrDown": 400, "Pop2025": 1394 },
+    { "Mois": "Fevrier", "nbrDown": 350, "Pop2025": 1396 },
+    { "Mois": "Mars", "nbrDown": 322, "Pop2025": 351 },
+    { "Mois": "Avril", "nbrDown": 256, "Pop2025": 277 },
+    { "Mois": "Mai", "nbrDown": 204, "Pop2025": 218 },
+    { "Mois": "Juin", "nbrDown": 215, "Pop2025": 1394 },
+    { "Mois": "Juillet", "nbrDown": 175, "Pop2025": 1396 },
+    { "Mois": "Aout", "nbrDown": 260, "Pop2025": 351 },
+    { "Mois": "Septembre", "nbrDown": 570, "Pop2025": 277 },
+    { "Mois": "Octobre", "nbrDown": 460, "Pop2025": 218 },
+    { "Mois": "Novembre", "nbrDown": 380, "Pop2025": 277 },
+    { "Mois": "Decembre", "nbrDown": 204, "Pop2025": 218 }
+];
+
+
+function initAnalyseFile() {
+    $("#chart").igDataChart({
+        width: "500px",
+        height: "450px",
+        title: "Popularité",
+        subtitle: "Nombre de téléchargement par mois depuis la création de la fiche",
+        dataSource: data,
+        axes: [
+            {
+                name: "NameAxis",
+                type: "categoryX",
+                title: "Country",
+                label: "Mois"
+            },
+            {
+                name: "PopulationAxis",
+                type: "numericY",
+                minimumValue: 0,
+                title: "Nbr de téléchargement",
+            }
+        ],
+        series: [
+            {
+                name: "NbrTelechargement",
+                type: "column",
+                isHighlightingEnabled: true,
+                isTransitionInEnabled: true,
+                xAxis: "NameAxis",
+                yAxis: "PopulationAxis",
+                valueMemberPath: "nbrDown"
+            }
+        ]
+    });
+}
 
 $('#PDFViewer').bind('hidden.bs.modal', function () {
     $("#contentPDF").empty();
+    $("#dataPDF").empty();
 });
 
 $(window).resize(function () {
-    $("#PDFViewer iframe").height($("#PDFViewer").height() - 200);
-    $("#PDFModal").height($("#PDFViewer").height() - 60);
+    var height = $(window).height() - 200;
+    $("#PDFViewer iframe").height(height - 78);
+    $("#PDFViewer #contentPDF").height(height - 78);
+    $("#PDFViewer #dataPDF").height(height - 78);
+    $("#PDFModal").height(height + 150);
 });
 
 String.prototype.replaceAll = function (search, replacement) {
@@ -274,7 +388,10 @@ $(function () {
             width: 300,
             dataSource: Niveau_List,
             textKey: "data",
-            valueKey: "data",
+            valueKey: "key",
+            locale: {
+                placeHolder: "Filtre par niveau(x)"
+            },
             multiSelection: {
                 enabled: true,
                 showCheckboxes: true
@@ -311,10 +428,12 @@ $(function () {
                 $("#tableNiv").empty();
                 $("#tableMat").empty();
                 $("#tableThe").empty();
+
                 $.each(listNivSelected, function (key, value) {
-                    $("#tableNiv").append("<li class='divSelected'><span class='choixSelected label label-warning'><div class='icon-remove' onclick='javascript:removeFilter(\"" + value.key + "\");' aria-hidden='true'></div> " + value.data + " </span></li>");
+                    $("#tableNiv").append("<li id='" + value.key + "' class='divSelected'><a class='btnFilter btnFilter-icon btnFilter-filter' href='#' onclick='javascript:removeFilter(\"" + value.key + "\");'><i class='fa fa-close'></i><span>" + value.data + "</span></a></li>");
                 });
 
+                changeFilter();
 
             },
             itemsRendered: function (evt, ui) {
@@ -328,9 +447,12 @@ $(function () {
         $("#checkboxSelectComboMat").igCombo({
             width: 300,
             dataSource: [],
-            textKey: "key",
-            valueKey: "data",
+            textKey: "data",
+            valueKey: "key",
             disabled: true,
+            locale: {
+                placeHolder: "Filtre par matière(s)"
+            },
             multiSelection: {
                 enabled: true,
                 showCheckboxes: true
@@ -368,8 +490,10 @@ $(function () {
                 $("#tableMat").empty();
                 $("#tableThe").empty();
                 $.each(listMatSelected, function (key, value) {
-                    $("#tableMat").append("<li class='divSelected'><span class='choixSelected label label-warning'><div class='icon-remove' onclick='javascript:removeFilter('" + value.key + "');' aria-hidden='true'></div> " + value.data + " </span></li>");
+                    $("#tableMat").append("<li id='" + value.key + "' class='divSelected'><a class='btnFilter btnFilter-icon btnFilter-filter' href='#' onclick='javascript:removeFilter(\"" + value.key + "\");'><i class='fa fa-close'></i><span>" + value.data + "</span></a></li>");
                 });
+
+                changeFilter();
             },
             itemsRendered: function (evt, ui) {
                 ui.owner.deselectAll();
@@ -383,10 +507,13 @@ $(function () {
             width: 300,
             dataSource: [],
             textKey: "data",
-            valueKey: "data",
+            valueKey: "key",
             disabled: true,
             parentComboKey: "matiere",
             parentCombo: "#checkboxSelectComboMat",
+            locale: {
+                placeHolder: "Filtre par thème(s)"
+            },
             grouping: {
                 key: 'mat',
                 dir: 'asc'
@@ -408,17 +535,14 @@ $(function () {
                         $("#state").css("display", "none");
                         $("#district").css("display", "block");
                     }
-
                     filteredCascDistrict = dsCascDistrict.filter(function (district) {
                         return district.keyCountry == itemData.valCountry;
                     });
                 }
-
                 var $comboDistrict = $("#comboDistrict");
                 $comboDistrict.igCombo("deselectAll", {}, true);
                 $comboDistrict.igCombo("option", "dataSource", filteredCascDistrict);
                 $comboDistrict.igCombo("dataBind");
-
                 var disableChildCombo = filteredCascDistrict.length == 0;
                 $comboDistrict.igCombo("option", "disabled", disableChildCombo);
                 */
@@ -428,8 +552,10 @@ $(function () {
 
                 $("#tableThe").empty();
                 $.each(listTheSelected, function (key, value) {
-                    $("#tableThe").append("<li class='divSelected'><span class='choixSelected label label-warning'><div class='icon-remove' onclick='javascript:removeFilter('" + value.key + "');' aria-hidden='true'></div> " + value.data + " </span></li>");
+                    $("#tableThe").append("<li id='" + value.key + "' class='divSelected'><a class='btnFilter btnFilter-icon btnFilter-filter' href='#' onclick='javascript:removeFilter(\"" + value.key + "\");'><i class='fa fa-close'></i><span>" + value.data + "</span></a></li>");
                 });
+
+                changeFilter();
             },
             itemsRendered: function (evt, ui) {
                 ui.owner.deselectAll();
@@ -439,3 +565,157 @@ $(function () {
     });
 });
 
+function changeFilter() {
+    var listNivClass = "";
+    var listMatClass = "";
+    var listTheClass = "";
+    var itemsNiv = $("#checkboxSelectComboNiv").igCombo("selectedItems");
+    var itemsMat = $("#checkboxSelectComboMat").igCombo("selectedItems");
+    var itemsThe = $("#checkboxSelectComboThe").igCombo("selectedItems");
+
+    var find = "";
+    var finded = false;
+
+    if (itemsThe != null) {
+        $.each(itemsNiv, function (keyNiv, valueNiv) {
+            $.each(itemsMat, function (keyMat, valueMat) {
+                $.each(itemsThe, function (keyThe, valueThe) {
+                    $.each(Theme_List, function (keyList, valueList) {
+                        console.log("Value mat/key: " + valueMat.data.key + "/" + valueThe.data.key + " -- list mat/key: " + valueList.mat + "/" + valueList.key);
+                        if (valueList.mat == valueMat.data.key && valueList.key == valueThe.data.key) {
+                            if (find != "") {
+                                if (!find.endsWith(", "))
+                                    find = find + ", ." + valueNiv.data.key + "." + valueMat.data.key + "." + valueThe.data.key;
+                                else
+                                    find = find + " ." + valueNiv.data.key + "." + valueMat.data.key + "." + valueThe.data.key;
+                            } else {
+                                find = find + " ." + valueNiv.data.key + "." + valueMat.data.key + "." + valueThe.data.key;
+                            }
+                            finded = true;
+                        }
+                    });
+                    if (!finded) {
+                        if (find != "") {
+                            if (!find.endsWith(", "))
+                                find = find + ", ." + valueNiv.data.key + "." + valueMat.data.key;
+                            else
+                                find = find + " ." + valueNiv.data.key + "." + valueMat.data.key;
+                        } else {
+                            find = find + " ." + valueNiv.data.key + "." + valueMat.data.key;
+                        }
+                    }
+                    finded = false;
+                });
+            });
+        });
+    } else if (itemsMat != null) {
+        $.each(itemsNiv, function (keyNiv, valueNiv) {
+            $.each(itemsMat, function (keyMat, valueMat) {
+                if (find != "") {
+                    if (!find.endsWith(", "))
+                        find = find + ", ." + valueNiv.data.key + "." + valueMat.data.key;
+                    else
+                        find = find + " ." + valueNiv.data.key + "." + valueMat.data.key;
+                } else {
+                    find = find + " ." + valueNiv.data.key + "." + valueMat.data.key;
+                }
+            });
+        });
+    } else if (itemsNiv != null) {
+        $.each(itemsNiv, function (keyNiv, valueNiv) {
+            if (find != "") {
+                if (!find.endsWith(", "))
+                    find = find + ", ." + valueNiv.data.key;
+                else
+                    find = find + " ." + valueNiv.data.key;
+            } else {
+                find = find + " ." + valueNiv.data.key;
+            }
+        });
+    } else {
+        find = ".box";
+    }
+
+
+    /*if (itemsNiv != null) {
+        $.each(itemsNiv, function (keyNiv, valueNiv) {
+            if(find != "")
+                find = find + ", ";
+            if (itemsMat != null) {
+                $.each(itemsMat, function (keyMat, valueMat) {
+                    if (find != "")
+                        if (!find.endsWith(", "))
+                            find = find + ", ";
+                    if (itemsThe != null) {
+                        $.each(itemsThe, function (keyThe, valueThe) {
+                            $.each(Theme_List, function (keyList, valueList) {
+                                if (valueList.mat == valueMat.data.key && valueList.key == valueThe.data.key) {
+                                    find = find + " ." + valueNiv.data.key + "." + valueMat.data.key + "." + valueThe.data.key;
+                                    finded = true;
+                                }
+                            });
+                            if (!finded) {
+                                find = find + " ." + valueNiv.data.key + "." + valueMat.data.key;
+                            }
+                        });
+                    } else {
+                        find = find + " ." + valueNiv.data.key + "." + valueMat.data.key;
+                    }
+                });
+            } else {
+                find = find + " ." + valueNiv.data.key;
+            }
+        });
+    }*/
+
+    /*if (itemsMat != null) {
+        $.each(itemsMat, function (key, value) {
+            listMatClass = listMatClass + " ." + value.data.key;
+        });
+        find = find + ", " + listMatClass
+    }
+
+    if (itemsThe != null) {
+        $.each(itemsThe, function (key, value) {
+            listTheClass = listTheClass + " ." + value.data.key;
+        });
+        find = find + ", " + listTheClass
+    }*/
+
+    var $el = $("#parent").find(find).fadeIn(450);
+    $('#parent > div').not($el).hide();
+}
+
+function removeFilter(key) {
+    var $checkboxSelectComboNiv = $("#checkboxSelectComboNiv");
+    var $checkboxSelectComboMat = $("#checkboxSelectComboMat");
+    var $checkboxSelectComboThe = $("#checkboxSelectComboThe");
+
+    $checkboxSelectComboNiv.igCombo("deselectByValue", key);
+    $checkboxSelectComboMat.igCombo("deselectByValue", key);
+    $checkboxSelectComboThe.igCombo("deselectByValue", key);
+
+    var NivSize = $checkboxSelectComboNiv.igCombo("selectedItems")
+    if (NivSize != null)
+        NivSize = $checkboxSelectComboNiv.igCombo("selectedItems").length;
+
+    var MatSize = $checkboxSelectComboMat.igCombo("selectedItems");
+    if (MatSize != null)
+        MatSize = $checkboxSelectComboNiv.igCombo("selectedItems").length;
+
+    var TheSize = $checkboxSelectComboThe.igCombo("selectedItems");
+    if (TheSize != null)
+        TheSize = $checkboxSelectComboNiv.igCombo("selectedItems").length;
+
+    console.log(NivSize);
+    console.log(MatSize);
+    console.log(TheSize);
+
+    if (NivSize < 1)
+        $checkboxSelectComboMat.igCombo("option", "disabled", true);
+    if (MatSize < 1)
+        $checkboxSelectComboThe.igCombo("option", "disabled", true);
+
+    $("#" + key).remove();
+    changeFilter();
+}

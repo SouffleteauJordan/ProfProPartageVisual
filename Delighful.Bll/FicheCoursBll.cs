@@ -22,7 +22,12 @@ namespace ProfProPartage.Bll
 
         public List<FicheCours> GetAllFicheCours()
         {
-            return context.Fiches.ToList();
+            List<FicheCours> listFiche = context.Fiches.ToList();
+            foreach (var item in listFiche)
+            {
+                item.User = context.Users.Where(o => o.Id == item.UserId).First();
+            }   
+            return listFiche;
         }
 
         public Task<List<FicheCours>> GetAllFicheCoursAsync()

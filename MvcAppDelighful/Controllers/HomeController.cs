@@ -1,6 +1,7 @@
 ﻿using ProfProPartage.Bll;
 using ProfProPartage.Model;
 using ProfProPartage.ViewModel;
+using ProfProPartage.ViewModel.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,5 +46,12 @@ namespace AppProfProPartage.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult getUser(string id)
+        {
+            UserBll UserBll = _businessLocator.UsersBll;
+            ApplicationUser user = UserBll.GetUsersByCriteria(x => x.Id == id);
+            return Json(user);
+        }
     }
 }

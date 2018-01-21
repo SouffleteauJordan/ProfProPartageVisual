@@ -16,7 +16,6 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Imaging;
 using Spire.Pdf;
-using Spire.Doc.Documents;
 
 namespace AppProfProPartage.Controllers
 {
@@ -101,12 +100,12 @@ namespace AppProfProPartage.Controllers
 
                 PdfDocument pdf_doc = new PdfDocument();
                 pdf_doc.LoadFromStream(Request.Files[upload].InputStream);
-                Bitmap img = pdf_doc.SaveAsImage(0);
+                Image img = pdf_doc.SaveAsImage(0);
                 img.Save(Path.Combine(pathToSave, filename.Replace(" ", "_").Replace("-", "_").Replace(".pdf", "")) + ".jpg", ImageFormat.Jpeg);
                 fileList.Add(doc);
 
                 FicheCoursInvalideBll FicheCoursInvalideBll = _businessLocator.FicheCoursInvalideBll;
-                FicheCoursInvalideBll.AddFicheCoursInvalideAsync(new FicheCoursInvalide() {Description = description, Titre = doc.name, Niveau = doc.niveau, Matiere = doc.matiere, Theme = doc.theme, UrlPDF = "/Files/" + filename.Replace(" ", "_").Replace("-", "_"), UrlJPG = "/Files/"+ filename.Replace(" ", "_").Replace("-", "_").Replace(".pdf", "") + ".jpg", Temperature = 0, UserId=User.Identity.GetUserId()});
+                FicheCoursInvalideBll.AddFicheCoursInvalideAsync(new FicheCoursInvalide() {Description = description, Titre = doc.name, Niveau = doc.niveau, Matiere = doc.matiere, Theme = doc.theme, UrlPDF = "/Files/" + filename.Replace(" ", "_").Replace("-", "_"), UrlJPG = "/Files/"+ filename.Replace(" ", "_").Replace("-", "_").Replace(".pdf", "") + ".jpg", Temperature = 0, UserId=User.Identity.GetUserId(), DateAjout = DateTime.Now, NombreTelechargement = 0});
             }
             listFiles list = new listFiles(fileList);
             JsonResult res = Json(list);

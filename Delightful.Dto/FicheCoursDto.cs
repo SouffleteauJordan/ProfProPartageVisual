@@ -59,7 +59,21 @@ namespace ProfProPartage.Dto
             set { _fic.Description = value; }
         }
 
-        
+        [DataMember]
+        public DateTime DateAjout
+        {
+            get { return _fic.DateAjout; }
+            set { _fic.DateAjout = value; }
+        }
+
+        [DataMember]
+        public int NombreTelechargement
+        {
+            get { return _fic.NombreTelechargement; }
+            set { _fic.NombreTelechargement = value; }
+        }
+
+
         public List<Keyword> Keywords
         {
             get { return _fic.Keywords.ToList(); }

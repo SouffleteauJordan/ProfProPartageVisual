@@ -19,10 +19,11 @@ namespace ProfProPartage.Dal
         {
         }
 
+
         public DbSet<FicheCours> Fiches { get; set; }
         public DbSet<FicheCoursInvalide> FichesInvalide { get; set; }
         public DbSet<Keyword> Keywords { get; set; }
-       
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

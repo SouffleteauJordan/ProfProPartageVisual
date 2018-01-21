@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="~/Content/jquery.fileupload-ui.css">
 
 <script>
-    var Matiere_List = [
+    var Matiere_List2 = [
 ["Francais", "Maths", "Anglais", "Decouverte du monde", "Sport", "Instruction civique et morale", "Pratique et histoire des arts", "Jeux educatifs", "Outils", "Evenements de l'annee"],
 ["Francais", "Maths", "Anglais", "Decouverte du monde", "Sport", "Instruction civique et morale", "Pratique et histoire des arts", "Jeux educatifs", "Outils", "Evenements de l'annee"],
 ["Francais", "Maths", "Anglais", "Geographie", "Sport", "Instruction civique et morale", "Pratique et histoire des arts", "Sciences", "Histoire", "Jeux educatifs", "Evenements de l'annee", "Outils"],
@@ -58,7 +58,7 @@
     <div class="row fileupload-buttonbar">
         <div class="col-lg-9">
             <!-- The fileinput-button span is used to style the file input field as button -->
-            <span class="fileinput-button ui-button btn-success ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary">
+            <span class="btn fileinput-button ui-button btn-success ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary">
                 <span>Ajouter des fiches...</span>
                 <input name="files[]" multiple="" type="file">
             </span>
@@ -245,9 +245,7 @@
         var sel = data.files[0].name;
         //var inputs = $(".dataFile_" + sel);
         var inputs = data.context.find('select, textarea').prop('class', sel);
-        console.log(inputs);
         data.formData = inputs.serializeArray();
-        console.log(data.formData);
     });
 
     $('#fileupload').fileupload({
@@ -277,10 +275,10 @@
     function Matiere_change(idx, id_niv, id_mat, id_the) {
         var select_niv = document.getElementById(id_niv);
         var select_mat = document.getElementById(id_mat);
-        for (var i = 0; i < Matiere_List[idx].length; i++) {
-            select_mat.options[i] = new Option(Matiere_List[idx][i], i);
+        for (var i = 0; i < Matiere_List2[idx].length; i++) {
+            select_mat.options[i] = new Option(Matiere_List2[idx][i], i);
         }
-        var liste_Mat = Matiere_List[select_niv.selectedIndex];
+        var liste_Mat = Matiere_List2[select_niv.selectedIndex];
         var nom = liste_Mat[select_mat.selectedIndex];
         select_mat[select_mat.selectedIndex].value = nom;
         select_mat[select_mat.selectedIndex].value = select_mat[select_mat.selectedIndex].value.split(" ").join("_");
@@ -293,7 +291,7 @@
         var select_the = document.getElementById(id_the);
         
         
-        var liste_Mat = Matiere_List[select_niv.selectedIndex];
+        var liste_Mat = Matiere_List2[select_niv.selectedIndex];
         var nom = liste_Mat[select_mat.selectedIndex];
         select_mat[select_mat.selectedIndex].value = nom;
         select_mat[select_mat.selectedIndex].value = select_mat[select_mat.selectedIndex].value.split(" ").join("_");

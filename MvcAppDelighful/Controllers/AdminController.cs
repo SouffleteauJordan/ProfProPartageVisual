@@ -34,7 +34,7 @@ namespace AppProfProPartage.Controllers
         [HttpPost]
         public int ValiderFicheInvalide()
         {
-            int id = int.Parse(HttpContext.Request.Form.Get("id"));
+            int id = int.Parse(HttpContext.Request.Form["id"]);
 
             FicheCoursInvalideBll FicheCoursInvalideBll = _businessLocator.FicheCoursInvalideBll;
             FicheCoursInvalideBll.ValiderFiche(id);
@@ -44,7 +44,7 @@ namespace AppProfProPartage.Controllers
         [HttpPost]
         public int RefuserFicheInvalide()
         {
-            int id = int.Parse(HttpContext.Request.Form.Get("id"));
+            int id = int.Parse(HttpContext.Request.Form["id"]);
 
             FicheCoursInvalideBll FicheCoursInvalideBll = _businessLocator.FicheCoursInvalideBll;
             FicheCoursInvalideBll.RefuserFiche(id);
