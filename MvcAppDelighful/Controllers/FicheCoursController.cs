@@ -16,33 +16,25 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Imaging;
 using Spire.Pdf;
+using AppProfProPartage.ViewModel;
+using Microsoft.AspNet.Identity.Owin;
+using ProfProPartage.ViewModel.Model;
 
 namespace AppProfProPartage.Controllers
 {
     public class FicheCoursController : Controller
     {
-        //private IBookmarkRepository _iBookmarkRepository;
-
-        //public BookmarkController(IBookmarkRepository iBookmarkRepository)
-        //{
-        //    _iBookmarkRepository = iBookmarkRepository;
-        //}
-
         private BusinessLocator _businessLocator;
 
         public FicheCoursController()
         {
-              _businessLocator = ((BusinessLocator)System.Web.HttpContext.Current.Items["BusinessLocator"]);
+            _businessLocator = ((BusinessLocator)System.Web.HttpContext.Current.Items["BusinessLocator"]);
         }
-
-        //
-        // GET: /Bookmark/
+        
         public async Task<ActionResult> Index()
         {
 
-            //BookmarkBll bookmarkBll = new BookmarkBll(_iBookmarkRepository);
             FicheCoursBll FicheCoursBll = _businessLocator.FicheCoursBll;
-
             List<FicheCours> listBkms = await FicheCoursBll.GetAllFicheCoursAsync();
             
             ViewModelFicheCoursList vm = new ViewModelFicheCoursList(listBkms);
@@ -58,20 +50,24 @@ namespace AppProfProPartage.Controllers
             
             return PartialView("PVListBookmarks", new ViewModelFicheCoursList(await _businessLocator.FicheCoursBll.GetFicheCoursByKeywordsAsync(list_selected_Keywords)).ListFic);
         }
-
-        //
-        // GET: /Bookmark/Details/5
+        
         public ActionResult Details(int id)
         {
             return View();
         }
-
+        
         [System.Web.Mvc.Authorize]
-        public ActionResult MesFiches()
+        public async Task<ActionResult> MesFiches()
         {
-            ViewBag.Message = "Your files page.";
+            List<FicheCours> listFiche = new List<FicheCours>();
 
-            return View();
+            FicheCoursBll FicheCoursBll = _businessLocator.FicheCoursBll;
+            listFiche = FicheCoursBll.GetMesFicheCours(User.Identity.GetUserId());
+            
+
+            ViewModelFicheCoursList vm = new ViewModelFicheCoursList(listFiche);
+            
+            return View(vm);
         }
 
         //

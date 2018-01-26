@@ -61,16 +61,22 @@
         </nav>
 
         <nav class="nav-main collapse" aria-expanded="false" id="navMain">
-            <a class="logo visible-desktop" href="/Home/Index" title="Accueil"></a>
+            <a class="logo visible-desktop" href="/Home/Dashboard" title="Accueil"></a>
             <ul class="nav-main-tabs">
                 <li><a class="active" href="#">Espace partenaire</a></li>
                 <li><a href="#">Espace locataire</a></li>
             </ul>
             <ul class="nav-main-list">
                 <li class="nav-main-item current">
-                    <a class="nav-main-link" href="/Home/Index">
+                    <a class="nav-main-link" href="/Home/Dashboard">
                         <span class="ic-container"><i class="icon ic-dashboard"></i></span>
                         <span class="link-text">Accueil</span>
+                    </a>
+                </li>
+                <li class="nav-main-item">
+                    <a class="nav-main-link" href="/Home/Index">
+                        <span class="ic-container" style="font-size:20px; text-align:center;"><i class="fa fa-file-pdf-o" style="display: block; margin: 0 auto;"></i></span>
+                        <span class="link-text">Recherche d'une fiche</span>
                     </a>
                 </li>
                 <li class="nav-main-item">
@@ -94,7 +100,7 @@
                 <li class="nav-main-item">
                     <a class="nav-main-link" href="/Home/About">
                         <span class="ic-container"><i class="icon ic-documentation"></i></span>
-                        <span class="link-text">A propos</span>
+                        <span class="link-text">À propos</span>
                     </a>
                 </li>
                 <li class="nav-main-item">
@@ -111,14 +117,14 @@
                 </li>
                 @if (ViewContext.HttpContext.User.IsInRole("Admin"))
                 {
-                <li class="nav-main-item">
-                    <a class="nav-main-link" href="@Url.Action("AdminPanel", "Admin", null)">
-                        <span class="ic-containerh"><i class="icon ic-club"></i></span>
-                        <span class="link-text">Panneau d'administration</span>
-                    </a>
-                </li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="@Url.Action("AdminPanel", "Admin", null)">
+                            <span class="ic-container" style="font-size:20px; text-align:center;"><i class="fa fa-star-o" style="display: block; margin: 0 auto;"></i></span>
+                            <span class="link-text">Panneau d'administration</span>
+                        </a>
+                    </li>
                 }
-                </ul>
+            </ul>
         </nav>
     </header>
 
@@ -158,34 +164,32 @@
         </div>
     </footer>
 
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="~/Scripts/libs/bootstrap.min.js"></script>
-        <script src="~/Scripts/libs/carousel-swipe.js"></script>
-        <script src="~/Scripts/libs/bootstrap-datepicker.min.js"></script>
-        <script src="~/Scripts/libs/bootstrap-datepicker.fr.min.js"></script>
-        <script src="~/Scripts/libs/jquery.mCustomScrollbar.concat.min.js"></script>
-        <script src="~/Scripts/libs/bootstrap-table.min.js"></script>
-        <script src="~/Scripts/libs/bootstrap-table-fr-FR.min.js"></script>
-        <script src="~/Scripts/libs/percircle.js"></script>
-        <script src="~/Scripts/libs/typeahead.jquery.min.js"></script>
-        <script src="~/Scripts/libs/select2.full.min.js"></script>
-        <script src="~/Scripts/libs/fr.js"></script>
-        <script src="~/Scripts/libs/on-off-switch.js"></script>
-        <script src="~/Scripts/libs/on-off-switch-onload.js"></script>
-        <script src="~/Scripts/libs/bootstrap-slider.min.js"></script>
-        <script src="~/Scripts/app.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    
+    <script src="~/Scripts/libs/bootstrap.min.js"></script>
+    <script src="~/Scripts/libs/carousel-swipe.js"></script>
+    <script src="~/Scripts/libs/bootstrap-datepicker.min.js"></script>
+    <script src="~/Scripts/libs/bootstrap-datepicker.fr.min.js"></script>
+    <script src="~/Scripts/libs/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="~/Scripts/libs/bootstrap-table.min.js"></script>
+    <script src="~/Scripts/libs/bootstrap-table-fr-FR.min.js"></script>
+    <script src="~/Scripts/libs/percircle.js"></script>
+    <script src="~/Scripts/libs/typeahead.jquery.min.js"></script>
+    <script src="~/Scripts/libs/select2.full.min.js"></script>
+    <script src="~/Scripts/libs/fr.js"></script>
+    <script src="~/Scripts/libs/on-off-switch.js"></script>
+    <script src="~/Scripts/libs/on-off-switch-onload.js"></script>
+    <script src="~/Scripts/libs/bootstrap-slider.min.js"></script>
+    
+    <script src="~/Scripts/site.js"></script>
+    <script src="https://igniteui.com/js/modernizr.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+    <script src="~/Scripts/infragistics.core.js"></script>
+    <script src="~/Scripts/infragistics.lob.js"></script>
+    <script src="~/Scripts/infragistics.dv.js"></script>
 
-        <script src="~/Scripts/site.js"></script>
-        <script src="https://igniteui.com/js/modernizr.min.js"></script>
-        <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
-        <script src="~/Scripts/infragistics.core.js"></script>
-        <script src="~/Scripts/infragistics.lob.js"></script>
-        <script src="~/Scripts/infragistics.dv.js"></script>
-
-
-        @RenderSection("scripts", required: false)
+    @RenderSection("scripts", required: false)
 </body>
-</html>
+    </html>

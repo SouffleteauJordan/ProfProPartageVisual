@@ -513,6 +513,8 @@
     <Content Include="Views\FicheCours\MesFiches.cshtml" />
     <Content Include="Views\Account\MesStatistiques.cshtml" />
     <Content Include="Views\Home\Help.cshtml" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
+    <Content Include="Views\FicheCours\listMesFiches.cshtml" />
     <None Include="_bin_deployableAssemblies\amd64\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\amd64\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\amd64\sqlceme40.dll" />
@@ -683,7 +685,6 @@
     <Content Include="Views\Shared\_Layout2.cshtml" />
     <Content Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
     <Content Include="Views\Home\About2.cshtml" />
-    <Content Include="Views\Admin\ListeFicheInvalide.cshtml" />
     <Content Include="Views\Admin\listFicheInvalide.cshtml" />
     <Content Include="Views\Admin\AdminPanel.cshtml" />
     <Content Include="Views\Home\listFiche.cshtml" />

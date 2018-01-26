@@ -26,13 +26,28 @@ namespace ProfProPartage.Bll
             foreach (var item in listFiche)
             {
                 item.User = context.Users.Where(o => o.Id == item.UserId).First();
-            }   
+            }
+            return listFiche;
+        }
+
+        public List<FicheCours> GetMesFicheCours(string id)
+        {
+            List<FicheCours> listFiche = context.Fiches.Where(o => o.UserId == id).ToList();
+            foreach (var item in listFiche)
+            {
+                item.User = context.Users.Where(o => o.Id == item.UserId).First();
+            }
             return listFiche;
         }
 
         public Task<List<FicheCours>> GetAllFicheCoursAsync()
         {
             return context.Fiches.ToListAsync();
+        }
+
+        public Task<List<FicheCours>> GetMesFicheCoursAsync(string id)
+        {
+            return context.Fiches.Where(o => o.UserId == id).ToListAsync();
         }
 
         public List<FicheCours> GetFicheCoursByCriteria(Func<FicheCours, bool> predicat)

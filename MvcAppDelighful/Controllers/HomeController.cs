@@ -1,4 +1,5 @@
-﻿using ProfProPartage.Bll;
+﻿using Microsoft.AspNet.Identity;
+using ProfProPartage.Bll;
 using ProfProPartage.Model;
 using ProfProPartage.ViewModel;
 using ProfProPartage.ViewModel.Model;
@@ -34,22 +35,21 @@ namespace AppProfProPartage.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
         public ActionResult Help()
         {
-            ViewBag.Message = "Your help page.";
+            return View();
+        }
 
+        public ActionResult Dashboard()
+        {
             return View();
         }
 

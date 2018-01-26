@@ -305,10 +305,10 @@ $('div.PDFViewerButton').on('click', function (e) {
 
 $('document').ready(function () {
     var height = $(window).height() - 200;
-    $("#PDFViewer iframe").height(height - 78);
-    $("#PDFViewer #contentPDF").height(height - 78);
-    $("#PDFViewer #dataPDF").height(height - 78);
-    $("#PDFModal").height(height + 150);
+    $("#PDFViewer iframe").height(height - 155);
+    $("#PDFViewer #contentPDF").height(height - 155);
+    $("#PDFViewer #dataPDF").height(height - 155);
+    $("#PDFModal").height(height - 150);
 });
 
 
@@ -370,10 +370,10 @@ $('#PDFViewer').bind('hidden.bs.modal', function () {
 
 $(window).resize(function () {
     var height = $(window).height() - 200;
-    $("#PDFViewer iframe").height(height - 78);
-    $("#PDFViewer #contentPDF").height(height - 78);
-    $("#PDFViewer #dataPDF").height(height - 78);
-    $("#PDFModal").height(height + 150);
+    $("#PDFViewer iframe").height(height - 155);
+    $("#PDFViewer #contentPDF").height(height - 155);
+    $("#PDFViewer #dataPDF").height(height - 155);
+    $("#PDFModal").height(height - 150);
 });
 
 String.prototype.replaceAll = function (search, replacement) {
@@ -501,6 +501,66 @@ $(function () {
         });
 
     });
+
+    function initCheckbox() {
+        if ($(".custom-switch").length > 0) {
+            new DG.OnOffSwitchAuto({
+                cls: '.custom-switch',
+                height: 20,
+                listener: function (name, checked) {
+                    if (checked) {
+                        $("input[name=" + name + "]").parents(".switch-row").find(".checkbox input").removeAttr("disabled");
+                        $("input[name=" + name + "]").parents(".switch-row").addClass("on");
+                    }
+                    else {
+                        $("input[name=" + name + "]").parents(".switch-row").find(".checkbox input").attr("disabled", "disabled").removeAttr("checked");
+                        $("input[name=" + name + "]").parents(".switch-row").removeClass("on");
+                    }
+                }
+            });
+
+            setTimeout(function () {
+                $("#settings .custom-switch").each(function () {
+                    if ($(this).is(":checked")) {
+                        $(this).parents(".switch-row").addClass("on");
+                    }
+                });
+            }, 500);
+        }
+
+        if ($("#enableAll").length > 0) {
+            $("#enableAll").click(function (e) {
+                e.preventDefault();
+                $("#settings .switch-row:not(.on) input.custom-switch").trigger("click");
+            });
+        }
+
+        if ($("#disableAll").length > 0) {
+            $("#disableAll").click(function (e) {
+                e.preventDefault();
+                $("#settings .switch-row.on input.custom-switch").trigger("click");
+            });
+        }
+
+        if ($("#subscribeToAll").length > 0) {
+            $("#subscribeToAll").click(function (e) {
+                e.preventDefault();
+                $("#communicationOptions input.custom-switch:not(:checked)").trigger("click");
+            });
+        }
+
+        if ($("#unsubscribeToAll").length > 0) {
+            $("#unsubscribeToAll").click(function (e) {
+                e.preventDefault();
+                $("#communicationOptions input.custom-switch:checked").trigger("click");
+            });
+        }
+    }
+
+    
+    $('document').ready(function () {
+        initCheckbox();
+    });    
 
     $(function () {
         $("#checkboxSelectComboThe").igCombo({
@@ -719,3 +779,4 @@ function removeFilter(key) {
     $("#" + key).remove();
     changeFilter();
 }
+

@@ -23,9 +23,16 @@ namespace ProfProPartage.Helper
 
 
         }
-        public static MvcHtmlString Replace(this HtmlHelper x, String s , string olds, string news)
+        public static MvcHtmlString Replace(this HtmlHelper x, String s, string olds, string news)
         {
             return MvcHtmlString.Create(s.Replace(olds, news));
         }
+
+        public static MvcHtmlString FormatDataView(string data)
+        {
+            return MvcHtmlString.Create(data.Replace(" ", "_").Replace("_:_", "_").Replace("_/_", "_").Replace("(", "_").Replace(")", "_"));
+        }
+
+        
     }
 }

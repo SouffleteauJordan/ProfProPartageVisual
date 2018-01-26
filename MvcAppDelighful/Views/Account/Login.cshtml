@@ -4,11 +4,16 @@
     ViewData["Title"] = "Se connecter";
 }
 
-<div class="titleTopPage">
-    <h2><strong style="color:#E95325;">S</strong>e connecter</h2>
-    <h3>Choisissez votre méthode de connexion</h3>
+<div id="title" class="main-title"><h1><strong style="color:#E95325;">S</strong>e connecter - Accès complet</h1></div>
+<div class="block-breadcrumb">
+    <div class="horizontal-scroll">
+        <ul class="breadcrumb">
+            <li><a href="/Home/Dashboard"><i class="icon ic-breadcrumb-dashboard"></i>Tableau de bord</a></li>
+            <li class="active">Se connecter - Accès complet</li>
+        </ul>
+    </div>
 </div>
-<br />
+</br>
 
 <div class="row">
     <div class="col-md-8">
@@ -36,8 +41,8 @@
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
+                            @Html.CheckBoxFor(m => m.RememberMe, new { @class = "input-checkbox-1" })
+                            @Html.LabelFor(m => m.RememberMe, new { @for = "input-checkbox-1" })
                         </div>
                     </div>
                 </div>

@@ -5,7 +5,16 @@
     ViewData["user"] = "Mes Fiches";
 }
 
-<div id="title"><h1>Accueil</h1></div>
+<div id="title" class="main-title"><h1><strong style="color:#E95325;">M</strong>es fiches - Liste de vos documents</h1></div>
+<div class="block-breadcrumb">
+    <div class="horizontal-scroll">
+        <ul class="breadcrumb">
+            <li><a href="/Home/Dashboard"><i class="icon ic-breadcrumb-dashboard"></i>Tableau de bord</a></li>
+            <li class="active">Aide - Une question ?</li>
+        </ul>
+    </div>
+</div>
+</br>
 
 <div id="Filter">
     <div id="contentFilter">
@@ -28,50 +37,34 @@
         <div class="spacer"></div>
 
         <div id="parent">
-            @Html.Partial("listFiche", Model.ListFic)
+            @Html.Partial("listMesFiches", Model.ListFic)
         </div>
-
-
+        
         <div class="modal fade" id="PDFViewer" tabindex="-1" role="dialog" aria-labelledby="PDFViewerLabel" aria-hidden="true" style="display: none;">
             <div id="PDFDialog" class="modal-dialog">
                 <div id="PDFModal" class="modal-content" style="height: 543px;">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4 class="modal-title" id="PDFViewerLabel">eval</h4>
                     <div class="modal-body">
-                        <div class="tabs tabs-style-shape">
+                        <div class="tabs tabs-style-linetriangle">
                             <nav>
                                 <ul>
                                     <li class="tab active">
                                         <a href="#pdfDoc" data-toggle="tab">
-                                            <svg viewBox="0 0 80 60" preserveAspectRatio="none"><use xlink:href="#tabshape"></use></svg>
+                                            <span class="ic-container"><i class="fa fa-file-pdf-o"></i></span>
                                             <span>Fiche PDF</span>
                                         </a>
                                     </li>
                                     <li class="tab">
                                         <a href="#pdfData" data-toggle="tab">
-                                            <svg viewBox="0 0 80 60" preserveAspectRatio="none"><use xlink:href="#tabshape"></use></svg>
-                                            <svg viewBox="0 0 80 60" preserveAspectRatio="none"><use xlink:href="#tabshape"></use></svg>
+                                            <span class="ic-container"><i class="fa fa-pie-chart"></i></span>
                                             <span>Métadonnées</span>
                                         </a>
                                     </li>
                                     <li class="tab">
                                         <a href="#pdfAuthor" data-toggle="tab">
-                                            <svg viewBox="0 0 80 60" preserveAspectRatio="none"><use xlink:href="#tabshape"></use></svg>
-                                            <svg viewBox="0 0 80 60" preserveAspectRatio="none"><use xlink:href="#tabshape"></use></svg>
+                                            <span class="ic-container"><i class="fa fa-vcard"></i></span>
                                             <span>Description</span>
-                                        </a>
-                                    </li>
-                                    <li class="tab">
-                                        <a href="#section-shape-4" data-toggle="tab">
-                                            <svg viewBox="0 0 80 60" preserveAspectRatio="none"><use xlink:href="#tabshape"></use></svg>
-                                            <svg viewBox="0 0 80 60" preserveAspectRatio="none"><use xlink:href="#tabshape"></use></svg>
-                                            <span>Portfolio</span>
-                                        </a>
-                                    </li>
-                                    <li class="tab">
-                                        <a href="#section-shape-5" data-toggle="tab">
-                                            <svg viewBox="0 0 80 60" preserveAspectRatio="none"><use xlink:href="#tabshape"></use></svg>
-                                            <span>Contact</span>
                                         </a>
                                     </li>
                                 </ul>

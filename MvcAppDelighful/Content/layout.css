@@ -577,10 +577,6 @@ th {
   .table-bordered td {
     border: 1px solid #ddd !important; } }
 
-@font-face {
-  font-family: 'Glyphicons Halflings';
-  src: url("../fonts/bootstrap/glyphicons-halflings-regular.eot");
-  src: url("../fonts/bootstrap/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/bootstrap/glyphicons-halflings-regular.woff2") format("woff2"), url("../fonts/bootstrap/glyphicons-halflings-regular.woff") format("woff"), url("../fonts/bootstrap/glyphicons-halflings-regular.ttf") format("truetype"), url("../fonts/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg"); }
 
 .glyphicon {
   position: relative;
@@ -5463,17 +5459,6 @@ button.close {
     opacity: 0.5;
     filter: alpha(opacity=50); }
 
-.modal-header {
-  padding: 15px;
-  border-bottom: 1px solid #e5e5e5; }
-  .modal-header:before, .modal-header:after {
-    content: " ";
-    display: table; }
-  .modal-header:after {
-    clear: both; }
-
-.modal-header .close {
-  margin-top: -2px; }
 
 .modal-title {
   margin: 0;
@@ -6625,26 +6610,7 @@ button.close {
   margin-left: -5px;
   margin-right: -5px; }
 
-/*# sourceMappingURL=bootstrap-datepicker.css.map */
-/*
-== malihu jquery custom scrollbar plugin ==
-Plugin URI: http://manos.malihu.gr/jquery-custom-content-scroller
-*/
-/*
-CONTENTS: 
-	1. BASIC STYLE - Plugin's basic/essential CSS properties (normally, should not be edited). 
-	2. VERTICAL SCROLLBAR - Positioning and dimensions of vertical scrollbar. 
-	3. HORIZONTAL SCROLLBAR - Positioning and dimensions of horizontal scrollbar.
-	4. VERTICAL AND HORIZONTAL SCROLLBARS - Positioning and dimensions of 2-axis scrollbars. 
-	5. TRANSITIONS - CSS3 transitions for hover events, auto-expanded and auto-hidden scrollbars. 
-	6. SCROLLBAR COLORS, OPACITY AND BACKGROUNDS 
-		6.1 THEMES - Scrollbar colors, opacity, dimensions, backgrounds etc. via ready-to-use themes.
-*/
-/* 
-------------------------------------------------------------------------------------------------------------------------
-1. BASIC STYLE  
-------------------------------------------------------------------------------------------------------------------------
-*/
+
 .mCustomScrollbar {
   -ms-touch-action: pinch-zoom;
   touch-action: pinch-zoom;
@@ -9553,8 +9519,7 @@ div.fixed-table-scroll-outer {
       border-bottom: solid 2px #6d55a8 !important;
       color: #6d55a8 !important; }
 
-.tab-pane {
-  margin-top: 60px; }
+
 
 .page-content > .horizontal-scroll:first-child .nav-tabs {
   margin-top: 0; }
@@ -9984,62 +9949,6 @@ div.fixed-table-scroll-outer {
   .module-modal {
     padding-right: 0 !important; } }
 
-.modal-dialog {
-  margin-top: 15%; }
-  @media all and (min-width: 768px) {
-    .modal-dialog {
-      width: 750px; }
-      .modal-dialog.v-scroll {
-        margin-top: 5vh; }
-        .modal-dialog.v-scroll .modal-body {
-          max-height: 65vh;
-          overflow: auto;
-          overflow-x: hidden; } }
-  @media all and (max-width: 767px) {
-    .modal-dialog {
-      margin: 0; } }
-  .modal-dialog .close {
-    opacity: 0.6; }
-    .modal-dialog .close:hover {
-      opacity: 1; }
-  .modal-dialog .modal-content {
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    border-radius: 0;
-    border: 0;
-    padding: 30px 70px; }
-    @media all and (max-width: 767px) {
-      .modal-dialog .modal-content {
-        padding: 20px; } }
-  .modal-dialog .modal-header, .modal-dialog .modal-body, .modal-dialog .modal-footer {
-    padding: 20px 0; }
-    @media all and (max-width: 767px) {
-      .modal-dialog .modal-header, .modal-dialog .modal-body, .modal-dialog .modal-footer {
-        padding: 10px 0; } }
-  .modal-dialog .modal-body p a {
-    text-decoration: underline;
-    font-weight: 500; }
-    .modal-dialog .modal-body p a:hover {
-      text-decoration: none; }
-  .modal-dialog .modal-header {
-    border-bottom: 0; }
-  .modal-dialog .modal-footer {
-    border-top: 0; }
-    @media all and (max-width: 767px) {
-      .modal-dialog .modal-footer .btn {
-        margin-top: 10px; } }
-  .modal-dialog .modal-title {
-    font-size: 40px;
-    font-size: 4rem;
-    line-height: 40px;
-    line-height: 4rem;
-    color: #26282a; }
-    @media all and (max-width: 767px) {
-      .modal-dialog .modal-title {
-        font-size: 22px;
-        font-size: 2.2rem;
-        line-height: 22px;
-        line-height: 2.2rem; } }
 
 .form {
   overflow: hidden; }

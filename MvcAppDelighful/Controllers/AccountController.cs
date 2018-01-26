@@ -421,15 +421,7 @@ namespace AppProfProPartage.ViewModel.Controllers
 
             return View();
         }
-
-        [HttpPost]
-        public ApplicationUser getUser()
-        {
-            string id = HttpContext.Request.Form["id"];
-            UserBll UserBll = _businessLocator.UsersBll;
-            ApplicationUser user = UserBll.GetUsersByCriteria(x => x.Id == id);
-            return user;
-        }
+        
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
