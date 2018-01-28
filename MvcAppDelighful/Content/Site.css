@@ -203,11 +203,15 @@ input[type="checkbox"].input-validation-error {
     display:inline-block;   
     vertical-align:top;
 }
-#contentPDF{  
-    display:inline-block;   
+#contentPDF {
+    display: inline-block;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
-#dataPDF{  
-    display:inline-block;   
+#dataPDF {
+    display: inline-block;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #footer{
@@ -1706,3 +1710,5 @@ body .ui-state-active.ui-state-hover .ui-icon, body .ui-state-hover.ui-state-hig
         background-color: #1DA1F2;
         border-color: #1DA1F2;
     }
+
+

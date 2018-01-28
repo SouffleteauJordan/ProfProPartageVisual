@@ -223,7 +223,7 @@ $('div.PDFViewerButton').on('click', function (e) {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (user) {
-            console.log(user);
+            
             var jour = new Date(parseInt(user.DateNaissance.replace("/Date(", "").replace(")/", ""), 10)).getDate();
             var mois = new Date(parseInt(user.DateNaissance.replace("/Date(", "").replace(")/", ""), 10)).getMonth() + 1;
             var année = new Date(parseInt(user.DateNaissance.replace("/Date(", "").replace(")/", ""), 10)).getFullYear();
@@ -253,7 +253,7 @@ $('div.PDFViewerButton').on('click', function (e) {
         }
     });
     
-    
+
     var src = $(this).attr('data-src');
     //var height = document.body.clientHeight * 0.75;
 
@@ -289,17 +289,25 @@ $('div.PDFViewerButton').on('click', function (e) {
 
     $("#PDFViewerLabel").html(title);
 
+    $("#thermostat").data('data-percent', temperature);
+    setTimeout(function () {
+        if (temperature > 0) {
+            $("#thermostat span").css('color', '#ff0c0c');
+            $(".bar").css('border-color', '#ff0c0c');
+        } else {
+            $("#thermostat span").css('color', '#0085ff');
+            $(".bar").css('border-color', '#0085ff');
+        }
+        $("#thermostat span").append("°C");
+    }, 1000)
+    $("#NbrDDL").append(NombreTelechargement + " fois");
+    $("#dateAjout").append(DateAjout);
+
     $("#dataPDF").append("<label> Niveau : </label><p>" + niveau + " </p>");
     $("#dataPDF").append("<label> Matiere : </label><p>" + matiere + " </p>");
     $("#dataPDF").append("<label> Theme : </label><p>" + theme + " </p>");
-    $("#dataPDF").append("<label> Température : </label><p>" + temperature + " </p>");
-    $("#dataPDF").append("<label> DateAjout : </label><p>" + DateAjout + " </p>");
-    $("#dataPDF").append("<label> Nombre de telechargemnt : </label><p>" + NombreTelechargement + " </p>");
     $("#dataPDF").append("<label> Auteur : </label><p>" + UserName + " </p>");
     $("#dataPDF").append("<label> Auteur identifiant : </label><p>" + UserId + " </p>");
-   
-
-    initAnalyseFile();
 
 });
 
@@ -308,9 +316,21 @@ $('document').ready(function () {
     $("#PDFViewer iframe").height(height - 155);
     $("#PDFViewer #contentPDF").height(height - 155);
     $("#PDFViewer #dataPDF").height(height - 155);
-    $("#PDFModal").height(height - 150);
+    $("#PDFModal").height(height + 100);
 });
 
+$('#PDFViewer').bind('hidden.bs.modal', function () {
+    $("#contentPDF").empty();
+    $("#dataPDF").empty();
+});
+
+$(window).resize(function () {
+    var height = $(window).height() - 200;
+    $("#PDFViewer iframe").height(height - 155);
+    $("#PDFViewer #contentPDF").height(height - 155);
+    $("#PDFViewer #dataPDF").height(height - 155);
+    $("#PDFModal").height(height + 100);
+});
 
 var data = [
     { "Mois": "Janvier", "nbrDown": 400, "Pop2025": 1394 },
@@ -326,55 +346,6 @@ var data = [
     { "Mois": "Novembre", "nbrDown": 380, "Pop2025": 277 },
     { "Mois": "Decembre", "nbrDown": 204, "Pop2025": 218 }
 ];
-
-
-function initAnalyseFile() {
-    $("#chart").igDataChart({
-        width: "500px",
-        height: "450px",
-        title: "Popularité",
-        subtitle: "Nombre de téléchargement par mois depuis la création de la fiche",
-        dataSource: data,
-        axes: [
-            {
-                name: "NameAxis",
-                type: "categoryX",
-                title: "Country",
-                label: "Mois"
-            },
-            {
-                name: "PopulationAxis",
-                type: "numericY",
-                minimumValue: 0,
-                title: "Nbr de téléchargement",
-            }
-        ],
-        series: [
-            {
-                name: "NbrTelechargement",
-                type: "column",
-                isHighlightingEnabled: true,
-                isTransitionInEnabled: true,
-                xAxis: "NameAxis",
-                yAxis: "PopulationAxis",
-                valueMemberPath: "nbrDown"
-            }
-        ]
-    });
-}
-
-$('#PDFViewer').bind('hidden.bs.modal', function () {
-    $("#contentPDF").empty();
-    $("#dataPDF").empty();
-});
-
-$(window).resize(function () {
-    var height = $(window).height() - 200;
-    $("#PDFViewer iframe").height(height - 155);
-    $("#PDFViewer #contentPDF").height(height - 155);
-    $("#PDFViewer #dataPDF").height(height - 155);
-    $("#PDFModal").height(height - 150);
-});
 
 String.prototype.replaceAll = function (search, replacement) {
     var target = this;

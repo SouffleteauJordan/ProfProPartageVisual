@@ -2,55 +2,58 @@
     ViewBag.Title = "Import";
 }
 
-
-
 <link rel="stylesheet" href="https://blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
 <link rel="stylesheet" href="~/Content/jquery.fileupload.css">
 <link rel="stylesheet" href="~/Content/jquery.fileupload-ui.css">
-
 <script>
     var Matiere_List2 = [
-["Francais", "Maths", "Anglais", "Decouverte du monde", "Sport", "Instruction civique et morale", "Pratique et histoire des arts", "Jeux educatifs", "Outils", "Evenements de l'annee"],
-["Francais", "Maths", "Anglais", "Decouverte du monde", "Sport", "Instruction civique et morale", "Pratique et histoire des arts", "Jeux educatifs", "Outils", "Evenements de l'annee"],
-["Francais", "Maths", "Anglais", "Geographie", "Sport", "Instruction civique et morale", "Pratique et histoire des arts", "Sciences", "Histoire", "Jeux educatifs", "Evenements de l'annee", "Outils"],
-["Francais", "Maths", "Anglais", "Geographie", "Sport", "Instruction civique et morale", "Pratique et histoire des arts", "Sciences", "Histoire", "Jeux educatifs", "Evenements de l'annee", "Outils"],
-["Francais", "Maths", "Anglais", "Geographie", "Sport", "Instruction civique et morale", "Pratique et histoire des arts", "Sciences", "Histoire", "Jeux educatifs", "Evenements de l'annee", "Outils"],
+        ["Francais", "Maths", "Anglais", "Decouverte du monde", "Sport", "Instruction civique et morale", "Pratique et histoire des arts", "Jeux educatifs", "Outils", "Evenements de l'annee"],
+        ["Francais", "Maths", "Anglais", "Decouverte du monde", "Sport", "Instruction civique et morale", "Pratique et histoire des arts", "Jeux educatifs", "Outils", "Evenements de l'annee"],
+        ["Francais", "Maths", "Anglais", "Geographie", "Sport", "Instruction civique et morale", "Pratique et histoire des arts", "Sciences", "Histoire", "Jeux educatifs", "Evenements de l'annee", "Outils"],
+        ["Francais", "Maths", "Anglais", "Geographie", "Sport", "Instruction civique et morale", "Pratique et histoire des arts", "Sciences", "Histoire", "Jeux educatifs", "Evenements de l'annee", "Outils"],
+        ["Francais", "Maths", "Anglais", "Geographie", "Sport", "Instruction civique et morale", "Pratique et histoire des arts", "Sciences", "Histoire", "Jeux educatifs", "Evenements de l'annee", "Outils"],
     ];
 
     var Theme_List_CP_CE1 = [
-    ["Lecture", "Grammaire", "Conjugaison", "Orthographe", "Vocabulaire", "Language oral", "Ecriture", "Redaction", "Devenir lecteur", "Litterature de jeunesse", "Outils : Francais"],
-    ["Numeration", "Calculs", "Geometrie", "Grandeurs et mesures", "Organisation des donnees", "Outils : Mathematiques"],
-    ["Langue anglaise", "Images / flash cards", "Civilisation anglaise", "Themes du quotidien", "Outils : anglais"],
-    ["Le temps", "Le developpement durable", "L'espace", "Le vivant (anatomie)", "Le vivant (etre vivants)", "La matiere", "Objets", "TIC", "Outils : Decouverte du monde"],
-    ["Realiser une performance", "Adapter ses deplacements", "Cooperer et s'opposer", "Actions esthetiques", "Outils : EPS"],
-    ["Principes de la morale", "Regles de vie collectives", "Education a la sante", "Education a la securite", "Veme Republique", "Union Europeenne", "Commerations et fetes", "Outils : instruction civique"],
-    ["Arts visuels", "Education musicale", "Histoire des arts", "Outils : arts"],
-    ["Jeux de francais", "Jeux de mathematiques", "Jeux de sciences", "Jeux pour l'histoire", "Jeux de geographie", "Jeux d'anglais", "Jeux d'arts visuels"],
-    ["Outils pour la classe", "Travail en autonomie", "Logiciels"],
-    ["Noel", "Evenements annuels", "Automne", "Hiver", "Printemps", "Ete"],
+        ["Lecture", "Grammaire", "Conjugaison", "Orthographe", "Vocabulaire", "Language oral", "Ecriture", "Redaction", "Devenir lecteur", "Litterature de jeunesse", "Outils : Francais"],
+        ["Numeration", "Calculs", "Geometrie", "Grandeurs et mesures", "Organisation des donnees", "Outils : Mathematiques"],
+        ["Langue anglaise", "Images / flash cards", "Civilisation anglaise", "Themes du quotidien", "Outils : anglais"],
+        ["Le temps", "Le developpement durable", "L'espace", "Le vivant (anatomie)", "Le vivant (etre vivants)", "La matiere", "Objets", "TIC", "Outils : Decouverte du monde"],
+        ["Realiser une performance", "Adapter ses deplacements", "Cooperer et s'opposer", "Actions esthetiques", "Outils : EPS"],
+        ["Principes de la morale", "Regles de vie collectives", "Education a la sante", "Education a la securite", "Veme Republique", "Union Europeenne", "Commerations et fetes", "Outils : instruction civique"],
+        ["Arts visuels", "Education musicale", "Histoire des arts", "Outils : arts"],
+        ["Jeux de francais", "Jeux de mathematiques", "Jeux de sciences", "Jeux pour l'histoire", "Jeux de geographie", "Jeux d'anglais", "Jeux d'arts visuels"],
+        ["Outils pour la classe", "Travail en autonomie", "Logiciels"],
+        ["Noel", "Evenements annuels", "Automne", "Hiver", "Printemps", "Ete"],
     ];
 
     var Theme_List_CE2_CM1_CM2 = [
-    ["Lecture", "Grammaire", "Conjugaison", "Orthographe", "Vocabulaire", "Language oral", "Ecriture", "Redaction", "Devenir lecteur", "Litterature de jeunesse", "Outils : Francais"],
-    ["Numeration", "Calculs", "Geometrie", "Grandeurs et mesures", "Organisation des donnees", "Outils : Mathematiques"],
-    ["Langue anglaise", "Images / flash cards", "Civilisation anglaise", "Themes du quotidien", "Outils : anglais"],
-    ["Geographie locale", "Territoire fancais dans l'UE", "Produire en France", "Population fancaise dans l'UE", "Se deplacer en Europe", "France dans le monde", "Outils : Geographie"],
-    ["Realiser une performance", "Adapter ses deplacements", "Cooperer et s'opposer", "Actions esthetiques", "Outils : EPS"],
-    ["Principes de la morale", "Regles de vie collectives", "Education a la sante", "Education a la securite", "Veme Republique", "Union Europeenne", "Commerations et fetes", "Outils : instruction civique"],
-    ["Arts visuels", "Education musicale", "Histoire des arts", "Outils : arts"],
-    ["Objets", "Le developpement durable", "La matiere", "Le Ciel et la Terre", "Le vivant (anatomie)", "Le vivant (etre vivants)", "TIC", "Outils : Sciences"],
-    ["Prehistoire", "Antiquite", "Moyen-Age", "Temps modernes", "Revolution et XIXeme siecle", "XXeme siecle", "Outils : Histoire"],
-    ["Jeux de francais", "Jeux de mathematiques", "Jeux de sciences", "Jeux pour l'histoire", "Jeux de geographie", "Jeux d'anglais", "Jeux d'arts visuels"],
-    ["Noel", "Evenements annuels", "Automne", "Hiver", "Printemps", "Ete"],
-    ["Outils pour la classe", "Travail en autonomie", "Logiciels"],
+        ["Lecture", "Grammaire", "Conjugaison", "Orthographe", "Vocabulaire", "Language oral", "Ecriture", "Redaction", "Devenir lecteur", "Litterature de jeunesse", "Outils : Francais"],
+        ["Numeration", "Calculs", "Geometrie", "Grandeurs et mesures", "Organisation des donnees", "Outils : Mathematiques"],
+        ["Langue anglaise", "Images / flash cards", "Civilisation anglaise", "Themes du quotidien", "Outils : anglais"],
+        ["Geographie locale", "Territoire fancais dans l'UE", "Produire en France", "Population fancaise dans l'UE", "Se deplacer en Europe", "France dans le monde", "Outils : Geographie"],
+        ["Realiser une performance", "Adapter ses deplacements", "Cooperer et s'opposer", "Actions esthetiques", "Outils : EPS"],
+        ["Principes de la morale", "Regles de vie collectives", "Education a la sante", "Education a la securite", "Veme Republique", "Union Europeenne", "Commerations et fetes", "Outils : instruction civique"],
+        ["Arts visuels", "Education musicale", "Histoire des arts", "Outils : arts"],
+        ["Objets", "Le developpement durable", "La matiere", "Le Ciel et la Terre", "Le vivant (anatomie)", "Le vivant (etre vivants)", "TIC", "Outils : Sciences"],
+        ["Prehistoire", "Antiquite", "Moyen-Age", "Temps modernes", "Revolution et XIXeme siecle", "XXeme siecle", "Outils : Histoire"],
+        ["Jeux de francais", "Jeux de mathematiques", "Jeux de sciences", "Jeux pour l'histoire", "Jeux de geographie", "Jeux d'anglais", "Jeux d'arts visuels"],
+        ["Noel", "Evenements annuels", "Automne", "Hiver", "Printemps", "Ete"],
+        ["Outils pour la classe", "Travail en autonomie", "Logiciels"],
     ];
 </script>
 
-<!--asp-controller="import" asp-action="Upload"-->
-<div class="titleTopPage">
-    <h2><strong style="color:#E95325;">D</strong>épôt de fiche de cours</h2>
-    <h3>Vous pouvez déposer vos fiches au format PDF</h3>
+<div id="title" class="main-title"><h1><strong style="color:#E95325;">I</strong>mport - Dépôt de fiche de cours</h1></div>
+<div class="block-breadcrumb">
+    <div class="horizontal-scroll">
+        <ul class="breadcrumb">
+            <li><a href="/Home/Dashboard"><i class="icon ic-breadcrumb-dashboard"></i>Tableau de bord</a></li>
+            <li class="active">Import - Dépôt de fiche de cours</li>
+        </ul>
+    </div>
 </div>
+</br>
+
 <form class="" id="fileupload" method="POST" enctype="multipart/form-data">
     <!-- Redirect browsers with JavaScript disabled to the origin page -->
     <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
@@ -88,7 +91,6 @@
     <!-- The table listing the files available for upload/download -->
     <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
 </form>
-
 <!-- The template to display files available for download -->
 <script id="template-upload" type="text/x-tmpl">
     {% for (var i=0, file; file=o.files[i]; i++) { %}
@@ -103,12 +105,12 @@
         <td class="niveau">
             <label>
                 Niveau: <select id="niv_{%=file.name%}" class="{%=file.name%}" name="niveau" onchange="Matiere_change(this.selectedIndex, 'niv_{%=file.name%}', 'mat_{%=file.name%}', 'the_{%=file.name%}')" required>
-                <option>CP</option>
-                <option>CE1</option>
-                <option>CE2</option>
-                <option>CM1</option>
-                <option>CM2</option>
-            </select>
+                    <option>CP</option>
+                    <option>CE1</option>
+                    <option>CE2</option>
+                    <option>CM1</option>
+                    <option>CM2</option>
+                </select>
             </label>
         </td>
         <td>
@@ -202,7 +204,6 @@
     {% } %}
 
 </script>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <script src="~/Scripts/jquery.ui.widget.js"></script>
@@ -232,7 +233,6 @@
 <script src="~/Scripts/jquery.fileupload-ui.js"></script>
 <!-- The File Upload jQuery UI plugin -->
 <script src="~/Scripts/jquery.fileupload-jquery-ui.js"></script>
-
 
 <script>
 
@@ -289,8 +289,8 @@
         var select_niv = document.getElementById(id_niv);
         var select_mat = document.getElementById(id_mat);
         var select_the = document.getElementById(id_the);
-        
-        
+
+
         var liste_Mat = Matiere_List2[select_niv.selectedIndex];
         var nom = liste_Mat[select_mat.selectedIndex];
         select_mat[select_mat.selectedIndex].value = nom;

@@ -272,6 +272,11 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -471,6 +476,7 @@
     <Content Include="Images\ui-icons_f08000_256x240.png" />
     <Content Include="Images\update.png" />
     <Content Include="Images\valide.png" />
+    <Content Include="Scripts\thermostat.js" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="App_Code\MyCustomHelpers.cshtml" />
@@ -515,6 +521,10 @@
     <Content Include="Views\Home\Help.cshtml" />
     <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\FicheCours\listMesFiches.cshtml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="_bin_deployableAssemblies\amd64\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\amd64\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\amd64\sqlceme40.dll" />
