@@ -302,10 +302,11 @@ $('div.PDFViewerButton').on('click', function (e) {
     }, 1000)
     $("#NbrDDL").append(NombreTelechargement + " fois");
     $("#dateAjout").append(DateAjout);
+    $("#niveauFiche").append(niveau);
+    $("#matiereFiche").append(matiere);
+    $("#themeFiche").append(theme);
 
-    $("#dataPDF").append("<label> Niveau : </label><p>" + niveau + " </p>");
-    $("#dataPDF").append("<label> Matiere : </label><p>" + matiere + " </p>");
-    $("#dataPDF").append("<label> Theme : </label><p>" + theme + " </p>");
+
     $("#dataPDF").append("<label> Auteur : </label><p>" + UserName + " </p>");
     $("#dataPDF").append("<label> Auteur identifiant : </label><p>" + UserId + " </p>");
 
