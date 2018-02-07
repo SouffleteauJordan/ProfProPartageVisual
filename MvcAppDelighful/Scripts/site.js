@@ -309,7 +309,8 @@ $('div.PDFViewerButton').on('click', function (e) {
 
 
     $("#Description").html(unescape(description)).text();
-
+    $("#Editor").append("<form id='forumPostForm' method='post' action='/FicheCours/setDescription'><div id='htmlEditor'></div> <input type='button' onclick='postHtmlEditorContent();' value='Sauvegarder'/></form>");
+    
     var contentText = unescape(description);
     
     //$("#contentPDF").append("<div id='htmlEditor'> </div>");
@@ -389,7 +390,8 @@ $('document').ready(function () {
 });
 
 $('#PDFViewer').bind('hidden.bs.modal', function () {
-    $("#contentPDF").empty();
+    $("#Description").empty();
+    $("#Editor").empty();
     $("#dataPDF").empty();
 });
 
