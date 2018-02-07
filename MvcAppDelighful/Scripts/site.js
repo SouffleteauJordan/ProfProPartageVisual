@@ -211,20 +211,70 @@ function changeFiche(Theme) {
 }
 
 $('div.PDFViewerButton').on('click', function (e) {
+
+    var UserId = $(this).attr('UserId');
+    var UserName = $(this).attr('UserName');
+    var User;
+
+    $.ajax({
+        type: "POST",
+        url: "/Home/getUser",
+        data: '{id: "'+ UserId + '"}',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (user) {
+            
+            var jour = new Date(parseInt(user.DateNaissance.replace("/Date(", "").replace(")/", ""), 10)).getDate();
+            var mois = new Date(parseInt(user.DateNaissance.replace("/Date(", "").replace(")/", ""), 10)).getMonth() + 1;
+            var année = new Date(parseInt(user.DateNaissance.replace("/Date(", "").replace(")/", ""), 10)).getFullYear();
+            var DateNaissance = jour + "/" + mois + "/" + année;
+
+            var jour = new Date(parseInt(user.DateInscription.replace("/Date(", "").replace(")/", ""), 10)).getDate();
+            var mois = new Date(parseInt(user.DateInscription.replace("/Date(", "").replace(")/", ""), 10)).getMonth() + 1;
+            var année = new Date(parseInt(user.DateInscription.replace("/Date(", "").replace(")/", ""), 10)).getFullYear();
+            var DateInscription = jour + "/" + mois + "/" + année;
+
+            $("#PseudoAuteur").append(user.UserName);
+            $("#NomAuteur").append(user.Nom);
+            $("#PrenomAuteur").append(user.Prenom);
+            $("#DateNaissanceAuteur").append(DateNaissance);
+            $("#DateInscriptionAuteur").append(DateInscription);
+            $("#NombreFicheUploadAuteur").append(user.NombreFicheUpload);
+            $("#LevelAuteur").append(user.Level + ' (' + user.Experience + ') ' +  '- ' + user.Titre);
+            $("#NombreTelechargementAuteur").append(user.NombreTelechargement);
+            
+        },
+        failure: function (response) {
+            console.log(response.responseText);
+        },
+        error: function (response) {
+            console.log(response.responseText);
+        }
+    });
+    
+
     var src = $(this).attr('data-src');
-    var height = $(window).height() * 0.7;
-    var width = "766px";
+    //var height = document.body.clientHeight * 0.75;
+
+    var height = $(window).height() - 200;
+    //var height = document.body.clientHeight - "350";
+    var width = "100%";
     var title = $(this).attr('title');
     var niveau = $(this).attr('niveau');
     var matiere = $(this).attr('matiere');
     var theme = $(this).attr('theme');
-    var temperature = $(this).attr('temperature');
-    var description = $(this).attr('description');
+    var temperature = $(this).attr('Temperature');
+    var description = $(this).attr('Description');
+    var DateAjout = $(this).attr('DateAjout');
+    var NombreTelechargement = $(this).attr('NombreTelechargement');
+    var NombreVote = $(this).attr('NombreVote');
+    var UserName = $(this).attr('UserName');
+    var UserId = $(this).attr('UserId');
     idF = $(this).attr('idFiche');
 
     $("#PDFViewer iframe").attr({
         'src': src,
-        'height': height,
+        'height': height - 78,
         'width': width
     });
 
@@ -238,23 +288,135 @@ $('div.PDFViewerButton').on('click', function (e) {
 
     $("#PDFViewerLabel").html(title);
 
-    $("#contentPDF").append("<label> Niveau : </label><p>" + niveau + " </p>");
-    $("#contentPDF").append("<label> Matiere : </label><p>" + matiere + " </p>");
-    $("#contentPDF").append("<label> Theme : </label><p>" + theme + " </p>");
-    $("#contentPDF").append("<label> Température : </label><p>" + temperature + " </p>");
-    $("#contentPDF").append("<label> Description : </label><p>" + description.replaceAll("_", " ") + " </p>");
+    $("#thermostat").data('data-percent', temperature);
+    setTimeout(function () {
+        if (temperature > 0) {
+            $("#thermostat span").css('color', '#ff0c0c');
+            $(".bar").css('border-color', '#ff0c0c');
+        } else {
+            $("#thermostat span").css('color', '#0085ff');
+            $(".bar").css('border-color', '#0085ff');
+        }
+        $("#thermostat span").append("°C");
+    }, 1000)
+    $("#NbrDDL").append(NombreTelechargement + " fois");
+    $("#dateAjout").append(DateAjout);
+    $("#NiveauFiche").append(niveau);
+    $("#MatiereFiche").append(matiere);
+    $("#ThemeFiche").append(theme);
+    $("#idUserFiche").append(UserId);
+    $("#AuteurFiche").append(UserName);
 
 
+    $("#Description").html(unescape(description)).text();
+    $("#Editor").append("<form id='forumPostForm' method='post' action='/FicheCours/setDescription'><div id='htmlEditor'></div> <input type='button' onclick='postHtmlEditorContent();' value='Sauvegarder'/></form>");
+    
+    var contentText = unescape(description);
+    
+    //$("#contentPDF").append("<div id='htmlEditor'> </div>");
+    $("#htmlEditor").igHtmlEditor({
+        height: 400,
+        width: "100%",
+        customToolbars: [
+            {
+                name: "DeleteContentButton",
+                collapseButtonIcon: "ui-igbutton-collapse",
+                expandButtonIcon: "ui-igbutton-expand",
+                items: [{
+                    name: "appendDeleteButton",
+                    type: "button",
+                    handler: appendDeleteButton,
+                    scope: this,
+                    props: {
+                        isImage: {
+                            value: false,
+                            action: '_isSelectedAction'
+                        },
+                        imageButtonTooltip: {
+                            value: "Clear all content",
+                            action: '_tooltipAction'
+                        },
+                        imageButtonIcon: {
+                            value: "ui-icon-clear-content",
+                            action: '_buttonIconAction'
+                        }
+                    }
+                }]
+            }]
+    });
+
+    $("#htmlEditor").igHtmlEditor("setContent", contentText, "html");
+    $("#htmlEditor_editor").height(250);
+    changeToolbarsPosition();
+
+    
+    $("#htmlEditor_editor body").on('change', function () {
+        console.log("gogo");
+    });
+
+});
+
+function postHtmlEditorContent() {
+    // serialize the form
+    var data = $("#htmlEditor").igHtmlEditor("getContent", "html");
+    data = escape(data);
+    // post the form as an ajax call
+    $.ajax({
+        type: "POST",
+        url: "/FicheCours/setDescription",
+        data: '{Description: "' + data + '", idFiche: "' + idF + '"}',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    });
+}
+
+
+function appendDeleteButton(ui) {
+    $("#htmlEditor").igHtmlEditor("setContent", "", "html");
+}
+
+function changeToolbarsPosition() {
+    $($("#htmlEditor").find("span[id*='insertObjectToolbar'].ui-igtoolbar")).insertAfter($("#htmlEditor").find("span[id*='textToolbar'].ui-igtoolbar"));
+}
+
+$('document').ready(function () {
+    var height = $(window).height() - 200;
+    $("#PDFViewer iframe").height(height - 155);
+    $("#PDFViewer #contentPDF").height(height - 155);
+    $("#PDFViewer #dataPDF").height(height - 155);
+    $("#PDFViewer #contentPDF").width("100%");
+    $("#PDFViewer #dataPDF").width("100%");
+    $("#PDFModal").height(height + 100);
 });
 
 $('#PDFViewer').bind('hidden.bs.modal', function () {
-    $("#contentPDF").empty();
+    $("#Description").empty();
+    $("#Editor").empty();
+    $("#dataPDF").empty();
 });
 
 $(window).resize(function () {
-    $("#PDFViewer iframe").height($("#PDFViewer").height() - 200);
-    $("#PDFModal").height($("#PDFViewer").height() - 60);
+    var height = $(window).height() - 200;
+    $("#PDFViewer iframe").height(height - 155);
+    $("#PDFViewer #contentPDF").height(height - 155);
+    $("#PDFViewer #dataPDF").height(height - 155);
+    $("#PDFModal").height(height + 100);
 });
+
+var data = [
+    { "Mois": "Janvier", "nbrDown": 400, "Pop2025": 1394 },
+    { "Mois": "Fevrier", "nbrDown": 350, "Pop2025": 1396 },
+    { "Mois": "Mars", "nbrDown": 322, "Pop2025": 351 },
+    { "Mois": "Avril", "nbrDown": 256, "Pop2025": 277 },
+    { "Mois": "Mai", "nbrDown": 204, "Pop2025": 218 },
+    { "Mois": "Juin", "nbrDown": 215, "Pop2025": 1394 },
+    { "Mois": "Juillet", "nbrDown": 175, "Pop2025": 1396 },
+    { "Mois": "Aout", "nbrDown": 260, "Pop2025": 351 },
+    { "Mois": "Septembre", "nbrDown": 570, "Pop2025": 277 },
+    { "Mois": "Octobre", "nbrDown": 460, "Pop2025": 218 },
+    { "Mois": "Novembre", "nbrDown": 380, "Pop2025": 277 },
+    { "Mois": "Decembre", "nbrDown": 204, "Pop2025": 218 }
+];
 
 String.prototype.replaceAll = function (search, replacement) {
     var target = this;
@@ -269,6 +431,9 @@ $(function () {
             dataSource: Niveau_List,
             textKey: "data",
             valueKey: "key",
+            locale: {
+                placeHolder: "Filtre par niveau(x)"
+            },
             multiSelection: {
                 enabled: true,
                 showCheckboxes: true
@@ -305,10 +470,12 @@ $(function () {
                 $("#tableNiv").empty();
                 $("#tableMat").empty();
                 $("#tableThe").empty();
+
                 $.each(listNivSelected, function (key, value) {
                     $("#tableNiv").append("<li id='" + value.key + "' class='divSelected'><a class='btnFilter btnFilter-icon btnFilter-filter' href='#' onclick='javascript:removeFilter(\"" + value.key + "\");'><i class='fa fa-close'></i><span>" + value.data + "</span></a></li>");
                 });
 
+                changeFilter();
 
             },
             itemsRendered: function (evt, ui) {
@@ -325,6 +492,9 @@ $(function () {
             textKey: "data",
             valueKey: "key",
             disabled: true,
+            locale: {
+                placeHolder: "Filtre par matière(s)"
+            },
             multiSelection: {
                 enabled: true,
                 showCheckboxes: true
@@ -364,6 +534,8 @@ $(function () {
                 $.each(listMatSelected, function (key, value) {
                     $("#tableMat").append("<li id='" + value.key + "' class='divSelected'><a class='btnFilter btnFilter-icon btnFilter-filter' href='#' onclick='javascript:removeFilter(\"" + value.key + "\");'><i class='fa fa-close'></i><span>" + value.data + "</span></a></li>");
                 });
+
+                changeFilter();
             },
             itemsRendered: function (evt, ui) {
                 ui.owner.deselectAll();
@@ -371,6 +543,66 @@ $(function () {
         });
 
     });
+
+    function initCheckbox() {
+        if ($(".custom-switch").length > 0) {
+            new DG.OnOffSwitchAuto({
+                cls: '.custom-switch',
+                height: 20,
+                listener: function (name, checked) {
+                    if (checked) {
+                        $("input[name=" + name + "]").parents(".switch-row").find(".checkbox input").removeAttr("disabled");
+                        $("input[name=" + name + "]").parents(".switch-row").addClass("on");
+                    }
+                    else {
+                        $("input[name=" + name + "]").parents(".switch-row").find(".checkbox input").attr("disabled", "disabled").removeAttr("checked");
+                        $("input[name=" + name + "]").parents(".switch-row").removeClass("on");
+                    }
+                }
+            });
+
+            setTimeout(function () {
+                $("#settings .custom-switch").each(function () {
+                    if ($(this).is(":checked")) {
+                        $(this).parents(".switch-row").addClass("on");
+                    }
+                });
+            }, 500);
+        }
+
+        if ($("#enableAll").length > 0) {
+            $("#enableAll").click(function (e) {
+                e.preventDefault();
+                $("#settings .switch-row:not(.on) input.custom-switch").trigger("click");
+            });
+        }
+
+        if ($("#disableAll").length > 0) {
+            $("#disableAll").click(function (e) {
+                e.preventDefault();
+                $("#settings .switch-row.on input.custom-switch").trigger("click");
+            });
+        }
+
+        if ($("#subscribeToAll").length > 0) {
+            $("#subscribeToAll").click(function (e) {
+                e.preventDefault();
+                $("#communicationOptions input.custom-switch:not(:checked)").trigger("click");
+            });
+        }
+
+        if ($("#unsubscribeToAll").length > 0) {
+            $("#unsubscribeToAll").click(function (e) {
+                e.preventDefault();
+                $("#communicationOptions input.custom-switch:checked").trigger("click");
+            });
+        }
+    }
+
+    
+    $('document').ready(function () {
+        initCheckbox();
+    });    
 
     $(function () {
         $("#checkboxSelectComboThe").igCombo({
@@ -381,6 +613,9 @@ $(function () {
             disabled: true,
             parentComboKey: "matiere",
             parentCombo: "#checkboxSelectComboMat",
+            locale: {
+                placeHolder: "Filtre par thème(s)"
+            },
             grouping: {
                 key: 'mat',
                 dir: 'asc'
@@ -421,6 +656,8 @@ $(function () {
                 $.each(listTheSelected, function (key, value) {
                     $("#tableThe").append("<li id='" + value.key + "' class='divSelected'><a class='btnFilter btnFilter-icon btnFilter-filter' href='#' onclick='javascript:removeFilter(\"" + value.key + "\");'><i class='fa fa-close'></i><span>" + value.data + "</span></a></li>");
                 });
+
+                changeFilter();
             },
             itemsRendered: function (evt, ui) {
                 ui.owner.deselectAll();
@@ -429,6 +666,127 @@ $(function () {
 
     });
 });
+
+function changeFilter() {
+    var listNivClass = "";
+    var listMatClass = "";
+    var listTheClass = "";
+    var itemsNiv = $("#checkboxSelectComboNiv").igCombo("selectedItems");
+    var itemsMat = $("#checkboxSelectComboMat").igCombo("selectedItems");
+    var itemsThe = $("#checkboxSelectComboThe").igCombo("selectedItems");
+
+    var find = "";
+    var finded = false;
+
+    if (itemsThe != null) {
+        $.each(itemsNiv, function (keyNiv, valueNiv) {
+            $.each(itemsMat, function (keyMat, valueMat) {
+                $.each(itemsThe, function (keyThe, valueThe) {
+                    $.each(Theme_List, function (keyList, valueList) {
+                        console.log("Value mat/key: " + valueMat.data.key + "/" + valueThe.data.key + " -- list mat/key: " + valueList.mat + "/" + valueList.key);
+                        if (valueList.mat == valueMat.data.key && valueList.key == valueThe.data.key) {
+                            if (find != "") {
+                                if (!find.endsWith(", "))
+                                    find = find + ", ." + valueNiv.data.key + "." + valueMat.data.key + "." + valueThe.data.key;
+                                else
+                                    find = find + " ." + valueNiv.data.key + "." + valueMat.data.key + "." + valueThe.data.key;
+                            } else {
+                                find = find + " ." + valueNiv.data.key + "." + valueMat.data.key + "." + valueThe.data.key;
+                            }
+                            finded = true;
+                        }
+                    });
+                    if (!finded) {
+                        if (find != "") {
+                            if (!find.endsWith(", "))
+                                find = find + ", ." + valueNiv.data.key + "." + valueMat.data.key;
+                            else
+                                find = find + " ." + valueNiv.data.key + "." + valueMat.data.key;
+                        } else {
+                            find = find + " ." + valueNiv.data.key + "." + valueMat.data.key;
+                        }
+                    }
+                    finded = false;
+                });
+            });
+        });
+    } else if (itemsMat != null) {
+        $.each(itemsNiv, function (keyNiv, valueNiv) {
+            $.each(itemsMat, function (keyMat, valueMat) {
+                if (find != "") {
+                    if (!find.endsWith(", "))
+                        find = find + ", ." + valueNiv.data.key + "." + valueMat.data.key;
+                    else
+                        find = find + " ." + valueNiv.data.key + "." + valueMat.data.key;
+                } else {
+                    find = find + " ." + valueNiv.data.key + "." + valueMat.data.key;
+                }
+            });
+        });
+    } else if (itemsNiv != null) {
+        $.each(itemsNiv, function (keyNiv, valueNiv) {
+            if (find != "") {
+                if (!find.endsWith(", "))
+                    find = find + ", ." + valueNiv.data.key;
+                else
+                    find = find + " ." + valueNiv.data.key;
+            } else {
+                find = find + " ." + valueNiv.data.key;
+            }
+        });
+    } else {
+        find = ".box";
+    }
+
+
+    /*if (itemsNiv != null) {
+        $.each(itemsNiv, function (keyNiv, valueNiv) {
+            if(find != "")
+                find = find + ", ";
+            if (itemsMat != null) {
+                $.each(itemsMat, function (keyMat, valueMat) {
+                    if (find != "")
+                        if (!find.endsWith(", "))
+                            find = find + ", ";
+                    if (itemsThe != null) {
+                        $.each(itemsThe, function (keyThe, valueThe) {
+                            $.each(Theme_List, function (keyList, valueList) {
+                                if (valueList.mat == valueMat.data.key && valueList.key == valueThe.data.key) {
+                                    find = find + " ." + valueNiv.data.key + "." + valueMat.data.key + "." + valueThe.data.key;
+                                    finded = true;
+                                }
+                            });
+                            if (!finded) {
+                                find = find + " ." + valueNiv.data.key + "." + valueMat.data.key;
+                            }
+                        });
+                    } else {
+                        find = find + " ." + valueNiv.data.key + "." + valueMat.data.key;
+                    }
+                });
+            } else {
+                find = find + " ." + valueNiv.data.key;
+            }
+        });
+    }*/
+
+    /*if (itemsMat != null) {
+        $.each(itemsMat, function (key, value) {
+            listMatClass = listMatClass + " ." + value.data.key;
+        });
+        find = find + ", " + listMatClass
+    }
+
+    if (itemsThe != null) {
+        $.each(itemsThe, function (key, value) {
+            listTheClass = listTheClass + " ." + value.data.key;
+        });
+        find = find + ", " + listTheClass
+    }*/
+
+    var $el = $("#parent").find(find).fadeIn(450);
+    $('#parent > div').not($el).hide();
+}
 
 function removeFilter(key) {
     var $checkboxSelectComboNiv = $("#checkboxSelectComboNiv");
@@ -461,4 +819,6 @@ function removeFilter(key) {
         $checkboxSelectComboThe.igCombo("option", "disabled", true);
 
     $("#" + key).remove();
+    changeFilter();
 }
+

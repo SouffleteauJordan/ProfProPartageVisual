@@ -1,86 +1,197 @@
 ﻿<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>@ViewData["Title"] - ProfProPartage</title>
-
-        <link rel="stylesheet" href="~/Content/Site.css" />
-        <link rel="stylesheet" href="~/Content/blueimp-gallery.css" />
-        <link rel="stylesheet" href="~/Content/blueimp-gallery-indicator.css" />
-        <link rel="stylesheet" href="~/Content/blueimp-gallery-video.css" />
-        <link rel="stylesheet" href="~/Content/bootstrap.css" />
-        <link rel="stylesheet" href="~/Content/jquery.fileupload.css" />
-        <link rel="stylesheet" href="~/Content/jquery.fileupload-ui.css" />
-        <link rel="shortcut icon" type="image/x-icon" href="~/Images/ppp.ico" />
-        <link rel="stylesheet" href="~/Content/infragistics.theme.css" />
-        <link rel="stylesheet" href="~/Content/infragistics.css" />
-        <link rel="stylesheet" href="~/Content/font-awesome.css" />
-        <link href="https://cdn-na.infragistics.com/igniteui/latest/css/themes/infragistics/infragistics.theme.css" rel="stylesheet"/>
-        <link href="https://cdn-na.infragistics.com/igniteui/latest/css/structure/infragistics.css" rel="stylesheet"/>
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    </head>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ProfProPartage</title>
+    <link rel="stylesheet" href="~/Content/Site.css" />
+    <link rel="stylesheet" href="~/Content/blueimp-gallery.css" />
+    <link rel="stylesheet" href="~/Content/blueimp-gallery-indicator.css" />
+    <link rel="stylesheet" href="~/Content/blueimp-gallery-video.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" href="~/Content/jquery.fileupload.css" />
+    <link rel="stylesheet" href="~/Content/jquery.fileupload-ui.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="~/Images/ppp.ico" />
+    <link rel="stylesheet" href="~/Content/layout.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <!--<link href="https://cdn-na.infragistics.com/igniteui/latest/css/themes/infragistics/infragistics.theme.css" rel="stylesheet"/>-->
+    <link href="https://cdn-na.infragistics.com/igniteui/latest/css/structure/infragistics.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="~/Scripts/jquery-3.2.1.js"></script>
+</head>
 <body>
-    <div id="header-menu" class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container menu">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="/" id="Ic" class="navbar-brand"><strong style="color:#39cf09;">P</strong>rof<strong style="color:#fa2420;">P</strong>ro<strong style="color:#ffa500;">P</strong>artage</a>
-            </div>
-            <div id="bar-menu" class="stroke navbar-collapse collapse">
-                <ul id="menu-elem" class="nav navbar-nav">
-                    <li class="elem-menu"><a class="elem" href="@Url.Action("Index","Home", null)"><span class="elem glyphicon glyphicon-home"></span>Accueil</a></li>
-                    <!--<li class="elem-menu"><a class="elem" href="@Url.Action("Catalogue","Catalogue", null)"><span class="elem glyphicon glyphicon-book"></span>Catalogue</a></li>-->
-                    <li class="elem-menu"><a class="elem" href="@Url.Action("Import","FicheCours", null)"><span class="elem glyphicon glyphicon-cloud-upload"></span>Importer des PDF</a></li>
-                    <li class="elem-menu"><a class="elem" href="@Url.Action("About","Home", null)"><span class="elem glyphicon glyphicon-info-sign"></span>A propos</a></li>
-                    <li class="elem-menu"><a class="elem" href="@Url.Action("Contact","Home", null)"><span class="elem glyphicon glyphicon-send"></span>Contact</a></li>
-                    @if (ViewContext.HttpContext.User.IsInRole("Admin"))
-                    {
-                        <li class="elem-menu"><a class="elem" href="@Url.Action("AdminPanel", "Admin", null)"><span class="elem glyphicon glyphicon-briefcase"></span>Panneau d'administration</a></li>
-                    }
-                </ul>
+    <header class="header">
+        <nav class="nav-top">
+            <ul class="nav-top-list nav-top-left">
+                <li class="nav-top-item">
+                    <button class="collapsed navbar-toggle" data-target="#navMain" data-toggle="collapse" type="button">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </li>
+                <li class="nav-top-item">
+                    <a class="nav-top-link" href="dashboard.html">
+                        <span class="logo" title="Leasecom une filiale du Crédit Mutuel AREKEA"></span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav-top-list nav-top-right">
                 @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>
+                <li class="nav-top-item">
+                    <a class="nav-top-link" data-toggle="modal" data-target="#searchModal"><i class="icon ic-search"></i></a>
+                </li>
+                <li class="nav-top-item partner-area visible-desktop">
+                    <a id="dlProfile" class="nav-top-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span>Espace partenaire</span>
+                        <em>Leasecom On Line</em>
+                        <i class="icon ic-arrow-down"></i>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dlProfile">
+                        <li>
+                            <a href="#">
+                                <span>Espace client</span>
+                                <em>Lease &amp; manage</em>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
 
-    @RenderSection("Banner", required: false)
-    
-    <div id="container-page">
-        <div class="layout">
-            <div id="border-left-page"></div>
-            <div id="contenu-page">
-                @RenderBody()
-            </div>
-            <div id="border-right-page"></div>
-        </div>
-        <div class="layout">
-             <footer id="footer">
-                <div class="fb-like"
-                     data-share="true"
-                     data-width="450"
-                     data-show-faces="true">
+        <nav class="nav-main collapse" aria-expanded="false" id="navMain">
+            <a class="logo visible-desktop" href="/Home/Dashboard" title="Accueil"></a>
+            <ul class="nav-main-tabs">
+                <li><a class="active" href="#">Espace partenaire</a></li>
+                <li><a href="#">Espace locataire</a></li>
+            </ul>
+            <ul class="nav-main-list">
+                <li class="nav-main-item current">
+                    <a class="nav-main-link" href="/Home/Dashboard">
+                        <span class="ic-container"><i class="icon ic-dashboard"></i></span>
+                        <span class="link-text">Accueil</span>
+                    </a>
+                </li>
+                <li class="nav-main-item">
+                    <a class="nav-main-link" href="/Home/Index">
+                        <span class="ic-container" style="font-size:20px; text-align:center;"><i class="fa fa-file-pdf-o" style="display: block; margin: 0 auto;"></i></span>
+                        <span class="link-text">Recherche d'une fiche</span>
+                    </a>
+                </li>
+                <li class="nav-main-item">
+                    <a class="nav-main-link" href="/FicheCours/Import">
+                        <span class="ic-container"><i class="icon ic-my-business"></i></span>
+                        <span class="link-text">Importer des fiches</span>
+                    </a>
+                </li>
+                <li class="nav-main-item">
+                    <a class="nav-main-link" href="/FicheCours/MesFiches">
+                        <span class="ic-container"><i class="icon ic-my-contracts"></i></span>
+                        <span class="link-text">Mes fiches</span>
+                    </a>
+                </li>
+                <li class="nav-main-item">
+                    <a class="nav-main-link" href="/Account/MesStatistiques">
+                        <span class="ic-container"><i class="icon ic-my-statistics"></i></span>
+                        <span class="link-text">Mes statistiques</span>
+                    </a>
+                </li>
+                <li class="nav-main-item">
+                    <a class="nav-main-link" href="/Home/About">
+                        <span class="ic-container"><i class="icon ic-documentation"></i></span>
+                        <span class="link-text">À propos</span>
+                    </a>
+                </li>
+                <li class="nav-main-item">
+                    <a class="nav-main-link" href="/Home/Contact">
+                        <span class="ic-container"><i class="icon ic-contact"></i></span>
+                        <span class="link-text">Contact</span>
+                    </a>
+                </li>
+                <li class="nav-main-item">
+                    <a class="nav-main-link" href="/Home/Help">
+                        <span class="ic-container"><i class="icon ic-help"></i></span>
+                        <span class="link-text">Aide</span>
+                    </a>
+                </li>
+                @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+                {
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="@Url.Action("AdminPanel", "Admin", null)">
+                            <span class="ic-container" style="font-size:20px; text-align:center;"><i class="fa fa-star-o" style="display: block; margin: 0 auto;"></i></span>
+                            <span class="link-text">Panneau d'administration</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Search Modal -->
+    <div class="modal fade block-search-modal" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="icon ic-close"></i></button>
+                    <div id="search">
+                        <input class="search-field typeahead" type="text" id="searchKeyword" placeholder="Rechercher" value="">
+                    </div>
                 </div>
-                <p>&copy; @DateTime.Now.Day/@DateTime.Now.Month/@DateTime.Now.Year - Les <strong style="color:#39cf09;">P</strong>rofs sont des <strong style="color:#fa2420;">P</strong>ros du <strong style="color:#ffa500;">P</strong>artage</p>
-            </footer>
+            </div>
         </div>
     </div>
+    <!-- /Search Modal -->
+    <section class="wrapper">
+        @RenderBody()
+    </section>
+    <footer class="footer">
+        <div class="content">
+            <a href="#"><img class="logo-credit-mutuel" src="Content/img/logo-credit-mutuel.png"></a>
+            <ul class="footer-links">
+                <li><a href="#" target="_blank">Site Leasecom</a></li>
+                <li><a href="#" target="_blank">Site Partenaires</a></li>
+                <li><a href="#" target="_blank">Site Locataires</a></li>
+            </ul>
+            <ul class="social-networks">
+                <li><a class="social-network-link" title="Linked in" href="#"><i class="icon ic-linkedin"></i></a></li>
+                <li><a class="social-network-link" title="Tweeter" href="#"><i class="icon ic-tweeter"></i></a></li>
+                <li><a class="social-network-link" title="Viadeo" href="#"><i class="icon ic-viadeo"></i></a></li>
+                <li><a class="social-network-link" title="Google+" href="#"><i class="icon ic-google-plus"></i></a></li>
+                <li><a class="social-network-link" title="Facebook" href="#"><i class="icon ic-facebook"></i></a></li>
+                <li><a class="social-network-link" title="Youtube" href="#"><i class="icon ic-youtube"></i></a></li>
+            </ul>
+        </div>
+    </footer>
 
-        <script src="~/Scripts/jquery-3.2.1.js"></script>
-        <script src="~/Scripts/bootstrap.js"></script>
-        <script src="~/Scripts/site.js"></script>
-        <script src="~/Scripts/modernizr-2.6.2.js"></script>
-        <script src="https://igniteui.com/js/modernizr.min.js"></script>
-        <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
-        <script src="https://cdn-na.infragistics.com/igniteui/latest/js/infragistics.core.js"></script>
-        <script src="https://cdn-na.infragistics.com/igniteui/latest/js/infragistics.lob.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
 
-        @RenderSection("scripts", required: false)
+    <script src="~/Scripts/libs/bootstrap.min.js"></script>
+    <script src="~/Scripts/libs/carousel-swipe.js"></script>
+    <script src="~/Scripts/libs/bootstrap-datepicker.min.js"></script>
+    <script src="~/Scripts/libs/bootstrap-datepicker.fr.min.js"></script>
+    <script src="~/Scripts/libs/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="~/Scripts/libs/bootstrap-table.min.js"></script>
+    <script src="~/Scripts/libs/bootstrap-table-fr-FR.min.js"></script>
+    <script src="~/Scripts/libs/percircle.js"></script>
+    <script src="~/Scripts/libs/typeahead.jquery.min.js"></script>
+    <script src="~/Scripts/libs/select2.full.min.js"></script>
+    <script src="~/Scripts/libs/fr.js"></script>
+    <script src="~/Scripts/libs/on-off-switch.js"></script>
+    <script src="~/Scripts/libs/on-off-switch-onload.js"></script>
+    <script src="~/Scripts/libs/bootstrap-slider.min.js"></script>
+
+    <script src="~/Scripts/site.js"></script>
+    <script src="https://igniteui.com/js/modernizr.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+    <script src="~/Scripts/infragistics.core.js"></script>
+    <script src="~/Scripts/infragistics.lob.js"></script>
+    <script src="~/Scripts/infragistics.dv.js"></script>
+    <script src="~/Scripts/app.js"></script>
+    <script src="~/Scripts/thermostat.js"></script>
+
+    @RenderSection("scripts", required: false)
 </body>
-</html>
+    </html>

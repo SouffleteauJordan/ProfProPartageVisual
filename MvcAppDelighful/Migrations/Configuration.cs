@@ -9,7 +9,8 @@ namespace AppProfProPartage.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(ProfProPartage.Dal.DbContextProfProPartage context)

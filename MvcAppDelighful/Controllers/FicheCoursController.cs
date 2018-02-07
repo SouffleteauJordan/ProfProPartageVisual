@@ -16,34 +16,25 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Imaging;
 using Spire.Pdf;
-using Spire.Doc.Documents;
+using AppProfProPartage.ViewModel;
+using Microsoft.AspNet.Identity.Owin;
+using ProfProPartage.ViewModel.Model;
 
 namespace AppProfProPartage.Controllers
 {
     public class FicheCoursController : Controller
     {
-        //private IBookmarkRepository _iBookmarkRepository;
-
-        //public BookmarkController(IBookmarkRepository iBookmarkRepository)
-        //{
-        //    _iBookmarkRepository = iBookmarkRepository;
-        //}
-
         private BusinessLocator _businessLocator;
 
         public FicheCoursController()
         {
-              _businessLocator = ((BusinessLocator)System.Web.HttpContext.Current.Items["BusinessLocator"]);
+            _businessLocator = ((BusinessLocator)System.Web.HttpContext.Current.Items["BusinessLocator"]);
         }
-
-        //
-        // GET: /Bookmark/
+        
         public async Task<ActionResult> Index()
         {
 
-            //BookmarkBll bookmarkBll = new BookmarkBll(_iBookmarkRepository);
             FicheCoursBll FicheCoursBll = _businessLocator.FicheCoursBll;
-
             List<FicheCours> listBkms = await FicheCoursBll.GetAllFicheCoursAsync();
             
             ViewModelFicheCoursList vm = new ViewModelFicheCoursList(listBkms);
@@ -59,17 +50,47 @@ namespace AppProfProPartage.Controllers
             
             return PartialView("PVListBookmarks", new ViewModelFicheCoursList(await _businessLocator.FicheCoursBll.GetFicheCoursByKeywordsAsync(list_selected_Keywords)).ListFic);
         }
-
-        //
-        // GET: /Bookmark/Details/5
+        
         public ActionResult Details(int id)
         {
             return View();
         }
+        
+        [System.Web.Mvc.Authorize]
+        public async Task<ActionResult> MesFiches()
+        {
+            List<FicheCours> listFiche = new List<FicheCours>();
+
+            FicheCoursBll FicheCoursBll = _businessLocator.FicheCoursBll;
+            listFiche = FicheCoursBll.GetMesFicheCours(User.Identity.GetUserId());
+            
+
+            ViewModelFicheCoursList vm = new ViewModelFicheCoursList(listFiche);
+            
+            return View(vm);
+        }
+
+        [System.Web.Mvc.Authorize]
+        [HttpPost]
+        public void setDescription(updateDescription jsonUpdate)
+        {
+
+            
+            FicheCoursBll FicheCoursBll = _businessLocator.FicheCoursBll;
+            FicheCours Fiche = FicheCoursBll.GetFicheCoursByCriteria(o=> o.Id == jsonUpdate.idFiche).First();
+            Fiche.Description = jsonUpdate.Description.Replace("source=", "");
+            FicheCoursBll.UpdateFicheCours(Fiche);
+        }
+
+        public class updateDescription
+        {
+            public string Description { get; set; }
+            public int idFiche { get; set; }
+        }
 
         //
         // GET: /Bookmark/Create
-         [System.Web.Mvc.Authorize(Roles="admin")]
+        [System.Web.Mvc.Authorize(Roles="admin")]
         public ActionResult Create()
         {
             return View();
@@ -101,12 +122,12 @@ namespace AppProfProPartage.Controllers
 
                 PdfDocument pdf_doc = new PdfDocument();
                 pdf_doc.LoadFromStream(Request.Files[upload].InputStream);
-                Bitmap img = pdf_doc.SaveAsImage(0);
+                Image img = pdf_doc.SaveAsImage(0);
                 img.Save(Path.Combine(pathToSave, filename.Replace(" ", "_").Replace("-", "_").Replace(".pdf", "")) + ".jpg", ImageFormat.Jpeg);
                 fileList.Add(doc);
 
                 FicheCoursInvalideBll FicheCoursInvalideBll = _businessLocator.FicheCoursInvalideBll;
-                FicheCoursInvalideBll.AddFicheCoursInvalideAsync(new FicheCoursInvalide() {Description = description, Titre = doc.name, Niveau = doc.niveau, Matiere = doc.matiere, Theme = doc.theme, UrlPDF = "/Files/" + filename.Replace(" ", "_").Replace("-", "_"), UrlJPG = "/Files/"+ filename.Replace(" ", "_").Replace("-", "_").Replace(".pdf", "") + ".jpg", Temperature = 0, UserId=User.Identity.GetUserId()});
+                FicheCoursInvalideBll.AddFicheCoursInvalideAsync(new FicheCoursInvalide() {Description = description, Titre = doc.name, Niveau = doc.niveau, Matiere = doc.matiere, Theme = doc.theme, UrlPDF = "/Files/" + filename.Replace(" ", "_").Replace("-", "_"), UrlJPG = "/Files/"+ filename.Replace(" ", "_").Replace("-", "_").Replace(".pdf", "") + ".jpg", Temperature = 0, UserId=User.Identity.GetUserId(), DateAjout = DateTime.Now, NombreTelechargement = 0});
             }
             listFiles list = new listFiles(fileList);
             JsonResult res = Json(list);
@@ -127,11 +148,7 @@ namespace AppProfProPartage.Controllers
                     {
                         vmBookmark.FicheCours_inside.UserId = User.Identity.GetUserId();
                         await _businessLocator.FicheCoursBll.AddFicheCoursAsync(vmBookmark.FicheCours_inside);
-                    
-                        var context = GlobalHost.ConnectionManager.GetHubContext<MyHub>();
-
-                        context.Clients.All.refreshJS();
-                    
+                                        
                         return RedirectToAction("Index");
                     }
                     else
@@ -238,5 +255,4 @@ namespace AppProfProPartage.Controllers
             this.description = description;
         }
     }
-
 }

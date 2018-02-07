@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using ProfProPartage.Function;
+using ProfProPartage.ViewModel.Model;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ProfProPartage.ViewModel
@@ -79,6 +82,33 @@ namespace ProfProPartage.ViewModel
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+    }
+
+    public class EditProfilViewModel
+    {
+        [Display(Name = "Nom")]
+        public string Nom { get; set; }
+        
+        [Display(Name = "Prenom")]
+        public string Prenom { get; set; }
+        
+        [Display(Name = "DateNaissance")]
+        public DateTime DateNaissance { get; set; }
+        
+        [Display(Name = "NombreFicheUpload")]
+        public int NombreFicheUpload { get; set; }
+        
+        [Display(Name = "Experience")]
+        public int Experience { get; set; }
+        
+        [Display(Name = "Level")]
+        public int Level { get; set; }
+        
+        [Display(Name = "Titre")]
+        public string Titre { get; set; }
+        
+        [Display(Name = "NombreTelechargement")]
+        public int NombreTelechargement { get; set; }
     }
 
     public class ResetPasswordViewModel

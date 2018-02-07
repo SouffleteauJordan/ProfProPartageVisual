@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ProfProPartage.ViewModel</RootNamespace>
     <AssemblyName>ProfProPartage.ViewModel</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -88,6 +89,10 @@
     <ProjectReference Include="..\Delightful.Validation\ProfProPartage.Validation.csproj">
       <Project>{13b926d1-0a24-4f60-8e04-677fa695f25a}</Project>
       <Name>ProfProPartage.Validation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProfProPartage.Function\ProfProPartage.Function.csproj">
+      <Project>{f53789e8-c1e6-4efa-8d17-69b3f44c33e1}</Project>
+      <Name>ProfProPartage.Function</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

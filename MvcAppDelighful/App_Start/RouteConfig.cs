@@ -14,13 +14,7 @@ namespace AppProfProPartage.ViewModel
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             
             routes.MapMvcAttributeRoutes();
-
-            routes.MapRoute(
-                name: "MyCustomRoad",
-                url: "MesFavoris/Start/{prenom}/{nom}",
-                defaults: new { controller = "Welcome", action = "Saluer" }
-            );
-
+            
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

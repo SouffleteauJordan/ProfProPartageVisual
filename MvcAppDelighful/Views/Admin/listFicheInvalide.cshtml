@@ -2,31 +2,21 @@
 @using ProfProPartage.Helper
 
 @foreach (var item in Model)
-            {
-    <a class="box PDFViewerButton @item.Theme.Replace(" ", "_")  @item.Matiere.Replace(" ", "_") @item.Niveau" data-toggle="modal" idFiche=@item.Id data-src=@item.UrlPDF title=@item.Titre niveau=@item.Niveau theme=@item.Theme matiere=@item.Matiere temperature=@item.Temperature description="" data-target="#PDFViewer">
-        <h4 style="margin-top:5px; margin-bottom:5px; height:40px;">@Html.DisplayFor(modelItem => item.Titre)</h4>
-        <img src=@item.UrlJPG class="previewPDF img-thumbnail" />
-        <div class="infoFiche">
-            <ul>
-                <li>
-                    <div><label>Niveau : </label> @Html.DisplayFor(modelItem => item.Niveau)</div>
-                </li>
-                <li>
-                    <div><label>Matière : </label> @Html.Replace(item.Matiere, "_", " ")</div>
-                </li>
-                <li>
-                    <div><label>Thème : </label> @Html.Replace(item.Theme, "_", " ")</div>
-                </li>
-                <li>
-                    <div><label>Température : </label> @Html.DisplayFor(modelItem => item.Temperature)°</div>
-                </li>
-                <li>
-                    <div><label>Description : </label> @Html.DisplayFor(modelItem => item.Description)</div>
-                </li>
-                <li>
-                    <div><label>Auteur : </label> @Html.DisplayFor(modelItem => item.User.UserName)</div>
-                </li>
-            </ul>
+{
+    <div class="box PDFViewerButton @MyHelpers.FormatDataView(item.Theme) @MyHelpers.FormatDataView(item.Matiere) @MyHelpers.FormatDataView(@item.Niveau)" data-toggle="modal" idFiche=@item.Id data-src=@item.UrlPDF title=@MyHelpers.FormatDataView(@item.Titre) niveau=@MyHelpers.FormatDataView(item.Niveau) theme=@MyHelpers.FormatDataView(item.Theme) matiere=@MyHelpers.FormatDataView(item.Matiere) temperature=@item.Temperature DateAjout=@item.DateAjout NombreTelechargement=@item.NombreTelechargement UserName=@item.User.UserName UserId=@item.UserId data-target="#PDFViewer">
+        <div class="demo-title">@Html.DisplayFor(modelItem => item.Titre)</div>
+        <div class="post-module">
+            <div class="apercu">
+                <div class="ribbonTemp"><span>@Html.DisplayFor(modelItem => item.Temperature)°</span></div>
+                <img src=@item.UrlJPG />
+            </div>
+            <div class="post-content">
+                <div class="category">@Html.DisplayFor(modelItem => item.Niveau)</div>
+                <h1 class="title">@Html.Replace(item.Matiere, "_", " ")</h1>
+                <h2 class="sub_title">@Html.Replace(item.Theme, "_", " ")</h2>
+                <p class="description">@Html.DisplayFor(modelItem => item.Description)</p>
+                <div class="post-meta"><span class="timestamp"><i class="fa fa-clock-o"></i> 6 mins ago</span><span class="comments"><i class="fa fa-comments"></i><a href="#"> 39 comments</a></span><span class="author"><i class="fa fa-user"></i>@Html.DisplayFor(modelItem => item.User.UserName)</span></div>
+            </div>
         </div>
-    </a>
+    </div>
 }

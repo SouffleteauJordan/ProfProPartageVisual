@@ -1,6 +1,8 @@
-﻿using ProfProPartage.Bll;
+﻿using Microsoft.AspNet.Identity;
+using ProfProPartage.Bll;
 using ProfProPartage.Model;
 using ProfProPartage.ViewModel;
+using ProfProPartage.ViewModel.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,17 +35,30 @@ namespace AppProfProPartage.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
+        public ActionResult Help()
+        {
+            return View();
+        }
+
+        public ActionResult Dashboard()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult getUser(string id)
+        {
+            UserBll UserBll = _businessLocator.UsersBll;
+            ApplicationUser user = UserBll.GetUsersByCriteria(x => x.Id == id);
+            return Json(user);
+        }
     }
 }

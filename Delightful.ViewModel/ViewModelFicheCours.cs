@@ -3,6 +3,7 @@ using System.Linq;
 using System.ComponentModel.DataAnnotations;
 using ProfProPartage.Model;
 using ProfProPartage.Validations;
+using System;
 
 namespace ProfProPartage.ViewModel
 {
@@ -96,7 +97,16 @@ namespace ProfProPartage.ViewModel
             get { return _fiche.Description; }
             set { _fiche.Description = value; }
         }
-
+        public DateTime DateAjout
+        {
+            get { return _fiche.DateAjout; }
+            set { _fiche.DateAjout = value; }
+        }
+        public int NombreTelechargement
+        {
+            get { return _fiche.NombreTelechargement; }
+            set { _fiche.NombreTelechargement = value; }
+        }
 
         public List<Keyword> Keywords
         {

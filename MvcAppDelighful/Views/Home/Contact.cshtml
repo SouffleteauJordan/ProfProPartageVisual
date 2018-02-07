@@ -2,36 +2,87 @@
     ViewData["Title"] = "Contact";
 }
 
-@section Banner {
-    <div class="spacer"></div>
-    <div class="spacer"></div>
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2 text-right content-slogan">
-            <h1 class="Slogan">
-                <blockquote class="pull-right">
-                    <p>Aucun de nous ne sait ce que nous savons tous, ensemble.</p>
-                    <small id="auteur">by <cite>Euripide</cite></small>
-                </blockquote>
-            </h1>
-            <div class="buttons">
-                <a href="/Account/Register/registerLink" title="Nous rejoindre" class="btn btn-primary btn-lg">Nous rejoindre</a>
+<div id="title" class="main-title"><h1><strong style="color:#E95325;">C</strong>ontact - Un avis, une idée ?</h1></div>
+<div class="block-breadcrumb">
+    <div class="horizontal-scroll">
+        <ul class="breadcrumb">
+            <li><a href="/Home/Dashboard"><i class="icon ic-breadcrumb-dashboard"></i>Tableau de bord</a></li>
+            <li class="active">Contact - Un avis, une idée ?</li>
+        </ul>
+    </div>
+</div>
+</br>
+
+<div role="tabpanel" class="tab-pane fade in active tab-my-contactLeasecom" id="contactLeasecom">
+    <section class="block block-table-datas">
+        <h2 class="block-title">Administrateur du site</h2>
+        <div class="horizontal-scroll">
+            <div class="datas-table">
+                <table class="table">
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col class="w-40">
+                        <col>
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <td class="icon-col">
+                                <img class="img-circle" src="img/temp/avatar.jpg" alt="">
+                            </td>
+                            <td>
+                                <p class="data-value">Loïc Souffleteau</p>
+                                <p class="data-detail">
+                                    Professeur - Ile de France
+                                </p>
+                            </td>
+                            <td>
+                                <p class="data-value">Adresse Email</p>
+                                <p class="data-detail nowrap">loic.souffleteau@gmail.com</p>
+                            </td>
+                            <td class="icon-action-col">
+                                <a class="icon-action" data-toggle="tooltip" data-placement="top" title="" href="loic.souffleteau@gmail.com" data-original-title="Envoyer un e-mail"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-    </div>
-}
+    </section>
 
-
-<div class="titleTopPage">
-    <h2><strong style="color:#E95325;">C</strong>ontact</h2>
-    <h3>Nous contacter.</h3>
+    <section class="block block-table-datas">
+        <h2 class="block-title">Développeur du site</h2>
+        <div class="horizontal-scroll">
+            <div class="datas-table">
+                <table class="table">
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col class="w-40">
+                        <col>
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <td class="icon-col">
+                                <img class="img-circle" src="img/temp/avatar.jpg" alt="">
+                            </td>
+                            <td>
+                                <p class="data-value">Jordan Souffleteau</p>
+                                <p class="data-detail">
+                                    Analyste Concepteur - Ile de France
+                                </p>
+                            </td>
+                            <td>
+                                <p class="data-value">Adresse Email</p>
+                                <p class="data-detail nowrap">jordan.souffleteau@gmail.com</p>
+                            </td>
+                            <td class="icon-action-col">
+                                <a class="icon-action" data-toggle="tooltip" data-placement="top" title="" href="jordan.souffleteau@gmail.com" data-original-title="Envoyer un e-mail"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
 </div>
-<br />
-<address>
-    <p>Actuellement, nous somme disponible uniquement par mail.</p></br>
-    Merci.
-</address>
-
-<address>
-    <strong>Administrateur :</strong> <a href="loic.souffleteau@gmail.com">loic.souffleteau@gmail.com</a><br />
-    <strong>Concepteur et Développeur :</strong> <a href="jordan.souffleteau@gmail.com">jordan.souffleteau@gmail.com</a>
-</address>

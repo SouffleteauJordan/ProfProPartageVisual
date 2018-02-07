@@ -19,6 +19,9 @@ namespace ProfProPartage.Model
         public virtual string UrlPDF { get; set; }
         public virtual string UrlJPG { get; set; }
         public virtual string Description { get; set; }
+        public virtual DateTime DateAjout { get; set; }
+        public virtual int NombreTelechargement { get; set; }
+        public virtual int NombreVote { get; set; }
 
         public string UserId { get; set; }
 

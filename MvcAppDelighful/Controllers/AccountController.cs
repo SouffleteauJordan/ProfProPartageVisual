@@ -13,6 +13,7 @@ using ProfProPartage.ViewModel;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Practices.Unity;
 using Unity.Attributes;
+using ProfProPartage.Bll;
 
 namespace AppProfProPartage.ViewModel.Controllers
 {
@@ -20,10 +21,13 @@ namespace AppProfProPartage.ViewModel.Controllers
     public class AccountController : Controller
     {
         private ApplicationUserManager _userManager;
+        private BusinessLocator _businessLocator;
+        
 
         [InjectionConstructor]  //important pour préciser que unity va instancier ce controller en passant par cet objet
         public AccountController()
         {
+            _businessLocator = ((BusinessLocator)System.Web.HttpContext.Current.Items["BusinessLocator"]);
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -159,7 +163,7 @@ namespace AppProfProPartage.ViewModel.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Level = 0, Titre = ProfProPartage.Function.Titre.Stagiaire.ToString(), Experience = 0, DateInscription = DateTime.Now, NombreFicheUpload = 0, NombreTelechargement = 0};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -411,6 +415,13 @@ namespace AppProfProPartage.ViewModel.Controllers
             return View();
         }
 
+        public ActionResult MesStatistiques()
+        {
+            ViewBag.Message = "Your statistics page.";
+
+            return View();
+        }
+        
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";

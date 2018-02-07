@@ -2,10 +2,18 @@
 @{
     ViewData["Title"] = "Panneau d'administration";
 }
-<div class="titleTopPage">
-    <h2><strong style="color:#E95325;">P</strong>anneau d'administration</h2>
-    <h3>Gestion du site et du contenu</h3>
+
+<div id="title" class="main-title"><h1><strong style="color:#E95325;">P</strong>anneau d'administration - Gestion du site et du contenu</h1></div>
+<div class="block-breadcrumb">
+    <div class="horizontal-scroll">
+        <ul class="breadcrumb">
+            <li><a href="/Home/Dashboard"><i class="icon ic-breadcrumb-dashboard"></i>Tableau de bord</a></li>
+            <li class="active">Panneau d'administration - Gestion du site et du contenu</li>
+        </ul>
+    </div>
 </div>
+</br>
+
 <ul class="nav nav-tabs">
     <li>@Html.ActionLink("Gestion des fiches invalides", "", "", new { data_toggle = "tab", href = "#FicheInvalide" })</li>
     <li>@Html.ActionLink("Gestion des news", "", "", new { data_toggle = "tab", href = "#GestionDesNews" })</li>
@@ -17,35 +25,18 @@
             <div class="col-md-12">
                 <div id="Filter">
                     <div id="contentFilter">
-                        <ul>
-                            <li>
-                                <button class="active btnP btnNiv btnMat" id="all">Show All</button>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li>
-                                <button class="btnP btnNiv" id="CP">CP</button>
-                            </li>
-                            <li>
-                                <button class="btnP btnNiv" id="CE1">CE1</button>
-                            </li>
-                            <li>
-                                <button class="btnP btnNiv" id="CE2">CE2</button>
-                            </li>
-                            <li>
-                                <button class="btnP btnNiv" id="CM1">CM1</button>
-                            </li>
-                            <li>
-                                <button class="btnP btnNiv" id="CM2">CM2</button>
-                            </li>
-                            <li>
-                                <div class="subTitle">(Niveau)</div>
-                            </li>
-                        </ul>
-                        <hr class="line" style="width: 70%; color: black; height: 1px; background-color:brown; opacity:0.6; margin-top:3px; margin-bottom:9px; display:none" />
-                        <ul id="FilterMatiere"></ul>
-                        <hr class="line" style="width: 70%; color: black; height: 1px; background-color:brown; opacity:0.6; margin-top:3px; margin-bottom:9px;display:none" />
-                        <ul id="FilterTheme"></ul>
+                        <div class="spacer"></div>
+                        <div id="checkboxSelectComboNiv"></div>
+                        <div id="checkboxSelectComboMat"></div>
+                        <div id="checkboxSelectComboThe"></div>
+
+                        <div id="itemData">
+                            <div id="table">
+                                <ul id="tableNiv" class="tableSelected"></ul>
+                                <ul id="tableMat" class="tableSelected"></ul>
+                                <ul id="tableThe" class="tableSelected"></ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="spacer"></div>
@@ -53,27 +44,58 @@
                     @Html.Partial("listFicheInvalide", Model.ListFic)
                 </div>
                 <div class="spacer"></div>
-                <div class="modal fade" id="PDFViewer" tabindex="-1" role="dialog" aria-labelledby="PDFViewerLabel" aria-hidden="true">
+
+                <div class="modal fade" id="PDFViewer" tabindex="-1" role="dialog" aria-labelledby="PDFViewerLabel" aria-hidden="true" style="display: none;">
                     <div id="PDFDialog" class="modal-dialog">
-                        <div id="PDFModal" class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="PDFViewerLabel">Modal title</h4>
-                            </div>
+                        <div id="PDFModal" class="modal-content" style="height: 543px;">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title" id="PDFViewerLabel">eval</h4>
                             <div class="modal-body">
-                                <div id="wrap">
-                                    <div id="left_div">
-                                        <div id="IframePDF">
-                                            <iframe frameborder="0"></iframe>
+                                <div class="tabs tabs-style-linetriangle">
+                                    <nav>
+                                        <ul>
+                                            <li class="tab active">
+                                                <a href="#pdfDoc" data-toggle="tab">
+                                                    <span class="ic-container"><i class="fa fa-file-pdf-o"></i></span>
+                                                    <span>Fiche PDF</span>
+                                                </a>
+                                            </li>
+                                            <li class="tab">
+                                                <a href="#pdfData" data-toggle="tab">
+                                                    <span class="ic-container"><i class="fa fa-pie-chart"></i></span>
+                                                    <span>Métadonnées</span>
+                                                </a>
+                                            </li>
+                                            <li class="tab">
+                                                <a href="#pdfAuthor" data-toggle="tab">
+                                                    <span class="ic-container"><i class="fa fa-vcard"></i></span>
+                                                    <span>Description</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <div class="modal-header">
+                                    <div id="wrap">
+                                        <div class="tab-content">
+                                            <div id="pdfDoc" class="tab-pane active">
+                                                <div id="IframePDF">
+                                                    <iframe></iframe>
+                                                </div>
+                                            </div>
+                                            <div id="pdfData" class="tab-pane">
+                                                <div id="dataPDF"></div>
+                                            </div>
+                                            <div id="pdfAuthor" class="tab-pane">
+                                                <div id="contentPDF"></div>
+                                            </div>
                                         </div>
-                                    </div><div id="right_div">
-                                        <div id="contentPDF"></div>
                                     </div>
                                 </div>
                             </div>
                             <div id="footerPDF">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="javascript: RefuserFicheInvalide();">Refuser</button>
-                                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="javascript: ValiderFicheInvalide();">Valider</button>
+                                <button type="button" class="btn btn-danger" onclick="javascript: RefuserFicheInvalide();">Refuser</button>
+                                <button type="button" class="btn btn-success" onclick="javascript: ValiderFicheInvalide();">Valider</button>
                             </div>
                         </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->
@@ -113,7 +135,7 @@
         var id = idF;
         $.ajax({
             url: '@Url.Action("RefuserFicheInvalide", "Admin")',
-            type: 'GET',
+            type: 'POST',
             dataType: 'json',
             cache: false,
             data: { id: id },

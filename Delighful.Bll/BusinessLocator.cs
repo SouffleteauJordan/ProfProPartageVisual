@@ -55,6 +55,20 @@ namespace ProfProPartage.Bll
 
         }
 
+        private UserBll _usersBll;
+
+        public UserBll UsersBll
+        {
+            get
+            {
+                if (_usersBll == null)
+                {
+                    _usersBll = new UserBll(this);
+                }
+                return _usersBll;
+            }
+
+        }
 
         private KeywordBll _keywordBll;
 

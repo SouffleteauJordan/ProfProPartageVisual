@@ -1,8 +1,20 @@
 ﻿@model ProfProPartage.ViewModel.ViewModelFicheCoursList
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Accueil";
+    ViewData["user"] = "Accueil";
 }
+
+<div id="title" class="main-title"><h1><strong style="color:#E95325;">A</strong>ccueil - Recherche d'une fiche</h1></div>
+<div class="block-breadcrumb">
+    <div class="horizontal-scroll">
+        <ul class="breadcrumb">
+            <li><a href="/"><i class="icon ic-breadcrumb-dashboard"></i>Tableau de bord</a></li>
+            <li class="active">Accueil - Recherche d'une fiche</li>
+        </ul>
+    </div>
+</div>
+</br>
 
 <div id="Filter">
     <div id="contentFilter">
@@ -28,29 +40,189 @@
             @Html.Partial("listFiche", Model.ListFic)
         </div>
 
-        <div class="spacer"></div>
-
-        <div class="modal fade" id="PDFViewer" tabindex="-1" role="dialog" aria-labelledby="PDFViewerLabel" aria-hidden="true">
+        <div class="modal fade" id="PDFViewer" tabindex="-1" role="dialog" aria-labelledby="PDFViewerLabel" aria-hidden="true" style="display: none;">
             <div id="PDFDialog" class="modal-dialog">
-                <div id="PDFModal" class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="PDFViewerLabel">Modal title</h4>
-                    </div>
+                <div id="PDFModal" class="modal-content" style="height: 543px;">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="PDFViewerLabel">eval</h4>
                     <div class="modal-body">
-                        <div id="wrap">
-                            <div id="left_div">
-                                <div id="IframePDF">
-                                    <iframe frameborder="0"></iframe>
+                        <div class="tabs tabs-style-linetriangle">
+                            <nav>
+                                <ul>
+                                    <li class="tab active">
+                                        <a href="#pdfDoc" data-toggle="tab">
+                                            <span class="ic-container"><i class="fa fa-file-pdf-o"></i></span>
+                                            <span>Fiche PDF</span>
+                                        </a>
+                                    </li>
+                                    <li class="tab">
+                                        <a href="#pdfData" data-toggle="tab">
+                                            <span class="ic-container"><i class="fa fa-pie-chart"></i></span>
+                                            <span>Métadonnées</span>
+                                        </a>
+                                    </li>
+                                    <li class="tab">
+                                        <a href="#pdfAuthor" data-toggle="tab">
+                                            <span class="ic-container"><i class="fa fa-vcard"></i></span>
+                                            <span>Description</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="modal-header">
+                            <div id="wrap">
+                                <div class="tab-content">
+                                    <div id="pdfDoc" class="tab-pane active">
+                                        <div id="IframePDF">
+                                            <iframe></iframe>
+                                        </div>
+                                    </div>
+                                    <div id="pdfData" class="tab-pane">
+                                        <div id="dataPDF">
+                                            <div class="row">
+                                                <div class="col-lg-12" style="font-size: 15px;">
+                                                    <section class="block block-table-datas">
+                                                        <h2 class="block-title">Popularité</h2>
+                                                        <div class="horizontal-scroll">
+                                                            <div class="datas-table">
+                                                                <table class="table no-hover-table">
+                                                                    <colgroup>
+                                                                        <col>
+                                                                        <col class="w-28">
+                                                                        <col>
+                                                                    </colgroup>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td class="percircle-col">
+                                                                                <div id="thermostat" data-percent="50" class="percircle p70"></div>
+
+                                                                            </td>
+                                                                            <td class="v-align-middle">
+                                                                                <p class="data-value">Nombre de téléchargement</p>
+                                                                                <p id="NbrDDL" class="data-detail"></p>
+                                                                            </td>
+                                                                            <td class="v-align-middle">
+                                                                                <p class="data-value">Date d'ajout du fichier</p>
+                                                                                <p id="dateAjout" class="data-detail"></p>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                    <section class="block block-table-datas">
+                                                        <h2 class="block-title">Informations Fiche</h2>
+                                                        <div class="horizontal-scroll">
+                                                            <div class="datas-table">
+                                                                <table class="table no-hover-table">
+                                                                    <colgroup>
+                                                                        <col>
+                                                                        <col class="w-28">
+                                                                        <col>
+                                                                    </colgroup>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td class="location-col" style="font-size: 45px; color: #6d55a8;">
+                                                                                <i class="glyphicon glyphicon-file"></i>
+                                                                            </td>
+                                                                            <td class="address-col">
+                                                                                <p class="data-value">Niveau</p>
+                                                                                <p class="data-detail" id="NiveauFiche">
+                                                                                </p>
+                                                                            </td>
+                                                                            <td>
+                                                                                <p class="data-value">Matière</p>
+                                                                                <p class="data-detail" id="MatiereFiche"></p>
+                                                                            </td>
+                                                                            <td>
+                                                                                <p class="data-value">Thème</p>
+                                                                                <p class="data-detail" id="ThemeFiche"></p>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                    <section class="block block-table-datas">
+                                                        <h2 class="block-title">Infomations sur l’auteur</h2>
+                                                        <div class="horizontal-scroll">
+                                                            <div class="datas-table">
+                                                                <table class="table no-hover-table">
+                                                                    <colgroup>
+                                                                        <col>
+                                                                        <col class="w-28">
+                                                                        <col>
+                                                                    </colgroup>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td class="location-col" style="font-size: 45px; color: #6d55a8;">
+                                                                                <i class="glyphicon glyphicon-info-sign"></i>
+                                                                            </td>
+                                                                            <td class="address-col">
+                                                                                <p class="data-value">Pseudo</p>
+                                                                                <p class="data-detail" id="PseudoAuteur"></p>
+                                                                            </td>
+                                                                            <td class="address-col">
+                                                                                <p class="data-value">Level (Experience) - Titre</p>
+                                                                                <p class="data-detail" id="LevelAuteur"></p>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="location-col" style="font-size: 45px; color: #6d55a8;"></td>
+                                                                            <td class="address-col">
+                                                                                <p class="data-value">Nom</p>
+                                                                                <p class="data-detail" id="NomAuteur"></p>
+                                                                            </td>
+                                                                            <td class="address-col">
+                                                                                <p class="data-value">Prenom</p>
+                                                                                <p class="data-detail" id="PrenomAuteur"></p>
+                                                                            </td>
+                                                                            <td class="address-col">
+                                                                                <p class="data-value">Date de naissance</p>
+                                                                                <p class="data-detail" id="DateNaissanceAuteur"></p>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="location-col" style="font-size: 45px; color: #6d55a8;"></td>
+                                                                            <td class="address-col">
+                                                                                <p class="data-value">Date d'inscription</p>
+                                                                                <p class="data-detail" id="DateInscriptionAuteur"></p>
+                                                                            </td>
+                                                                            <td class="address-col">
+                                                                                <p class="data-value">Nombre de fiche déposées</p>
+                                                                                <p class="data-detail" id="NombreFicheUploadAuteur"></p>
+                                                                            </td>
+                                                                            <td class="address-col">
+                                                                                <p class="data-value">Nombre de téléchargement total</p>
+                                                                                <p class="data-detail" id="NombreTelechargementAuteur"></p>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="pdfAuthor" class="tab-pane">
+                                        <div id="contentPDF">
+                                            <div id="Description">
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div><div id="right_div">
-                                <div id="contentPDF"></div>
                             </div>
                         </div>
                     </div>
                     <div id="footerPDF">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        <a id="btnDownload" class="btn btn-primary" download>Download</a>
+                        <a id="btnDownload" class="btn btn-primary" download="" href="/Files/eval_CE2_conj_present.pdf">Download</a>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->

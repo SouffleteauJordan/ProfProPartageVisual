@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ProfProPartage</title>
+    <link rel="stylesheet" href="~/Content/Site.css" />
+    <link rel="stylesheet" href="~/Content/blueimp-gallery.css" />
+    <link rel="stylesheet" href="~/Content/blueimp-gallery-indicator.css" />
+    <link rel="stylesheet" href="~/Content/blueimp-gallery-video.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" href="~/Content/jquery.fileupload.css" />
+    <link rel="stylesheet" href="~/Content/jquery.fileupload-ui.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="~/Images/ppp.ico" />
+    <!--<link href="https://cdn-na.infragistics.com/igniteui/latest/css/themes/infragistics/infragistics.theme.css" rel="stylesheet"/>-->
+    <link href="https://cdn-na.infragistics.com/igniteui/latest/css/structure/infragistics.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="~/Scripts/jquery-3.2.1.js"></script>
+</head>
+    <body>
+        <div id="fond2"></div>
+        <svg class="hidden">
+            <defs>
+                <path id="tabshape" d="M80,60C34,53.5,64.417,0,0,0v60H80z" />
+            </defs>
+        </svg>
+        <div id="header-menu" class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container menu">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="/" id="Ic" class="navbar-brand"><img src="/Images/PPP.png"><!--<strong style="color:#39cf09;">P</strong>rof<strong style="color:#fa2420;">P</strong>ro<strong style="color:#ffa500;">P</strong>artage--></a>
+                </div>
+                <div id="bar-menu" class="stroke navbar-collapse collapse">
+                    <ul id="menu-elem" class="nav navbar-nav">
+                        <li class="elem-menu"><a class="elem" href="/"><span class="elem glyphicon glyphicon-home"></span>Accueil</a></li>
+                        <!--<li class="elem-menu"><a class="elem" href="/Catalogue/Catalogue"><span class="elem glyphicon glyphicon-book"></span>Catalogue</a></li>-->
+                        <li class="elem-menu"><a class="elem" href="/FicheCours/Import"><span class="elem glyphicon glyphicon-cloud-upload"></span>Importer des PDF</a></li>
+                        <li class="elem-menu"><a class="elem" href="/Home/About"><span class="elem glyphicon glyphicon-info-sign"></span>A propos</a></li>
+                        <li class="elem-menu"><a class="elem" href="/Home/Contact"><span class="elem glyphicon glyphicon-send"></span>Contact</a></li>
+                        @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+                    {
+                        <li class="elem-menu"><a class="elem" href="@Url.Action("AdminPanel", "Admin", null)"><span class="elem glyphicon glyphicon-th"></span>Panneau d'administration</a></li>
+                }
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+        </div>
+        <div id="container-page">
+            @RenderSection("Banner", required: false)
+            <div class="layoutRow">
+                @*<div id="border-left-page">
+                    <div id="indicateur">
+                    </div>
+                </div>*@
+                <div id="contenu-page">
+                    <div id="contenu-height">
+                        @RenderBody()
+                        <footer id="footer">
+                            <div class="fb-like"
+                                 data-share="true"
+                                 data-width="450"
+                                 data-show-faces="true">
+                            </div>
+                            <p>&copy; @DateTime.Now.Day/@DateTime.Now.Month/@DateTime.Now.Year - Les <strong style="color:#39cf09;">P</strong>rofs sont des <strong style="color:#fa2420;">P</strong>ros du <strong style="color:#ffa500;">P</strong>artage</p>
+                        </footer>
+                    </div>
+                </div>
+                @*<div id="border-right-page"></div>*@
+            </div>
+        </div>
+        <script src="~/Scripts/bootstrap.js"></script>
+        <script src="~/Scripts/site.js"></script>
+        <script src="https://igniteui.com/js/modernizr.min.js"></script>
+        <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+        <script src="~/Scripts/infragistics.core.js"></script>
+        <script src="~/Scripts/infragistics.lob.js"></script>
+        <script src="~/Scripts/infragistics.dv.js"></script>
+
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

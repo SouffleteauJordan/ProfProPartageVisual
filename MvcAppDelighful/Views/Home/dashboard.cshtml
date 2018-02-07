@@ -1,0 +1,1160 @@
+﻿@{
+    ViewData["Title"] = "Tableau de bord";
+}
+
+<h1 class="main-title">Leasecom On Line</h1>
+
+<div class="block-breadcrumb">
+    <div class="horizontal-scroll">
+        <ul class="breadcrumb">
+            <li class="active"><i class="icon ic-breadcrumb-dashboard"></i>Tableau de bord</li>
+        </ul>
+    </div>
+</div>
+
+<div class="row main-row">
+    <main class="col-lg-9 col-md-8 col-sm-8 col-xs-12 main">
+
+        <section class="block block-data">
+            <div class="content">
+                <article class="data-item create-data">
+                    <a href="#" class="data-content" data-toggle="modal" data-target="#createBusinessModal">
+                        <i class="icon ic-create"></i>
+                        <span class="text">Créer une nouvelle affaire</span>
+                    </a>
+                </article>
+            </div>
+        </section>
+        <!-- Modal Add a new Business -->
+        <div class="modal fade module-modal popin-modal" id="createBusinessModal" tabindex="-1" role="dialog" aria-labelledby="createBusinessModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="icon ic-close"></i></button>
+                        <h2 class="modal-title">Création d'une affaire</h2>
+                    </div>
+                    <form action="creation-affaire-identification-client.html" method="post" class="form">
+                        <div class="modal-body">
+                            <p>
+                                Vous êtes sur le point de créer une nouvelle affaire.
+                            </p>
+                            <div class="form-item">
+                                <strong>Créez-vous cette affaire au nom d'un collaborateur&nbsp;?</strong>
+                                <div class="radio">
+                                    <input class="add-form" data-id="#employeeNameForm" name="createWithEmployeeName" id="createWithEmployeeName-yes" value="" type="radio">
+                                    <label for="createWithEmployeeName-yes">Oui</label>
+                                </div>
+                                <div class="hidden-form" id="employeeNameForm">
+                                    <label for="employeeName">Nom du collaborateur</label>
+                                    <input class="form-inline" id="employeeName" value="" type="text">
+                                    <button class="btn-validate" type="button">Valider</button>
+                                </div>
+                                <div class="radio">
+                                    <input class="add-form closeAddedForm" data-id="#employeeNameForm" name="createWithEmployeeName" id="createWithEmployeeName-no" value="" type="radio">
+                                    <label for="createWithEmployeeName-no">Non</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="reset" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                            <button type="submit" class="btn btn-primary">Confirmer</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /Modal Add a new Business -->
+
+        <section class="block block-data block-current-business">
+            <div class="content">
+                <h2 class="block-title">
+                    <a href="#">
+                        Affaires en cours <strong>18</strong>
+                        <span class="see-more"><span class="see-more-txt">Voir plus</span> <i class="icon ic-arrow-more"></i></span>
+                    </a>
+                </h2>
+                <div class="horizontal-scroll">
+                    <div class="row list-datas">
+                        <article class="col-lg-4 col-md-6 col-sm-6 col-xs-6 data-item">
+                            <a href="#" class="data-content">
+                                <span class="number">2</span>
+                                <span class="statut">Etudes de financement à lancer</span>
+                            </a>
+                        </article>
+                        <article class="col-lg-4 col-md-6 col-sm-6 col-xs-6 data-item">
+                            <a href="#" class="data-content">
+                                <span class="number">5</span>
+                                <span class="statut">En attente de réponse de financement</span>
+                                <span class="to-do">
+                                    <span class="to-do-text">Documents à fournir (3)</span>
+                                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                </span>
+                            </a>
+                        </article>
+                        <article class="col-lg-4 col-md-6 col-sm-6 col-xs-6 data-item">
+                            <a href="#" class="data-content">
+                                <span class="number">2</span>
+                                <span class="statut">Documents contractuels en attente de réception par Leasecom</span>
+                            </a>
+                        </article>
+                        <article class="col-lg-4 col-md-6 col-sm-6 col-xs-6 data-item">
+                            <a href="#" class="data-content">
+                                <span class="number">3</span>
+                                <span class="statut">Documents contractuels non conformes</span>
+                                <span class="to-do">
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                </span>
+                            </a>
+                        </article>
+                        <article class="col-lg-4 col-md-6 col-sm-6 col-xs-6 data-item">
+                            <a href="#" class="data-content">
+                                <span class="number">2</span>
+                                <span class="statut">En attente de votre facture</span>
+                                <span class="to-do">
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                </span>
+                            </a>
+                        </article>
+                        <article class="col-lg-4 col-md-6 col-sm-6 col-xs-6 data-item">
+                            <a href="#" class="data-content">
+                                <span class="number">4</span>
+                                <span class="statut">Règlements Leasecom en attente</span>
+                            </a>
+                        </article>
+                        <article class="col-lg-4 col-md-6 col-sm-6 col-xs-6 data-item">
+                            <a href="#" class="data-content">
+                                <span class="number">4</span>
+                                <span class="statut">Enveloppes de financement clients en cours</span>
+                            </a>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="block block-data block-active-contracts">
+            <div class="content">
+                <h2 class="block-title">
+                    <a href="#">
+                        Contrats actifs <strong>47</strong>
+                        <span class="see-more"><span class="see-more-txt">Voir plus</span> <i class="icon ic-arrow-more"></i></span>
+                    </a>
+                </h2>
+                <div class="horizontal-scroll">
+                    <div class="row list-datas">
+                        <article class="col-lg-4 col-md-6 col-sm-6 col-xs-6 data-item">
+                            <a href="#" class="data-content">
+                                <span class="number">5</span>
+                                <span class="statut">En zone optimale d’évolution</span>
+                            </a>
+                        </article>
+                        <article class="col-lg-4 col-md-6 col-sm-6 col-xs-6 data-item">
+                            <a href="#" class="data-content">
+                                <span class="number">2</span>
+                                <span class="statut">En prolongation</span>
+                            </a>
+                        </article>
+                        <article class="col-lg-4 col-md-6 col-sm-6 col-xs-6 data-item">
+                            <a href="#" class="data-content">
+                                <span class="number">4</span>
+                                <span class="statut">Arrivant à terme</span>
+                            </a>
+                        </article>
+                        <article class="col-lg-4 col-md-6 col-sm-6 col-xs-6 data-item">
+                            <a href="#" class="data-content">
+                                <span class="number">1</span>
+                                <span class="statut">Equipements en fin de contrat à restituer</span>
+                            </a>
+                        </article>
+                        <article class="col-lg-4 col-md-6 col-sm-6 col-xs-6 data-item">
+                            <a href="#" class="data-content">
+                                <span class="number">2</span>
+                                <span class="statut">Suivis de retour des équipements chez Leasecom</span>
+                            </a>
+                        </article>
+                        <article class="col-lg-4 col-md-6 col-sm-6 col-xs-6 data-item">
+                            <span class="data-content null">
+                                <span class="number">0</span>
+                                <span class="statut">Avec prestations de maintenance à réindexer</span>
+                            </span>
+                        </article>
+                        <article class="col-lg-4 col-md-6 col-sm-6 col-xs-6 data-item">
+                            <a href="#" class="data-content alerted">
+                                <span class="number">2</span>
+                                <span class="statut">Impayés</span>
+                                <span class="to-do">
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                </span>
+                            </a>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="block block-statistics">
+            <div class="content">
+                <h2 class="block-title">
+                    <a href="#">
+                        Statistiques
+                        <span class="see-more"><span class="see-more-txt">Voir plus</span> <i class="icon ic-arrow-more"></i></span>
+                    </a>
+                </h2>
+                <div class="module-filters">
+                    <form action="#" method="POST">
+                        <div class="horizontal-scroll">
+                            <div class="block-bg">
+                                <div class="filter-row">
+                                    <div class="filter-col col-1-4">
+                                        <span class="btn-filter" data-id="#subFilters">Filtrer<i class="icon ic-filter"></i></span>
+                                    </div>
+                                    <div class="filter-col col-1-4">
+                                        <div class="dropdown">
+                                            <span class="btn-dropdown" id="dlCustomPeriod" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Période<span class="hidden-sm-desktop"> personnalisée</span>
+                                                <span class="caret"></span>
+                                            </span>
+                                            <ul class="dropdown-menu" aria-labelledby="dlCustomPeriod">
+                                                <li class="dropdown-header">
+                                                    <a class="close-dropdown" data-id="#dlCustomPeriod" href="#"><i class="icon ic-back"></i></a>
+                                                    <button class="btn btn-validate apply-filter">Valider</button>
+                                                </li>
+                                                <li>
+                                                    <div class="radio">
+                                                        <input id="customPeriod1" name="customPeriod" value="" type="radio">
+                                                        <label for="customPeriod1">7 derniers jours</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="radio">
+                                                        <input id="customPeriod2" name="customPeriod" value="" type="radio">
+                                                        <label for="customPeriod2">30 derniers jours</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="radio">
+                                                        <input id="customPeriod3" name="customPeriod" value="" type="radio">
+                                                        <label for="customPeriod3">12 mois glissants</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="radio">
+                                                        <input id="customPeriod4" name="customPeriod" value="" type="radio">
+                                                        <label for="customPeriod4">Période personnalisée</label>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="filter-col col-1-2 filter-dates">
+                                        <div class="input-daterange input-group filterDatepicker" id="filterDatepicker">
+                                            <span class="input-group-addon">Du</span>
+                                            <input class="input-sm form-control filterDateStart" id="filterDateStart" name="start" value="" type="text">
+                                            <span class="separ-col"></span>
+                                            <span class="input-group-addon group-end">Au</span>
+                                            <input class="input-sm form-control filterDateEnd" id="filterDateEnd" name="end" value="" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sub-filters" id="subFilters">
+                            <div class="horizontal-scroll">
+                                <div class="block-bg">
+                                    <div class="filter-row">
+                                        <div class="filter-col col-1-3">
+                                            <div class="dropdown">
+                                                <span class="btn-dropdown collapsed" data-target="#dlMarket" data-toggle="collapse" aria-expanded="false">
+                                                    Marchés
+                                                    <span class="caret"></span>
+                                                </span>
+                                                <div class="dropdown-menu" id="dlMarket">
+                                                    <div class="dropdown-header">
+                                                        <a class="close-dropdown" data-id="#dlMarket" href="#"><i class="icon ic-back"></i></a>
+                                                        <button class="btn btn-validate apply-filter">Appliquer</button>
+                                                    </div>
+                                                    <i class="icon ic-search"></i>
+                                                    <select class="select2-select select2-hidden-accessible" id="marketSelect" multiple="" tabindex="-1" aria-hidden="true">
+                                                        <option value="Informatique">Informatique et technologies d'affichage</option>
+                                                        <option value="Télécom">Télécom et visioconférence</option>
+                                                    </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1"><ul class="select2-selection__rendered"><li class="select2-search select2-search--inline"><input class="select2-search__field" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" role="textbox" aria-autocomplete="list" placeholder="Rechercher..." style="width: 100px;" type="search"></li></ul></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                                    <div class="dropdown-footer">
+                                                        <button class="btn btn-validate apply-filter">Appliquer</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="filter-col col-1-3">
+                                            <div class="dropdown">
+                                                <span class="btn-dropdown collapsed" data-target="#dlSupervisor" data-toggle="collapse" aria-expanded="false">
+                                                    Superviseurs
+                                                    <span class="caret"></span>
+                                                </span>
+                                                <div class="dropdown-menu" id="dlSupervisor">
+                                                    <div class="dropdown-header">
+                                                        <a class="close-dropdown" data-id="#dlSupervisor" href="#"><i class="icon ic-back"></i></a>
+                                                        <button class="btn btn-validate apply-filter">Appliquer</button>
+                                                    </div>
+                                                    <i class="icon ic-search"></i>
+                                                    <select class="select2-select select2-hidden-accessible" id="supervisorSelect" multiple="" tabindex="-1" aria-hidden="true">
+                                                        <option value="Da Silva">Anne-José Da Silva</option>
+                                                        <option value="Aliane">Ismail Aliane</option>
+                                                    </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1"><ul class="select2-selection__rendered"><li class="select2-search select2-search--inline"><input class="select2-search__field" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" role="textbox" aria-autocomplete="list" placeholder="Rechercher..." style="width: 100px;" type="search"></li></ul></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                                    <div class="dropdown-footer">
+                                                        <button class="btn btn-validate apply-filter">Appliquer</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="filter-col col-1-3">
+                                            <div class="dropdown">
+                                                <span class="btn-dropdown collapsed" data-target="#dlEngineer" data-toggle="collapse" aria-expanded="false">
+                                                    Ingénieurs commerciaux
+                                                    <span class="caret"></span>
+                                                </span>
+                                                <div class="dropdown-menu" id="dlEngineer">
+                                                    <div class="dropdown-header">
+                                                        <a class="close-dropdown" data-id="#dlEngineer" href="#"><i class="icon ic-back"></i></a>
+                                                        <button class="btn btn-validate apply-filter">Appliquer</button>
+                                                    </div>
+                                                    <i class="icon ic-search"></i>
+                                                    <select class="select2-select select2-hidden-accessible" id="engineerSelect" multiple="" tabindex="-1" aria-hidden="true">
+                                                        <option value="Lemaître">Alexis Lemaître</option>
+                                                        <option value="Moïse">Angélique Moïse</option>
+                                                        <option value="Masson">Aurore Masson</option>
+                                                        <option value="Launay">François Launay</option>
+                                                        <option value="Leclerc">Gabriel Leclerc</option>
+                                                        <option value="Broughton">Henry Broughton</option>
+                                                        <option value="Klein">Isabelle Klein</option>
+                                                        <option value="Frappier">Philippe Frappier</option>
+                                                        <option value="Motin">Tanguy Motin</option>
+                                                        <option value="De Launay">Sébastien De Launay</option>
+                                                    </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1"><ul class="select2-selection__rendered"><li class="select2-search select2-search--inline"><input class="select2-search__field" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" role="textbox" aria-autocomplete="list" placeholder="Rechercher..." style="width: 100px;" type="search"></li></ul></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                                    <div class="dropdown-footer">
+                                                        <button class="btn btn-validate apply-filter">Appliquer</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="block-bg">
+                    <div class="statistics-nav-tabs-container scrollStart">
+                        <div class="statistics-nav-tabs-scroll mCustomScrollbar _mCS_1">
+                            <div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_horizontal mCSB_inside" style="max-height: none;" tabindex="0">
+                                <div id="mCSB_1_container" class="mCSB_container" style="position: relative; top: 0px; left: 0px; width: 1933px; min-width: 100%; overflow-x: inherit;" dir="ltr">
+                                    <div class="statistics-nav-tabs">
+                                        <article class="item active">
+                                            <div class="item-btn current" data-tab="#statistics-tab-1">
+                                                <span class="item-title">Demandes<br>de financement</span>
+                                                <span class="number">53</span>
+                                                <span class="evolution">
+                                                    <span class="evolution-value">+14</span>
+                                                    <i class="icon ic-evolution-up" title="en hausse"></i>
+                                                </span>
+                                            </div>
+                                        </article>
+                                        <article class="item">
+                                            <div class="item-btn" data-tab="#statistics-tab-2">
+                                                <span class="item-title">Nombre<br>de contrats</span>
+                                                <span class="number">12</span>
+                                                <span class="evolution">
+                                                    <span class="evolution-value">+4</span>
+                                                    <i class="icon ic-evolution-up" title="en hausse"></i>
+                                                </span>
+                                            </div>
+                                        </article>
+                                        <article class="item">
+                                            <div class="item-btn" data-tab="#statistics-tab-3">
+                                                <span class="item-title">Montant<br>financé (€ H.T.)</span>
+                                                <span class="number">100 000</span>
+                                                <span class="evolution">
+                                                    <span class="evolution-value">-2,3</span>
+                                                    <i class="icon ic-evolution-down" title="en hausse"></i>
+                                                </span>
+                                            </div>
+                                        </article>
+                                        <article class="item">
+                                            <div class="item-btn" data-tab="#statistics-tab-4">
+                                                <span class="item-title">Taux<br>d’accord</span>
+                                                <span class="number">60,5</span>
+                                                <span class="evolution">
+                                                    <span class="evolution-value">-2,3%</span>
+                                                    <i class="icon ic-evolution-down" title="en baisse"></i>
+                                                </span>
+                                            </div>
+                                        </article>
+                                        <article class="item">
+                                            <div class="item-btn" data-tab="#statistics-tab-5">
+                                                <span class="item-title">Taux de mise<br>en place</span>
+                                                <span class="number">99,6</span>
+                                                <span class="evolution">
+                                                    <span class="evolution-value">-2,3%</span>
+                                                    <i class="icon ic-evolution-down" title="en baisse"></i>
+                                                </span>
+                                            </div>
+                                        </article>
+                                        <article class="item">
+                                            <div class="item-btn" data-tab="#statistics-tab-6">
+                                                <span class="item-title">Evolution<br>de contrat</span>
+                                                <span class="number">22</span>
+                                                <span class="evolution">
+                                                    <span class="evolution-value">+8</span>
+                                                    <i class="icon ic-evolution-up" title="en hausse"></i>
+                                                </span>
+                                            </div>
+                                        </article>
+                                        <article class="item">
+                                            <div class="item-btn" data-tab="#statistics-tab-7">
+                                                <span class="item-title">Taux<br>d’accord</span>
+                                                <span class="number">70,5</span>
+                                                <span class="evolution">
+                                                    <span class="evolution-value">+2,3%</span>
+                                                    <i class="icon ic-evolution-up" title="en hausse"></i>
+                                                </span>
+                                            </div>
+                                        </article>
+                                        <article class="item">
+                                            <div class="item-btn" data-tab="#statistics-tab-8">
+                                                <span class="item-title">Taux<br>d’accord</span>
+                                                <span class="number">60,5</span>
+                                                <span class="evolution">
+                                                    <span class="evolution-value">-2,3%</span>
+                                                    <i class="icon ic-evolution-down" title="en baisse"></i>
+                                                </span>
+                                            </div>
+                                        </article>
+                                        <article class="item">
+                                            <div class="item-btn" data-tab="#statistics-tab-9">
+                                                <span class="item-title">Taux de mise<br>en place</span>
+                                                <span class="number">99,6</span>
+                                                <span class="evolution">
+                                                    <span class="evolution-value">-2,3%</span>
+                                                    <i class="icon ic-evolution-down" title="en baisse"></i>
+                                                </span>
+                                            </div>
+                                        </article>
+                                        <article class="item">
+                                            <div class="item-btn" data-tab="#statistics-tab-10">
+                                                <span class="item-title">Evolution<br>de contrat</span>
+                                                <span class="number">22</span>
+                                                <span class="evolution">
+                                                    <span class="evolution-value">+8</span>
+                                                    <i class="icon ic-evolution-up" title="en hausse"></i>
+                                                </span>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </div><div id="mCSB_1_scrollbar_horizontal" class="mCSB_scrollTools mCSB_1_scrollbar mCS-light mCSB_scrollTools_horizontal" style="display: block;"><div class="mCSB_draggerContainer"><div id="mCSB_1_dragger_horizontal" class="mCSB_dragger" style="position: absolute; min-width: 30px; display: block; width: 304px; max-width: 757px; left: 0px;"><div class="mCSB_dragger_bar"></div></div><div class="mCSB_draggerRail"></div></div></div>
+                            </div>
+                        </div>
+                        <a class="prev-control"><i class="icon ic-arrow-left"></i></a>
+                        <a class="next-control"><i class="icon ic-arrow-right"></i></a>
+                    </div>
+                    <div class="statistics-tab-content tab-current" id="statistics-tab-1">
+                        <article class="statistics-item">
+                            <p class="customer-name">Alexis Lemaître</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 28%"></div></div>
+                                <div class="bar-value">28%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Angélique Moïse</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 36%"></div></div>
+                                <div class="bar-value">36%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Aurore Masson</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 14%"></div></div>
+                                <div class="bar-value">14%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Gabriel Leclerc</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 88%"></div></div>
+                                <div class="bar-value">88%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Philippe Frappier</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 52%"></div></div>
+                                <div class="bar-value">52%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Sébastien De Launay</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 41%"></div></div>
+                                <div class="bar-value">41%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Tanguy Motin</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 17%"></div></div>
+                                <div class="bar-value">17%</div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="statistics-tab-content" id="statistics-tab-2">
+                        <article class="statistics-item">
+                            <p class="customer-name">Philippe Frappier</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 52%"></div></div>
+                                <div class="bar-value">52%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Sébastien De Launay</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 41%"></div></div>
+                                <div class="bar-value">41%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Tanguy Motin</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 17%"></div></div>
+                                <div class="bar-value">17%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Alexis Lemaître</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 28%"></div></div>
+                                <div class="bar-value">28%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Angélique Moïse</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 36%"></div></div>
+                                <div class="bar-value">36%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Aurore Masson</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 14%"></div></div>
+                                <div class="bar-value">14%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Gabriel Leclerc</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 88%"></div></div>
+                                <div class="bar-value">88%</div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="statistics-tab-content" id="statistics-tab-3">
+                        <article class="statistics-item">
+                            <p class="customer-name">Aurore Masson</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 14%"></div></div>
+                                <div class="bar-value">14%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Gabriel Leclerc</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 88%"></div></div>
+                                <div class="bar-value">88%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Philippe Frappier</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 52%"></div></div>
+                                <div class="bar-value">52%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Sébastien De Launay</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 41%"></div></div>
+                                <div class="bar-value">41%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Tanguy Motin</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 17%"></div></div>
+                                <div class="bar-value">17%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Alexis Lemaître</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 28%"></div></div>
+                                <div class="bar-value">28%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Angélique Moïse</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 36%"></div></div>
+                                <div class="bar-value">36%</div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="statistics-tab-content" id="statistics-tab-4">
+                        <article class="statistics-item">
+                            <p class="customer-name">Sébastien De Launay</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 41%"></div></div>
+                                <div class="bar-value">41%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Tanguy Motin</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 17%"></div></div>
+                                <div class="bar-value">17%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Aurore Masson</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 14%"></div></div>
+                                <div class="bar-value">14%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Gabriel Leclerc</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 88%"></div></div>
+                                <div class="bar-value">88%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Philippe Frappier</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 52%"></div></div>
+                                <div class="bar-value">52%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Alexis Lemaître</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 28%"></div></div>
+                                <div class="bar-value">28%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Angélique Moïse</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 36%"></div></div>
+                                <div class="bar-value">36%</div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="statistics-tab-content" id="statistics-tab-5">
+                        <article class="statistics-item">
+                            <p class="customer-name">Angélique Moïse</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 36%"></div></div>
+                                <div class="bar-value">36%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Alexis Lemaître</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 28%"></div></div>
+                                <div class="bar-value">28%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Aurore Masson</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 14%"></div></div>
+                                <div class="bar-value">14%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Gabriel Leclerc</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 88%"></div></div>
+                                <div class="bar-value">88%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Philippe Frappier</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 52%"></div></div>
+                                <div class="bar-value">52%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Sébastien De Launay</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 41%"></div></div>
+                                <div class="bar-value">41%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Tanguy Motin</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 17%"></div></div>
+                                <div class="bar-value">17%</div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="statistics-tab-content" id="statistics-tab-6">
+                        <article class="statistics-item">
+                            <p class="customer-name">Tanguy Motin</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 17%"></div></div>
+                                <div class="bar-value">17%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Philippe Frappier</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 52%"></div></div>
+                                <div class="bar-value">52%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Sébastien De Launay</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 41%"></div></div>
+                                <div class="bar-value">41%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Alexis Lemaître</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 28%"></div></div>
+                                <div class="bar-value">28%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Angélique Moïse</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 36%"></div></div>
+                                <div class="bar-value">36%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Aurore Masson</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 14%"></div></div>
+                                <div class="bar-value">14%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Gabriel Leclerc</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 88%"></div></div>
+                                <div class="bar-value">88%</div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="statistics-tab-content" id="statistics-tab-7">
+                        <article class="statistics-item">
+                            <p class="customer-name">Philippe Frappier</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 52%"></div></div>
+                                <div class="bar-value">52%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Sébastien De Launay</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 41%"></div></div>
+                                <div class="bar-value">41%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Tanguy Motin</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 17%"></div></div>
+                                <div class="bar-value">17%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Alexis Lemaître</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 28%"></div></div>
+                                <div class="bar-value">28%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Angélique Moïse</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 36%"></div></div>
+                                <div class="bar-value">36%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Aurore Masson</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 14%"></div></div>
+                                <div class="bar-value">14%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Gabriel Leclerc</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 88%"></div></div>
+                                <div class="bar-value">88%</div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="statistics-tab-content" id="statistics-tab-8">
+                        <article class="statistics-item">
+                            <p class="customer-name">Aurore Masson</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 14%"></div></div>
+                                <div class="bar-value">14%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Gabriel Leclerc</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 88%"></div></div>
+                                <div class="bar-value">88%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Philippe Frappier</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 52%"></div></div>
+                                <div class="bar-value">52%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Sébastien De Launay</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 41%"></div></div>
+                                <div class="bar-value">41%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Tanguy Motin</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 17%"></div></div>
+                                <div class="bar-value">17%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Alexis Lemaître</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 28%"></div></div>
+                                <div class="bar-value">28%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Angélique Moïse</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 36%"></div></div>
+                                <div class="bar-value">36%</div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="statistics-tab-content" id="statistics-tab-9">
+                        <article class="statistics-item">
+                            <p class="customer-name">Sébastien De Launay</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 41%"></div></div>
+                                <div class="bar-value">41%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Tanguy Motin</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 17%"></div></div>
+                                <div class="bar-value">17%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Aurore Masson</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 14%"></div></div>
+                                <div class="bar-value">14%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Gabriel Leclerc</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 88%"></div></div>
+                                <div class="bar-value">88%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Philippe Frappier</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 52%"></div></div>
+                                <div class="bar-value">52%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Alexis Lemaître</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 28%"></div></div>
+                                <div class="bar-value">28%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Angélique Moïse</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 36%"></div></div>
+                                <div class="bar-value">36%</div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="statistics-tab-content" id="statistics-tab-10">
+                        <article class="statistics-item">
+                            <p class="customer-name">Angélique Moïse</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 36%"></div></div>
+                                <div class="bar-value">36%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Alexis Lemaître</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 28%"></div></div>
+                                <div class="bar-value">28%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Aurore Masson</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 14%"></div></div>
+                                <div class="bar-value">14%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Gabriel Leclerc</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 88%"></div></div>
+                                <div class="bar-value">88%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Philippe Frappier</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 52%"></div></div>
+                                <div class="bar-value">52%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Sébastien De Launay</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 41%"></div></div>
+                                <div class="bar-value">41%</div>
+                            </div>
+                        </article>
+                        <article class="statistics-item">
+                            <p class="customer-name">Tanguy Motin</p>
+                            <div class="bar-container">
+                                <div class="bar"><div class="bar-inner" style="width: 17%"></div></div>
+                                <div class="bar-value">17%</div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="block block-data block-bills">
+            <div class="content">
+                <h2 class="block-title">
+                    <a href="#">
+                        Factures Leasecom au partenaire
+                        <span class="see-more"><span class="see-more-txt">Voir plus</span> <i class="icon ic-arrow-more"></i></span>
+                    </a>
+                </h2>
+                <div class="horizontal-scroll">
+                    <div class="row list-datas">
+                        <article class="col-lg-4 col-md-6 col-sm-6 col-xs-6 data-item">
+                            <a href="#" class="data-content">
+                                <span class="number">1</span>
+                                <span class="statut">Solde pour résiliation anticipée d’un contact</span>
+                                <span class="to-do">
+                                    <span class="to-do-text">à régler</span>
+                                    <i class="fa fa-info-circle" aria-hidden="tue"></i>
+                                </span>
+                            </a>
+                        </article>
+                        <article class="col-lg-4 col-md-6 col-sm-6 col-xs-6 data-item">
+                            <a href="#" class="data-content">
+                                <span class="number">3</span>
+                                <span class="statut">Ventes équipements</span>
+                                <span class="to-do">
+                                    <span class="to-do-text">à régler</span>
+                                    <i class="fa fa-info-circle" aria-hidden="tue"></i>
+                                </span>
+                            </a>
+                        </article>
+                        <article class="col-lg-4 col-md-6 col-sm-6 col-xs-6 data-item">
+                            <a href="#" class="data-content null">
+                                <span class="number">0</span>
+                                <span class="statut">
+                                    Litige client<br>
+                                    Rachat du contrat par le partenaire
+                                </span>
+                            </a>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="block block-data block-documents">
+            <div class="content">
+                <h2 class="block-title">
+                    <a href="#">
+                        Derniers relevés Leasecom
+                        <span class="see-more"><span class="see-more-txt">Voir plus</span> <i class="icon ic-arrow-more"></i></span>
+                    </a>
+                </h2>
+                <div class="horizontal-scroll">
+                    <div class="row list-datas">
+                        <article class="col-lg-4 col-md-6 col-sm-6 col-xs-6 data-item">
+                            <a href="#" class="data-content">
+                                <i class="icon ic-doc"></i>
+                                <span class="statut">Relevé valant facture commissionnement de mise à disposition</span>
+                            </a>
+                        </article>
+                        <article class="col-lg-4 col-md-6 col-sm-6 col-xs-6 data-item">
+                            <a href="#" class="data-content">
+                                <i class="icon ic-doc"></i>
+                                <span class="statut">Relevé valant facture commissionnement de fidélisation</span>
+                            </a>
+                        </article>
+                        <article class="col-lg-4 col-md-6 col-sm-6 col-xs-6 data-item">
+                            <a href="#" class="data-content">
+                                <i class="icon ic-doc"></i>
+                                <span class="statut">Relevé valant facture des  prestations réccurentes en prélèvement pour compte</span>
+                            </a>
+                        </article>
+                        <article class="col-lg-4 col-md-6 col-sm-6 col-xs-6 data-item">
+                            <a href="#" class="data-content">
+                                <i class="icon ic-doc"></i>
+                                <span class="statut">Relevé valant facture commissionnement sur apport d’affaires</span>
+                            </a>
+                        </article>
+                        <article class="col-lg-4 col-md-6 col-sm-6 col-xs-6 data-item">
+                            <a href="#" class="data-content">
+                                <i class="icon ic-doc"></i>
+                                <span class="statut">Relevé fonds de garantie</span>
+                            </a>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <aside class="col-lg-3 col-md-4 col-sm-4 col-xs-12 sidebar">
+        <a class="block block-advertisement" href="#">
+            <div class="ad-img-gradient"></div>
+            <img class="ad-img" src="img/temp/pub.jpg" alt="">
+            <div class="ad-details">
+                <h2 class="title">
+                    La Boutique Leasecom<br>
+                    Matériel de seconde main
+                </h2>
+            </div>
+            <p class="bottom-link"><span class="arrow-link" href="#">CTA Lorem ipsum<i class="icon ic-link-arrow-right"></i></span></p>
+        </a>
+
+        <a class="block block-my-club" href="#">
+            <h2 class="title">Mon club Frequentlease</h2>
+            <div class="my-club-details">
+                <p class="my-points"><span class="points">6789</span><sup>pts</sup></p>
+                <p class="level">Niveau : Azur</p>
+            </div>
+            <p class="bottom-link"><span class="arrow-link">Voir les avantages<i class="icon ic-link-arrow-right"></i></span></p>
+        </a>
+
+        <div class="block block-contact">
+            <h2 class="title">Mon contact</h2>
+            <div class="contact-details">
+                <p><i class="icon ic-sites"></i></p>
+                <p>Leasecom</p>
+                <p class="tel">+33 (0)1 58 01 15 15</p>
+            </div>
+            <p class="bottom-link"><a class="arrow-link" href="#">Envoyer un mail<i class="icon ic-link-arrow-right-violet"></i></a></p>
+        </div>
+
+        <div class="block block-events">
+            <h2 class="title">Prochains événements</h2>
+            <div id="carousel-events" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-events" data-slide-to="0" class=""></li>
+                    <li data-target="#carousel-events" data-slide-to="1" class="active"></li>
+                    <li data-target="#carousel-events" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                    <div class="item event-item">
+                        <div class="event-details">
+                            <p class="date">Mer. 3 mai 2017</p>
+                            <h3 class="event-name">
+                                Roadshow Leasecom<br>
+                                Agence Leascom Aix en Provence
+                            </h3>
+                        </div>
+                        <p class="bottom-link"><a class="arrow-link" href="#">M’inscrire<i class="icon ic-link-arrow-right-violet"></i></a></p>
+                    </div>
+                    <div class="item event-item active">
+                        <div class="event-details">
+                            <p class="date">A partir du 1er juin 2017</p>
+                            <h3 class="event-name">
+                                Concours des ventes 2017
+                            </h3>
+                        </div>
+                        <p class="bottom-link"><a class="arrow-link" href="#">M’inscrire<i class="icon ic-link-arrow-right-violet"></i></a></p>
+                    </div>
+                    <div class="item event-item">
+                        <div class="event-details">
+                            <p class="date">Jeu. 10 août 2017</p>
+                            <h3 class="event-name">
+                                Lorem ipsum dolore sit amet
+                            </h3>
+                        </div>
+                        <p class="bottom-link"><a class="arrow-link" href="#">M’inscrire<i class="icon ic-link-arrow-right-violet"></i></a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a class="block block-advertisement" href="#">
+            <div class="ad-img-gradient"></div>
+            <img class="ad-img" src="img/temp/pub.jpg" alt="">
+            <div class="ad-details">
+                <h2 class="title">
+                    Offres Leasecom lorem ipsum dolore sit amet
+                </h2>
+            </div>
+            <p class="bottom-link"><span class="arrow-link">CTA Lorem ipsum<i class="icon ic-link-arrow-right"></i></span></p>
+        </a>
+
+        <a class="block block-advertisement" href="#">
+            <div class="ad-img-gradient"></div>
+            <img class="ad-img" src="img/temp/pub.jpg" alt="">
+            <div class="ad-details">
+                <h2 class="title">
+                    Ma vie commerciale<br>
+                    Le magazine en ligne dédié aux équipes commerciales
+                </h2>
+            </div>
+            <p class="bottom-link"><span class="arrow-link">CTA Lorem ipsum<i class="icon ic-link-arrow-right"></i></span></p>
+        </a>
+    </aside>
+
+</div>
