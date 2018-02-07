@@ -1711,4 +1711,7 @@ body .ui-state-active.ui-state-hover .ui-icon, body .ui-state-hover.ui-state-hig
         border-color: #1DA1F2;
     }
 
-
+span.ui-icon.ui-icon-clear-content {
+    background-image: url('../../igniteui/css/themes/infragistics/images/ui-icons_888888_256x240.png') !important;
+    background-position: -177px -97px;
+}

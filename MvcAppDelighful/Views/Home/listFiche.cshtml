@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProfProPartage.ViewModel.ViewModelFicheCours>
+@model IEnumerable<ProfProPartage.ViewModel.ViewModelFicheCours>
 @using ProfProPartage.Helper
 
 <script>
@@ -6,7 +6,7 @@
 </script>
 @foreach (var item in Model)
 {
-    <div class="box PDFViewerButton @MyHelpers.FormatDataView(item.Theme) @MyHelpers.FormatDataView(item.Matiere) @MyHelpers.FormatDataView(@item.Niveau)" data-toggle="modal" idFiche=@item.Id data-src=@item.UrlPDF title=@MyHelpers.FormatDataView(@item.Titre) niveau=@MyHelpers.FormatDataView(item.Niveau) theme=@MyHelpers.FormatDataView(item.Theme) matiere=@MyHelpers.FormatDataView(item.Matiere) temperature=@item.Temperature DateAjout=@item.DateAjout NombreTelechargement=@item.NombreTelechargement UserName=@item.User.UserName UserId=@item.UserId data-target="#PDFViewer">
+    <div class="box PDFViewerButton @MyHelpers.FormatDataView(item.Theme) @MyHelpers.FormatDataView(item.Matiere) @MyHelpers.FormatDataView(@item.Niveau)" data-toggle="modal" idFiche=@item.Id data-src=@item.UrlPDF title=@MyHelpers.FormatDataView(@item.Titre) niveau=@MyHelpers.FormatDataView(item.Niveau) theme=@MyHelpers.FormatDataView(item.Theme) matiere=@MyHelpers.FormatDataView(item.Matiere) Temperature=@item.Temperature DateAjout=@item.DateAjout Description=@item.Description NombreTelechargement=@item.NombreTelechargement UserName=@item.User.UserName UserId=@item.UserId data-target="#PDFViewer">
         <div class="demo-title">@Html.DisplayFor(modelItem => item.Titre)</div>
         <div class="post-module">
             <div class="apercu">

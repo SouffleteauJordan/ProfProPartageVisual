@@ -81,7 +81,7 @@
                                     <div id="pdfData" class="tab-pane">
                                         <div id="dataPDF">
                                             <div class="row">
-                                                <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12">
+                                                <div class="col-lg-12" style="font-size: 15px;">
                                                     <section class="block block-table-datas">
                                                         <h2 class="block-title">Popularité</h2>
                                                         <div class="horizontal-scroll">
@@ -128,15 +128,17 @@
                                                                                 <i class="glyphicon glyphicon-file"></i>
                                                                             </td>
                                                                             <td class="address-col">
-                                                                                <p class="data-value">Brico-Vence</p>
-                                                                                <p class="data-detail">
-                                                                                    800 avenue Rhin et Danube<br>
-                                                                                    06140 Vence
+                                                                                <p class="data-value">Niveau</p>
+                                                                                <p class="data-detail" id="NiveauFiche">
                                                                                 </p>
                                                                             </td>
                                                                             <td>
-                                                                                <p class="data-value">Siret</p>
-                                                                                <p class="data-detail nowrap">493974208 00024</p>
+                                                                                <p class="data-value">Matière</p>
+                                                                                <p class="data-detail" id="MatiereFiche"></p>
+                                                                            </td>
+                                                                            <td>
+                                                                                <p class="data-value">Thème</p>
+                                                                                <p class="data-detail" id="ThemeFiche"></p>
                                                                             </td>
                                                                         </tr>
                                                                     </tbody>
@@ -144,111 +146,60 @@
                                                             </div>
                                                         </div>
                                                     </section>
-                                                    <section class="block block-table-infos">
-                                                        <h2 class="block-title">Infomations sur l’affaire</h2>
+                                                    <section class="block block-table-datas">
+                                                        <h2 class="block-title">Infomations sur l’auteur</h2>
                                                         <div class="horizontal-scroll">
                                                             <div class="datas-table">
-                                                                <table class="table">
+                                                                <table class="table no-hover-table">
                                                                     <colgroup>
                                                                         <col>
-                                                                        <col class="w-30">
-                                                                        <col class="w-30">
+                                                                        <col class="w-28">
                                                                         <col>
                                                                     </colgroup>
                                                                     <tbody>
                                                                         <tr>
-                                                                            <td class="icon-col">
-                                                                                <span class="icon-wrapper"><i class="fa fa-info" aria-hidden="true"></i></span>
+                                                                            <td class="location-col" style="font-size: 45px; color: #6d55a8;">
+                                                                                <i class="glyphicon glyphicon-info-sign"></i>
                                                                             </td>
-                                                                            <td>
-                                                                                <p class="data-value nowrap">N° 201704-Aff-443010</p>
-                                                                                <p class="data-detail">Créée le 25/04/2017</p>
-                                                                                <p class="data-detail">Par Hajar Badr Halabi</p>
+                                                                            <td class="address-col">
+                                                                                <p class="data-value">Pseudo</p>
+                                                                                <p class="data-detail" id="PseudoAuteur"></p>
                                                                             </td>
-                                                                            <td>
-                                                                                <p class="data-value">Marché</p>
-                                                                                <p class="data-detail">Bureautique</p>
-                                                                            </td>
-                                                                            <td>
-                                                                                <p class="data-value">Type d’affaire</p>
-                                                                                <p class="data-detail">Evolution du contrat 214L29305</p>
+                                                                            <td class="address-col">
+                                                                                <p class="data-value">Level (Experience) - Titre</p>
+                                                                                <p class="data-detail" id="LevelAuteur"></p>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td class="icon-col">
-                                                                                <span class="icon-wrapper"><i class="fa fa-align-right" aria-hidden="true"></i></span>
+                                                                            <td class="location-col" style="font-size: 45px; color: #6d55a8;">
                                                                             </td>
-                                                                            <td>
-                                                                                <p class="data-value">Poduit de location</p>
-                                                                                <p class="data-detail">Location</p>
+                                                                            <td class="address-col">
+                                                                                <p class="data-value">Nom</p>
+                                                                                <p class="data-detail" id="NomAuteur"></p>
                                                                             </td>
-                                                                            <td>
-                                                                                <p class="data-value">Document contractuel choisi</p>
-                                                                                <p class="data-detail">eContrat</p>
+                                                                            <td class="address-col">
+                                                                                <p class="data-value">Prenom</p>
+                                                                                <p class="data-detail" id="PrenomAuteur"></p>
                                                                             </td>
-                                                                            <td></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td class="icon-col">
-                                                                                <span class="icon-wrapper"><i class="fa fa-calendar-o" aria-hidden="true"></i></span>
-                                                                            </td>
-                                                                            <td>
-                                                                                <p class="data-value">Mois prévisionnel d’installation</p>
-                                                                                <p class="data-detail">08/2017</p>
-                                                                            </td>
-                                                                            <td>
-                                                                                <p class="data-value">Calage demandé</p>
-                                                                                <p class="data-detail">1 Mois</p>
-                                                                            </td>
-                                                                            <td></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td class="icon-col">
-                                                                                <span class="icon-wrapper"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
-                                                                            </td>
-                                                                            <td>
-                                                                                <p class="data-value">Périodicité</p>
-                                                                                <p class="data-detail">Mensuelle</p>
-                                                                            </td>
-                                                                            <td>
-                                                                                <p class="data-value">Terme des loyers</p>
-                                                                                <p class="data-detail">À échoir</p>
-                                                                            </td>
-                                                                            <td>
-                                                                                <p class="data-value">Mode de réglement</p>
-                                                                                <p class="data-detail">Prélèvement automatique</p>
+                                                                            <td class="address-col">
+                                                                                <p class="data-value">Date de naissance</p>
+                                                                                <p class="data-detail" id="DateNaissanceAuteur"></p>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td class="icon-col">
-                                                                                <span class="icon-wrapper"><i class="fa fa-eur" aria-hidden="true"></i></span>
+                                                                            <td class="location-col" style="font-size: 45px; color: #6d55a8;">
                                                                             </td>
-                                                                            <td>
-                                                                                <p class="data-value">Montant total à financer&nbsp;: <span class="nowrap">10 000 € H.T.</span></p>
+                                                                            <td class="address-col">
+                                                                                <p class="data-value">Date d'inscription</p>
+                                                                                <p class="data-detail" id="DateInscriptionAuteur"></p>
                                                                             </td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                        </tr>
-                                                                        <tr class="sub-row">
-                                                                            <td class="icon-col"></td>
-                                                                            <td>
-                                                                                <p class="data-value">Durée sélectionnée</p>
-                                                                                <p class="data-detail">48 mois</p>
+                                                                            <td class="address-col">
+                                                                                <p class="data-value">Nombre de fiche déposées</p>
+                                                                                <p class="data-detail" id="NombreFicheUploadAuteur"></p>
                                                                             </td>
-                                                                            <td colspan="2">
-                                                                                <p class="data-value">Loyer total&nbsp;: <span class="nowrap">350 € H.T.</span></p>
-                                                                                <p class="data-detail montant">Montant VFNA&nbsp;: <span class="nowrap">40 € H.T.</span></p>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr class="sub-row">
-                                                                            <td class="icon-col"></td>
-                                                                            <td>
-                                                                                <p class="data-value">Durée sélectionnée</p>
-                                                                                <p class="data-detail">60 mois</p>
-                                                                            </td>
-                                                                            <td colspan="2">
-                                                                                <p class="data-value">Loyer total&nbsp;: <span class="nowrap">320 € H.T.</span></p>
-                                                                                <p class="data-detail montant">Montant VFNA&nbsp;: <span class="nowrap">40 € H.T.</span></p>
+                                                                            <td class="address-col">
+                                                                                <p class="data-value">Nombre de téléchargement total</p>
+                                                                                <p class="data-detail" id="NombreTelechargementAuteur"></p>
                                                                             </td>
                                                                         </tr>
                                                                     </tbody>
@@ -257,38 +208,16 @@
                                                         </div>
                                                     </section>
                                                 </div>
-                                                <aside class="col-lg-3 col-md-4 col-sm-4 col-xs-12 sidebar">
-                                                    <div class="block block-infos">
-                                                        <h2 class="title">Informations complémentaires</h2>
-                                                        <dl class="list-infos">
-                                                            <dt class="info-title">Montant encours externe intégré</dt>
-                                                            <dd class="info-detail nowrap">1 200,00 € H.T. (10%)</dd>
-                                                            <dt class="info-title">Montant encours Leasecom intégré</dt>
-                                                            <dd class="info-detail nowrap">800,00 € H.T. (7%)</dd>
-                                                            <dt class="info-title">Montant maximal des services d'installation</dt>
-                                                            <dd class="info-detail nowrap">250,00 € H.T. (4%)</dd>
-                                                            <dt class="info-title">Editeurs On Premises</dt>
-                                                            <dd class="info-detail">
-                                                                Futurosoft<br>
-                                                                Application logiciel pour ingénierie
-                                                            </dd>
-                                                            <dt class="info-title">Editeurs Saas</dt>
-                                                            <dd class="info-detail">
-                                                                <p>Adobe Systems France SAS</p>
-                                                                <p class="precision"><em>Le montant des logiciels en mode Saas est inférieur à 30% du montant total à financer</em></p>
-                                                            </dd>
-                                                            <dt class="info-title">Montant rachat Partenaire fin de contrat</dt>
-                                                            <dd class="info-detail nowrap">2 400,00 € H.T. (20%)</dd>
-                                                            <dt class="info-title">Commissionnement apport affaire</dt>
-                                                            <dd class="info-detail nowrap">800,00 € H.T. (7%)</dd>
-                                                        </dl>
-                                                    </div>
-                                                </aside>
                                             </div>
                                         </div>
                                     </div>
                                     <div id="pdfAuthor" class="tab-pane">
-                                        <div id="contentPDF"></div>
+                                        <div id="contentPDF">
+                                            <form id="forumPostForm" method="post" action="/FicheCours/setDescription">
+                                                <div id="htmlEditor"></div>
+                                                <input type="button" onclick="postHtmlEditorContent();" value="Save" />
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

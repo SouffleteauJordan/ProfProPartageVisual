@@ -234,16 +234,15 @@ $('div.PDFViewerButton').on('click', function (e) {
             var année = new Date(parseInt(user.DateInscription.replace("/Date(", "").replace(")/", ""), 10)).getFullYear();
             var DateInscription = jour + "/" + mois + "/" + année;
 
-            $("#contentPDF").append("<label> Pseudo : </label><p>" + user.UserName + " </p>");
-            $("#contentPDF").append("<label> Nom : </label><p>" + user.Nom + " </p>");
-            $("#contentPDF").append("<label> Prenom : </label><p>" + user.Prenom + " </p>");
-            $("#contentPDF").append("<label> DateNaissance : </label><p>" + DateNaissance + " </p>");
-            $("#contentPDF").append("<label> DateInscription : </label><p>" + DateInscription + " </p>");
-            $("#contentPDF").append("<label> NombreFicheUpload : </label><p>" + user.NombreFicheUpload + " </p>");
-            $("#contentPDF").append("<label> Experience : </label><p>" + user.Experience + " </p>");
-            $("#contentPDF").append("<label> Level : </label><p>" + user.Level + " </p>");
-            $("#contentPDF").append("<label> Titre : </label><p>" + user.Titre + " </p>");
-            $("#contentPDF").append("<label> NombreTelechargement : </label><p>" + user.NombreTelechargement + " </p>");
+            $("#PseudoAuteur").append(user.UserName);
+            $("#NomAuteur").append(user.Nom);
+            $("#PrenomAuteur").append(user.Prenom);
+            $("#DateNaissanceAuteur").append(DateNaissance);
+            $("#DateInscriptionAuteur").append(DateInscription);
+            $("#NombreFicheUploadAuteur").append(user.NombreFicheUpload);
+            $("#LevelAuteur").append(user.Level + ' (' + user.Experience + ') ' +  '- ' + user.Titre);
+            $("#NombreTelechargementAuteur").append(user.NombreTelechargement);
+            
         },
         failure: function (response) {
             console.log(response.responseText);
@@ -264,8 +263,8 @@ $('div.PDFViewerButton').on('click', function (e) {
     var niveau = $(this).attr('niveau');
     var matiere = $(this).attr('matiere');
     var theme = $(this).attr('theme');
-    var temperature = $(this).attr('temperature');
-    var description = $(this).attr('description');
+    var temperature = $(this).attr('Temperature');
+    var description = $(this).attr('Description');
     var DateAjout = $(this).attr('DateAjout');
     var NombreTelechargement = $(this).attr('NombreTelechargement');
     var NombreVote = $(this).attr('NombreVote');
@@ -302,20 +301,90 @@ $('div.PDFViewerButton').on('click', function (e) {
     }, 1000)
     $("#NbrDDL").append(NombreTelechargement + " fois");
     $("#dateAjout").append(DateAjout);
+    $("#NiveauFiche").append(niveau);
+    $("#MatiereFiche").append(matiere);
+    $("#ThemeFiche").append(theme);
+    $("#idUserFiche").append(UserId);
+    $("#AuteurFiche").append(UserName);
 
-    $("#dataPDF").append("<label> Niveau : </label><p>" + niveau + " </p>");
-    $("#dataPDF").append("<label> Matiere : </label><p>" + matiere + " </p>");
-    $("#dataPDF").append("<label> Theme : </label><p>" + theme + " </p>");
-    $("#dataPDF").append("<label> Auteur : </label><p>" + UserName + " </p>");
-    $("#dataPDF").append("<label> Auteur identifiant : </label><p>" + UserId + " </p>");
+
+    $("#Description").html(unescape(description)).text();
+
+    var contentText = unescape(description);
+    
+    //$("#contentPDF").append("<div id='htmlEditor'> </div>");
+    $("#htmlEditor").igHtmlEditor({
+        height: 400,
+        width: "100%",
+        customToolbars: [
+            {
+                name: "DeleteContentButton",
+                collapseButtonIcon: "ui-igbutton-collapse",
+                expandButtonIcon: "ui-igbutton-expand",
+                items: [{
+                    name: "appendDeleteButton",
+                    type: "button",
+                    handler: appendDeleteButton,
+                    scope: this,
+                    props: {
+                        isImage: {
+                            value: false,
+                            action: '_isSelectedAction'
+                        },
+                        imageButtonTooltip: {
+                            value: "Clear all content",
+                            action: '_tooltipAction'
+                        },
+                        imageButtonIcon: {
+                            value: "ui-icon-clear-content",
+                            action: '_buttonIconAction'
+                        }
+                    }
+                }]
+            }]
+    });
+
+    $("#htmlEditor").igHtmlEditor("setContent", contentText, "html");
+    $("#htmlEditor_editor").height(250);
+    changeToolbarsPosition();
+
+    
+    $("#htmlEditor_editor body").on('change', function () {
+        console.log("gogo");
+    });
 
 });
+
+function postHtmlEditorContent() {
+    // serialize the form
+    var data = $("#htmlEditor").igHtmlEditor("getContent", "html");
+    data = escape(data);
+    // post the form as an ajax call
+    $.ajax({
+        type: "POST",
+        url: "/FicheCours/setDescription",
+        data: '{Description: "' + data + '", idFiche: "' + idF + '"}',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    });
+}
+
+
+function appendDeleteButton(ui) {
+    $("#htmlEditor").igHtmlEditor("setContent", "", "html");
+}
+
+function changeToolbarsPosition() {
+    $($("#htmlEditor").find("span[id*='insertObjectToolbar'].ui-igtoolbar")).insertAfter($("#htmlEditor").find("span[id*='textToolbar'].ui-igtoolbar"));
+}
 
 $('document').ready(function () {
     var height = $(window).height() - 200;
     $("#PDFViewer iframe").height(height - 155);
     $("#PDFViewer #contentPDF").height(height - 155);
     $("#PDFViewer #dataPDF").height(height - 155);
+    $("#PDFViewer #contentPDF").width("100%");
+    $("#PDFViewer #dataPDF").width("100%");
     $("#PDFModal").height(height + 100);
 });
 

@@ -70,6 +70,24 @@ namespace AppProfProPartage.Controllers
             return View(vm);
         }
 
+        [System.Web.Mvc.Authorize]
+        [HttpPost]
+        public void setDescription(updateDescription jsonUpdate)
+        {
+
+            
+            FicheCoursBll FicheCoursBll = _businessLocator.FicheCoursBll;
+            FicheCours Fiche = FicheCoursBll.GetFicheCoursByCriteria(o=> o.Id == jsonUpdate.idFiche).First();
+            Fiche.Description = jsonUpdate.Description.Replace("source=", "");
+            FicheCoursBll.UpdateFicheCours(Fiche);
+        }
+
+        public class updateDescription
+        {
+            public string Description { get; set; }
+            public int idFiche { get; set; }
+        }
+
         //
         // GET: /Bookmark/Create
         [System.Web.Mvc.Authorize(Roles="admin")]
@@ -130,11 +148,7 @@ namespace AppProfProPartage.Controllers
                     {
                         vmBookmark.FicheCours_inside.UserId = User.Identity.GetUserId();
                         await _businessLocator.FicheCoursBll.AddFicheCoursAsync(vmBookmark.FicheCours_inside);
-                    
-                        var context = GlobalHost.ConnectionManager.GetHubContext<MyHub>();
-
-                        context.Clients.All.refreshJS();
-                    
+                                        
                         return RedirectToAction("Index");
                     }
                     else
