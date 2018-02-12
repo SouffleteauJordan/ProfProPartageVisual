@@ -8,7 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
-using ProfProPartage.ViewModel.Model;
+using ProfProPartage.Model;
 using ProfProPartage.ViewModel;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Practices.Unity;
@@ -163,7 +163,7 @@ namespace AppProfProPartage.ViewModel.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Level = 0, Titre = ProfProPartage.Function.Titre.Stagiaire.ToString(), Experience = 0, DateInscription = DateTime.Now, NombreFicheUpload = 0, NombreTelechargement = 0};
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Level = 0, Titre = ProfProPartage.Libs.Titre.Stagiaire.ToString(), Experience = 0, DateInscription = DateTime.Now, NombreFicheUpload = 0, NombreTelechargement = 0};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

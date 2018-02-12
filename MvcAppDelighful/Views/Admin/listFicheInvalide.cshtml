@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProfProPartage.ViewModel.ViewModelFicheCoursInvalide>
+@model IEnumerable<ProfProPartage.ViewModel.ViewModelFicheCoursInvalide>
 @using ProfProPartage.Helper
 
 @foreach (var item in Model)
@@ -14,7 +14,7 @@
                 <div class="category">@Html.DisplayFor(modelItem => item.Niveau)</div>
                 <h1 class="title">@Html.Replace(item.Matiere, "_", " ")</h1>
                 <h2 class="sub_title">@Html.Replace(item.Theme, "_", " ")</h2>
-                <p class="description">@Html.DisplayFor(modelItem => item.Description)</p>
+                <p class="typeFiche"></p>
                 <div class="post-meta"><span class="timestamp"><i class="fa fa-clock-o"></i> 6 mins ago</span><span class="comments"><i class="fa fa-comments"></i><a href="#"> 39 comments</a></span><span class="author"><i class="fa fa-user"></i>@Html.DisplayFor(modelItem => item.User.UserName)</span></div>
             </div>
         </div>

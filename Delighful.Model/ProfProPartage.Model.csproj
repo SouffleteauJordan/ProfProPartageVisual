@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ProfProPartage.Model</RootNamespace>
     <AssemblyName>ProfProPartage.Model</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -61,7 +61,7 @@
   <ItemGroup>
     <Compile Include="FichesCoursInvalide.cs" />
     <Compile Include="FicheCours.cs" />
-    <Compile Include="IdentityModel.cs" />
+    <Compile Include="Identity.cs" />
     <Compile Include="Keyword.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -70,9 +70,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ProfProPartage.Function\ProfProPartage.Function.csproj">
-      <Project>{f53789e8-c1e6-4efa-8d17-69b3f44c33e1}</Project>
-      <Name>ProfProPartage.Function</Name>
+    <ProjectReference Include="..\Libs\ProfProPartage.Libs.csproj">
+      <Project>{C7DD601D-9358-418B-B2D4-4A2FD25DDC9C}</Project>
+      <Name>ProfProPartage.Libs</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

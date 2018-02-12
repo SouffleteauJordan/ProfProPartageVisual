@@ -18,7 +18,6 @@ using System.Drawing.Imaging;
 using Spire.Pdf;
 using AppProfProPartage.ViewModel;
 using Microsoft.AspNet.Identity.Owin;
-using ProfProPartage.ViewModel.Model;
 
 namespace AppProfProPartage.Controllers
 {
@@ -30,15 +29,15 @@ namespace AppProfProPartage.Controllers
         {
             _businessLocator = ((BusinessLocator)System.Web.HttpContext.Current.Items["BusinessLocator"]);
         }
-        
+
         public async Task<ActionResult> Index()
         {
 
             FicheCoursBll FicheCoursBll = _businessLocator.FicheCoursBll;
             List<FicheCours> listBkms = await FicheCoursBll.GetAllFicheCoursAsync();
-            
+
             ViewModelFicheCoursList vm = new ViewModelFicheCoursList(listBkms);
-            
+
             return View(vm);
         }
 
@@ -47,15 +46,15 @@ namespace AppProfProPartage.Controllers
         {
 
             string[] list_selected_Keywords = collection["hf_Keywords_selected"].Split('|');
-            
+
             return PartialView("PVListBookmarks", new ViewModelFicheCoursList(await _businessLocator.FicheCoursBll.GetFicheCoursByKeywordsAsync(list_selected_Keywords)).ListFic);
         }
-        
+
         public ActionResult Details(int id)
         {
             return View();
         }
-        
+
         [System.Web.Mvc.Authorize]
         public async Task<ActionResult> MesFiches()
         {
@@ -63,10 +62,10 @@ namespace AppProfProPartage.Controllers
 
             FicheCoursBll FicheCoursBll = _businessLocator.FicheCoursBll;
             listFiche = FicheCoursBll.GetMesFicheCours(User.Identity.GetUserId());
-            
+
 
             ViewModelFicheCoursList vm = new ViewModelFicheCoursList(listFiche);
-            
+
             return View(vm);
         }
 
@@ -74,10 +73,8 @@ namespace AppProfProPartage.Controllers
         [HttpPost]
         public void setDescription(updateDescription jsonUpdate)
         {
-
-            
             FicheCoursBll FicheCoursBll = _businessLocator.FicheCoursBll;
-            FicheCours Fiche = FicheCoursBll.GetFicheCoursByCriteria(o=> o.Id == jsonUpdate.idFiche).First();
+            FicheCours Fiche = FicheCoursBll.GetFicheCoursByCriteria(o => o.Id == jsonUpdate.idFiche).First();
             Fiche.Description = jsonUpdate.Description.Replace("source=", "");
             FicheCoursBll.UpdateFicheCours(Fiche);
         }
@@ -90,7 +87,7 @@ namespace AppProfProPartage.Controllers
 
         //
         // GET: /Bookmark/Create
-        [System.Web.Mvc.Authorize(Roles="admin")]
+        [System.Web.Mvc.Authorize(Roles = "admin")]
         public ActionResult Create()
         {
             return View();
@@ -117,7 +114,8 @@ namespace AppProfProPartage.Controllers
                 string niveau = HttpContext.Request.Form["niveau"];
                 string matiere = HttpContext.Request.Form["matiere"];
                 string theme = HttpContext.Request.Form["theme"];
-                string description = HttpContext.Request.Form["description"];
+                //string typeFiche = HttpContext.Request.Form["typeFiche"];
+                string description = "Votre description ici...";
                 doc = new Files("/Files/" + filename.Replace(".pdf", "").Replace(" ", "_").Replace("-", "_"), "/Files/" + filename.Replace(".pdf", "").Replace(" ", "_").Replace("-", "_") + ".jpg", filename, Request.Files[upload].ContentLength, "/Files/" + filename.Replace(".pdf", "").Replace(" ", "_").Replace("-", "_"), "/Files/" + filename.Replace(".pdf", "").Replace(" ", "_").Replace("-", "_"), niveau, matiere, theme, description);
 
                 PdfDocument pdf_doc = new PdfDocument();
@@ -127,7 +125,7 @@ namespace AppProfProPartage.Controllers
                 fileList.Add(doc);
 
                 FicheCoursInvalideBll FicheCoursInvalideBll = _businessLocator.FicheCoursInvalideBll;
-                FicheCoursInvalideBll.AddFicheCoursInvalideAsync(new FicheCoursInvalide() {Description = description, Titre = doc.name, Niveau = doc.niveau, Matiere = doc.matiere, Theme = doc.theme, UrlPDF = "/Files/" + filename.Replace(" ", "_").Replace("-", "_"), UrlJPG = "/Files/"+ filename.Replace(" ", "_").Replace("-", "_").Replace(".pdf", "") + ".jpg", Temperature = 0, UserId=User.Identity.GetUserId(), DateAjout = DateTime.Now, NombreTelechargement = 0});
+                FicheCoursInvalideBll.AddFicheCoursInvalideAsync(new FicheCoursInvalide() { Description = description, Titre = doc.name, Niveau = doc.niveau, Matiere = doc.matiere, Theme = doc.theme, UrlPDF = "/Files/" + filename.Replace(" ", "_").Replace("-", "_"), UrlJPG = "/Files/" + filename.Replace(" ", "_").Replace("-", "_").Replace(".pdf", "") + ".jpg", Temperature = 0, UserId = User.Identity.GetUserId(), DateAjout = DateTime.Now, NombreTelechargement = 0 });
             }
             listFiles list = new listFiles(fileList);
             JsonResult res = Json(list);
@@ -139,85 +137,79 @@ namespace AppProfProPartage.Controllers
         //
         // POST: /Bookmark/Create
         [HttpPost]
-            [System.Web.Mvc.Authorize(Roles = "admin")]
-            public async Task<ActionResult> Create(ViewModelFicheCours vmBookmark)
+        [System.Web.Mvc.Authorize(Roles = "admin")]
+        public async Task<ActionResult> Create(ViewModelFicheCours vmBookmark)
+        {
+            try
             {
-                try
+                if (ModelState.IsValid)
                 {
-                    if (ModelState.IsValid)
-                    {
-                        vmBookmark.FicheCours_inside.UserId = User.Identity.GetUserId();
-                        await _businessLocator.FicheCoursBll.AddFicheCoursAsync(vmBookmark.FicheCours_inside);
-                                        
-                        return RedirectToAction("Index");
-                    }
-                    else
-                    {
-                        return View(vmBookmark);
-                    }
+                    vmBookmark.FicheCours_inside.UserId = User.Identity.GetUserId();
+                    await _businessLocator.FicheCoursBll.AddFicheCoursAsync(vmBookmark.FicheCours_inside);
+
+                    return RedirectToAction("Index");
                 }
-                catch
+                else
                 {
                     return View(vmBookmark);
                 }
             }
-
-            public async Task<ActionResult> Obtain5LastBookmarks()
+            catch
             {
-                Thread.Sleep(1000); //permet de ralentir l'execution de la méthode afin de voir l'appel asynchrone et l'image du chargement s'afficher
-                return PartialView("PVListBookmarks",
-                    new ViewModelFicheCoursList(await _businessLocator.FicheCoursBll.GetAllFicheCoursAsync()).ListFic.OrderByDescending(x => x.Id).Take(5));
-            }
-
-   
-            //
-            // GET: /Bookmark/Edit/5
-            public ActionResult Edit(int id)
-            {
-                return View();
-            }
-
-            //
-            // POST: /Bookmark/Edit/5
-            [HttpPost]
-            public ActionResult Edit(int id, FormCollection collection)
-            {
-                try
-                {
-                    // TODO: Add update logic here
-
-                    return RedirectToAction("Index");
-                }
-                catch
-                {
-                    return View();
-                }
-            }
-
-            //
-            // GET: /Bookmark/Delete/5
-            public ActionResult Delete(int id)
-            {
-                return View();
-            }
-
-            //
-            // POST: /Bookmark/Delete/5
-            [HttpPost]
-            public ActionResult Delete(int id, FormCollection collection)
-            {
-                try
-                {
-                    // TODO: Add delete logic here
-
-                    return RedirectToAction("Index");
-                }
-                catch
-                {
-                    return View();
-                }
+                return View(vmBookmark);
             }
         }
+
+        public async Task<ActionResult> Obtain5LastBookmarks()
+        {
+            Thread.Sleep(1000); //permet de ralentir l'execution de la méthode afin de voir l'appel asynchrone et l'image du chargement s'afficher
+            return PartialView("PVListBookmarks",
+                new ViewModelFicheCoursList(await _businessLocator.FicheCoursBll.GetAllFicheCoursAsync()).ListFic.OrderByDescending(x => x.Id).Take(5));
+        }
+
+
+        //
+        // GET: /Bookmark/Edit/5
+        public ActionResult Edit(int id)
+        {
+            FicheCoursBll FicheCoursBll = _businessLocator.FicheCoursBll;
+            FicheCours Fiche = FicheCoursBll.GetFicheCoursByCriteria(o => o.Id == id).First();
+            FicheCoursBll.UpdateFicheCours(Fiche);
+            return View();
+        }
+
+        //
+        // POST: /Bookmark/Edit/5
+        [HttpPost]
+        public ActionResult Edit(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add update logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        
+        [HttpPost]
+        public int Delete(int id)
+        {
+            FicheCoursBll FicheCoursBll = _businessLocator.FicheCoursBll;
+            FicheCoursBll.DeleteFicheCours(id);
+            return id;
+        }
+        
+        [HttpPost]
+        public int Signaler(int id)
+        {
+            return id;
+        }
+        
+    }
     
     class listFiles
     {

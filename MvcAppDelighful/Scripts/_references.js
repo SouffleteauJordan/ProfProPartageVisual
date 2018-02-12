@@ -1,4 +1,5 @@
-﻿/// <autosync enabled="true" />
+﻿/// <reference path="jquery-ui-1.12.1.js" />
+/// <autosync enabled="true" />
 /// <reference path="bootstrap.js" />
 /// <reference path="canvas-to-blob.min.js" />
 /// <reference path="custom/autocompletescript.js" />

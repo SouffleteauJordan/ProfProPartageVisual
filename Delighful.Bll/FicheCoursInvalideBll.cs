@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Linq.Expressions;
+using System.IO;
 
 namespace ProfProPartage.Bll
 {
@@ -22,8 +23,15 @@ namespace ProfProPartage.Bll
 
         public List<FicheCoursInvalide> GetAllFicheCoursInvalide()
         {
-            if(context.FichesInvalide.Count() != 0)
-                return context.FichesInvalide.ToList();
+            if(context.FichesInvalide.Count() != 0) {
+
+                List<FicheCoursInvalide> listFicheInvalide = context.FichesInvalide.ToList();
+                foreach (var item in listFicheInvalide)
+                {
+                    item.User = context.Users.Where(o => o.Id == item.UserId).First();
+                }
+                return listFicheInvalide;
+            }
             return null;
         }
 
@@ -126,16 +134,10 @@ namespace ProfProPartage.Bll
                 {
 
                     var ficI = context.FichesInvalide.Where(x => x.Id == id).First();
-
-                    /*
-                    var keywords = ficI.Keywords.ToList();
-
-                    context.Entry(keywords[0]).State = EntityState.Deleted;
-                    context.Entry(keywords[1]).State = EntityState.Deleted;
-                    context.Entry(keywords[2]).State = EntityState.Deleted;
-                    context.SaveChanges();
-                    */
-
+                    if (File.Exists(ficI.UrlJPG))
+                        File.Delete(ficI.UrlJPG);
+                    if (File.Exists(ficI.UrlPDF))
+                        File.Delete(ficI.UrlPDF);
                     context.Entry(ficI).State = EntityState.Deleted;
 
                     context.SaveChanges();

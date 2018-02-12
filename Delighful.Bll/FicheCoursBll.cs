@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Linq.Expressions;
+using System.IO;
 
 namespace ProfProPartage.Bll
 {
@@ -111,17 +112,11 @@ namespace ProfProPartage.Bll
                 {
 
                     var fic = context.Fiches.Where(x => x.Id == id).First();
-
-                    var keywords = fic.Keywords.ToList();
-
-                    context.Entry(keywords[0]).State = EntityState.Deleted;
-                    context.Entry(keywords[1]).State = EntityState.Deleted;
-                    context.Entry(keywords[2]).State = EntityState.Deleted;
-
-                    context.SaveChanges();
-
                     context.Entry(fic).State = EntityState.Deleted;
-
+                    if (File.Exists(fic.UrlJPG))
+                        File.Delete(fic.UrlJPG);
+                    if (File.Exists(fic.UrlPDF))
+                        File.Delete(fic.UrlPDF);
                     context.SaveChanges();
                 }
                 catch (Exception e)

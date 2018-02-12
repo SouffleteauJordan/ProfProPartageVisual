@@ -1385,7 +1385,6 @@ body .ui-state-active.ui-state-hover .ui-icon, body .ui-state-hover.ui-state-hig
 
 #PDFDialog .modal-header {
     padding: 15px;
-    border-bottom: 1px solid var(--dark-color);
     background-color: white;
     color: var(--dark-color);
     padding-bottom: 20px;

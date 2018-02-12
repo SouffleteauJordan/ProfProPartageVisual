@@ -1,0 +1,103 @@
+@{
+    ViewData["Title"] = "Mon profil";
+}
+@model ProfProPartage.Model.ApplicationUser
+
+
+<div id="title" class="main-title"><h1><strong style="color:#E95325;">M</strong> on profil - Mes informations personnelles</h1></div>
+<div class="block-breadcrumb">
+    <div class="horizontal-scroll">
+        <ul class="breadcrumb">
+            <li><a href="/Home/Dashboard"><i class="icon ic-breadcrumb-dashboard"></i>Tableau de bord</a></li>
+            <li class="active">Mon profil - Mes informations personnelles</li>
+        </ul>
+    </div>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal">
+    <h4>Mon profil</h4>
+    <hr />
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Pseudo, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Pseudo)
+            @Html.ValidationMessageFor(model => model.Pseudo)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.DateNaissance, new { @class = "control-label col-md-2 date-picker" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DateNaissance)
+            @Html.ValidationMessageFor(model => model.DateNaissance)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.DateDebutCarriere, new { @class = "control-label col-md-2 date-picker" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DateDebutCarriere)
+            @Html.ValidationMessageFor(model => model.DateDebutCarriere)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Departement, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Departement)
+            @Html.ValidationMessageFor(model => model.Departement)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Classe, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Classe)
+            @Html.ValidationMessageFor(model => model.Classe)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Titre, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.Titre)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Level, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.Level)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Experience, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.Experience)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.DateInscription, new { @class = "control-label col-md-2 date-picker" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.DateInscription)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Sauvegarder" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<script>
+    $('.date-picker').datepicker();
+</script>

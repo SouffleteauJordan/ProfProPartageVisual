@@ -10,8 +10,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using ProfProPartage.ViewModel.Model;
 using ProfProPartage.Dal;
+using ProfProPartage.Model;
 
 namespace AppProfProPartage.ViewModel
 {

@@ -1,12 +1,13 @@
-﻿@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    <li class="nav-top-item">
-        <a class="nav-top-link" href="Manage/Index">
-            <span class="visible-desktop">Bonjour @User.Identity.GetUserName()</span>
-            <i class="icon ic-account"></i><span class="notification"></span>
-        </a>
-    </li>
+<li class="nav-top-item">
+    
+    <a class="nav-top-link" href="@Url.Action("MonProfil", "Home", new { id = User.Identity.GetUserId() })">
+        <span class="visible-desktop">Bonjour @User.Identity.GetUserName()</span>
+        <i class="icon ic-account"></i><span class="notification"></span>
+    </a>
+</li>
     <li class="nav-top-item">
         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "nav-top-link" }))
         {

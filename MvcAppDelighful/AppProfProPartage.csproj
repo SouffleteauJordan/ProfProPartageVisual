@@ -24,6 +24,8 @@
     <TargetFrameworkProfile />
     <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
     <Use64BitIISExpress />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -130,6 +132,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
@@ -137,9 +140,34 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Linq" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime">
+      <HintPath>..\packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web" />
@@ -192,8 +220,6 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http">
     </Reference>
     <Reference Include="System.Net.Http.WebRequest">
     </Reference>
@@ -264,6 +290,18 @@
     <Compile Include="Migrations\201801071507348_newOne.cs" />
     <Compile Include="Migrations\201801071507348_newOne.Designer.cs">
       <DependentUpon>201801071507348_newOne.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802101807242_InitialCreate.cs" />
+    <Compile Include="Migrations\201802101807242_InitialCreate.Designer.cs">
+      <DependentUpon>201802101807242_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802101832339_InitialCreate2.cs" />
+    <Compile Include="Migrations\201802101832339_InitialCreate2.Designer.cs">
+      <DependentUpon>201802101832339_InitialCreate2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802120826369_ok.cs" />
+    <Compile Include="Migrations\201802120826369_ok.Designer.cs">
+      <DependentUpon>201802120826369_ok.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -421,6 +459,9 @@
     <Content Include="Content\dragdrop.css" />
     <Content Include="Content\dropzone.css" />
     <Content Include="Content\fonts\bootstrap\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\froala_editor.min.css" />
+    <Content Include="Content\froala_editor.pkgd.min.css" />
+    <Content Include="Content\froala_style.min.css" />
     <Content Include="Content\img\arrow-orange.png" />
     <Content Include="Content\img\bg-club.png" />
     <Content Include="Content\img\bg-financial-health.png" />
@@ -446,7 +487,59 @@
     <Content Include="Content\jquery.fileupload.css" />
     <Content Include="Content\layout.css" />
     <Content Include="Content\site.min.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
+    <Content Include="Files\000000205499346_46597200.jpg" />
+    <Content Include="Files\1_Livret_des_sons_2_.jpg" />
+    <Content Include="Files\cerfa_13973-03.jpg" />
+    <Content Include="Files\CV - Jordan Souffleteau.jpg" />
+    <Content Include="Files\CV SOUFFLETEAU Jordan.jpg" />
+    <Content Include="Files\CV_SOUFFLETEAU_Jordan.jpg" />
+    <Content Include="Files\CV___Jordan_Souffleteau.jpg" />
+    <Content Include="Files\LDM - Souffleteau Jordan.jpg" />
+    <Content Include="Files\LDM Souffleteau Jordan.jpg" />
+    <Content Include="Files\LDM_Souffleteau_Jordan.jpg" />
+    <Content Include="Files\Mémoire_Valtech_AEM___Jordan_Souffleteau.jpg" />
     <Content Include="Files\Planning.jpg" />
     <Content Include="Files\rapport.jpg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -472,6 +565,10 @@
     <Content Include="Images\ui-icons_f08000_256x240.png" />
     <Content Include="Images\update.png" />
     <Content Include="Images\valide.png" />
+    <Content Include="Scripts\jquery-ui-1.12.1.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\libs\froala_editor.min.js" />
+    <Content Include="Scripts\libs\froala_editor.pkgd.min.js" />
     <Content Include="Scripts\thermostat.js" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -517,10 +614,22 @@
     <Content Include="Views\Home\Help.cshtml" />
     <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\FicheCours\listMesFiches.cshtml" />
+    <Content Include="Files\000000205499346_46597200.pdf" />
+    <Content Include="Files\cerfa_13973-03.pdf" />
+    <Content Include="Files\CV - Jordan Souffleteau.pdf" />
+    <Content Include="Files\CV SOUFFLETEAU Jordan.pdf" />
+    <Content Include="Files\CV_Jordan_Souffleteau.pdf" />
+    <Content Include="Files\CV_SOUFFLETEAU_Jordan.pdf" />
+    <Content Include="Files\CV___Jordan_Souffleteau.pdf" />
+    <Content Include="Files\LDM - Souffleteau Jordan.pdf" />
+    <Content Include="Files\LDM Souffleteau Jordan.pdf" />
+    <Content Include="Files\Les_services_en_ligne_de_l%27Assurance_retraite___Calculer_mon_âge_de_départ_à_la_retraite.pdf" />
+    <Content Include="Files\Mémoire_Valtech_AEM___Jordan_Souffleteau.pdf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="Views\Home\MonProfil.cshtml" />
     <None Include="_bin_deployableAssemblies\amd64\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\amd64\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\amd64\sqlceme40.dll" />
@@ -741,9 +850,9 @@
       <Project>{04582d3f-d153-41c1-bae5-d91c723dfec3}</Project>
       <Name>ProfProPartage.ViewModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ProfProPartage.Function\ProfProPartage.Function.csproj">
-      <Project>{f53789e8-c1e6-4efa-8d17-69b3f44c33e1}</Project>
-      <Name>ProfProPartage.Function</Name>
+    <ProjectReference Include="..\Libs\ProfProPartage.Libs.csproj">
+      <Project>{c7dd601d-9358-418b-b2d4-4a2fd25ddc9c}</Project>
+      <Name>ProfProPartage.Libs</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -758,6 +867,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801071507348_newOne.resx">
       <DependentUpon>201801071507348_newOne.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802101807242_InitialCreate.resx">
+      <DependentUpon>201802101807242_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802101832339_InitialCreate2.resx">
+      <DependentUpon>201802101832339_InitialCreate2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802120826369_ok.resx">
+      <DependentUpon>201802120826369_ok.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -790,6 +908,13 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Ce projet fait référence à des packages NuGet qui sont manquants sur cet ordinateur. Utilisez l'option de restauration des packages NuGet pour les télécharger. Pour plus d'informations, consultez http://go.microsoft.com/fwlink/?LinkID=322105. Le fichier manquant est : {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

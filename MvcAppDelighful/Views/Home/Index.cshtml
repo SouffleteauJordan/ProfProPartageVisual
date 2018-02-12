@@ -221,8 +221,13 @@
                         </div>
                     </div>
                     <div id="footerPDF">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        <a id="btnDownload" class="btn btn-primary" download="" href="/Files/eval_CE2_conj_present.pdf">Download</a>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                        @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+                        {
+                          <button onclick="javascript:supprimerFiche();" type="button" class="btn btn-info">Supprimer</button>
+                        }
+                        <button onclick="javascript:signalerFiche();" type="button" class="btn btn-warning">Signaler</button>
+                        <a id="btnDownload" class="btn btn-primary" download="" href="/Files/eval_CE2_conj_present.pdf">Télécharger</a>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->

@@ -2,7 +2,7 @@
 using ProfProPartage.Bll;
 using ProfProPartage.Model;
 using ProfProPartage.ViewModel;
-using ProfProPartage.ViewModel.Model;
+using ProfProPartage.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,6 +46,13 @@ namespace AppProfProPartage.Controllers
         public ActionResult Help()
         {
             return View();
+        }
+
+        public ActionResult MonProfil(string id)
+        {
+            UserBll UserBll = _businessLocator.UsersBll;
+            ApplicationUser user = UserBll.GetUsersByCriteria(x => x.Id == id);
+            return View(user);
         }
 
         public ActionResult Dashboard()

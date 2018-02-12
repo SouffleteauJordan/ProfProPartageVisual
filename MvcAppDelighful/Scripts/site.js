@@ -3,15 +3,6 @@ var niv = "all";
 var mat = "all";
 var the = "all";
 
-var Matiere_List2 = [
-    ["Francais", "Maths", "Anglais", "Decouverte du monde", "Sport", "Instruction civique et morale", "Pratique et histoire des arts", "Jeux educatifs", "Outils", "Evenements de l'annee"],
-    ["Francais", "Maths", "Anglais", "Decouverte du monde", "Sport", "Instruction civique et morale", "Pratique et histoire des arts", "Jeux educatifs", "Outils", "Evenements de l'annee"],
-    ["Francais", "Maths", "Anglais", "Geographie", "Sport", "Instruction civique et morale", "Pratique et histoire des arts", "Sciences", "Histoire", "Jeux educatifs", "Evenements de l'annee", "Outils"],
-    ["Francais", "Maths", "Anglais", "Geographie", "Sport", "Instruction civique et morale", "Pratique et histoire des arts", "Sciences", "Histoire", "Jeux educatifs", "Evenements de l'annee", "Outils"],
-    ["Francais", "Maths", "Anglais", "Geographie", "Sport", "Instruction civique et morale", "Pratique et histoire des arts", "Sciences", "Histoire", "Jeux educatifs", "Evenements de l'annee", "Outils"],
-];
-
-
 
 var Niveau_List = [
     { key: 'CP', data: 'CP' },
@@ -140,76 +131,6 @@ var Theme_List = [
 ];
 
 
-
-var Theme_List_CP_CE1 = [
-    ["Lecture", "Grammaire", "Conjugaison", "Orthographe", "Vocabulaire", "Language oral", "Ecriture", "Redaction", "Devenir lecteur", "Litterature de jeunesse", "Outils : Francais"],
-    ["Numeration", "Calculs", "Geometrie", "Grandeurs et mesures", "Organisation des donnees", "Outils : Mathematiques"],
-    ["Langue anglaise", "Images / flash cards", "Civilisation anglaise", "Themes du quotidien", "Outils : anglais"],
-    ["Le temps", "Le developpement durable", "L'espace", "Le vivant (anatomie)", "Le vivant (etre vivants)", "La matiere", "Objets", "TIC", "Outils : Decouverte du monde"],
-    ["Realiser une performance", "Adapter ses deplacements", "Cooperer et s'opposer", "Actions esthetiques", "Outils : EPS"],
-    ["Principes de la morale", "Regles de vie collectives", "Education a la sante", "Education a la securite", "Veme Republique", "Union Europeenne", "Commerations et fetes", "Outils : instruction civique"],
-    ["Arts visuels", "Education musicale", "Histoire des arts", "Outils : arts"],
-    ["Jeux de francais", "Jeux de mathematiques", "Jeux de sciences", "Jeux pour l'histoire", "Jeux de geographie", "Jeux d'anglais", "Jeux d'arts visuels"],
-    ["Outils pour la classe", "Travail en autonomie", "Logiciels"],
-    ["Noel", "Evenements annuels", "Automne", "Hiver", "Printemps", "Ete"],
-];
-
-var Theme_List_CE2_CM1_CM2 = [
-    ["Lecture", "Grammaire", "Conjugaison", "Orthographe", "Vocabulaire", "Language oral", "Ecriture", "Redaction", "Devenir lecteur", "Litterature de jeunesse", "Outils : Francais"],
-    ["Numeration", "Calculs", "Geometrie", "Grandeurs et mesures", "Organisation des donnees", "Outils : Mathematiques"],
-    ["Langue anglaise", "Images / flash cards", "Civilisation anglaise", "Themes du quotidien", "Outils : anglais"],
-    ["Geographie locale", "Territoire francais dans l'UE", "Produire en France", "Population fancaise dans l'UE", "Se deplacer en Europe", "France dans le monde", "Outils : Geographie"],
-    ["Realiser une performance", "Adapter ses deplacements", "Cooperer et s'opposer", "Actions esthetiques", "Outils : EPS"],
-    ["Principes de la morale", "Regles de vie collectives", "Education a la sante", "Education a la securite", "Veme Republique", "Union Europeenne", "Commerations et fetes", "Outils : instruction civique"],
-    ["Arts visuels", "Education musicale", "Histoire des arts", "Outils : arts"],
-    ["Objets", "Le developpement durable", "La matiere", "Le Ciel et la Terre", "Le vivant (anatomie)", "Le vivant (etre vivants)", "TIC", "Outils : Sciences"],
-    ["Prehistoire", "Antiquite", "Moyen-Age", "Temps modernes", "Revolution et XIXeme siecle", "XXeme siecle", "Outils : Histoire"],
-    ["Jeux de francais", "Jeux de mathematiques", "Jeux de sciences", "Jeux pour l'histoire", "Jeux de geographie", "Jeux d'anglais", "Jeux d'arts visuels"],
-    ["Noel", "Evenements annuels", "Automne", "Hiver", "Printemps", "Ete"],
-    ["Outils pour la classe", "Travail en autonomie", "Logiciels"],
-];
-
-function changeTheme(Matiere, indice) {
-    if (niv == "CP" || niv == "CE1")
-        setFilterTheme(Theme_List_CP_CE1[indice]);
-    else
-        setFilterTheme(Theme_List_CE2_CM1_CM2[indice]);
-
-    if (this.id == 'all') {
-        $('#parent > a').fadeIn(450);
-        niv = "all";
-        mat = "all";
-        the = "all";
-    } else {
-        var $el = $('.' + Matiere + "." + niv).fadeIn(450);
-        $('#parent > a').not($el).hide();
-    }
-    mat = Matiere;
-    $(".btnMat").removeClass('active');
-    $("#" + Matiere).addClass('active');
-}
-
-function changeFiche(Theme) {
-    if (this.id == 'all') {
-        $('#parent > a').fadeIn(450);
-        niv = "all";
-        mat = "all";
-        the = "all";
-    } else {
-        if (the != "all") {
-            var $el = $('.' + Theme + "." + mat + "." + niv).fadeIn(450);
-            $('#parent > a').not($el).hide();
-        }
-        else {
-            var $el = $('.' + Theme).fadeIn(450);
-            $('#parent > a').not($el).hide();
-        }
-    }
-    the = Theme;
-    $(".btnTheme").removeClass('active');
-    $("#" + Theme).addClass('active');
-}
-
 $('div.PDFViewerButton').on('click', function (e) {
 
     var UserId = $(this).attr('UserId');
@@ -309,56 +230,46 @@ $('div.PDFViewerButton').on('click', function (e) {
 
 
     $("#Description").html(unescape(description)).text();
-    $("#Editor").append("<form id='forumPostForm' method='post' action='/FicheCours/setDescription'><div id='htmlEditor'></div> <input type='button' onclick='postHtmlEditorContent();' value='Sauvegarder'/></form>");
-    
+    $("#Editor").append('<textarea id="froala-editor">' + unescape(description) + '</textarea><input type="button" class="btn btn-info" onclick="postHtmlEditorContent();" value="Sauvegarder"/>');
+    $('textarea#froala-editor').froalaEditor()
     var contentText = unescape(description);
-    
-    //$("#contentPDF").append("<div id='htmlEditor'> </div>");
-    $("#htmlEditor").igHtmlEditor({
-        height: 400,
-        width: "100%",
-        customToolbars: [
-            {
-                name: "DeleteContentButton",
-                collapseButtonIcon: "ui-igbutton-collapse",
-                expandButtonIcon: "ui-igbutton-expand",
-                items: [{
-                    name: "appendDeleteButton",
-                    type: "button",
-                    handler: appendDeleteButton,
-                    scope: this,
-                    props: {
-                        isImage: {
-                            value: false,
-                            action: '_isSelectedAction'
-                        },
-                        imageButtonTooltip: {
-                            value: "Clear all content",
-                            action: '_tooltipAction'
-                        },
-                        imageButtonIcon: {
-                            value: "ui-icon-clear-content",
-                            action: '_buttonIconAction'
-                        }
-                    }
-                }]
-            }]
-    });
-
-    $("#htmlEditor").igHtmlEditor("setContent", contentText, "html");
-    $("#htmlEditor_editor").height(250);
-    changeToolbarsPosition();
-
-    
-    $("#htmlEditor_editor body").on('change', function () {
-        console.log("gogo");
-    });
 
 });
 
+
+function supprimerFiche() {
+    var id = idF;
+    $.ajax({
+        url: '/FicheCours/Delete',
+        type: 'POST',
+        dataType: 'json',
+        cache: false,
+        data: { id: id },
+        success: function (idR) {
+            idf = null;
+            $('*[idfiche="' + idR + '"]').remove();
+            $('#PDFViewer').modal('hide');
+        }
+    });
+}
+
+function signalerFiche() {
+    var id = idF;
+    $.ajax({
+        url: '/FicheCours/Signaler',
+        type: 'POST',
+        dataType: 'json',
+        cache: false,
+        data: { id: id },
+        success: function (idR) {
+            $('#PDFViewer').modal('hide');
+        }
+    });
+}
+
 function postHtmlEditorContent() {
     // serialize the form
-    var data = $("#htmlEditor").igHtmlEditor("getContent", "html");
+    var data = $('#froala-editor').froalaEditor('html.get');
     data = escape(data);
     // post the form as an ajax call
     $.ajax({
@@ -392,7 +303,23 @@ $('document').ready(function () {
 $('#PDFViewer').bind('hidden.bs.modal', function () {
     $("#Description").empty();
     $("#Editor").empty();
-    $("#dataPDF").empty();
+    $("#PseudoAuteur").empty();
+    $("#NomAuteur").empty();
+    $("#PrenomAuteur").empty();
+    $("#DateNaissanceAuteur").empty();
+    $("#DateInscriptionAuteur").empty();
+    $("#NombreFicheUploadAuteur").empty();
+    $("#LevelAuteur").empty();
+    $("#NombreTelechargementAuteur").empty();
+    $("#thermostat").empty();
+    $("#NbrDDL").empty();
+    $("#dateAjout").empty();
+    $("#NiveauFiche").empty();
+    $("#MatiereFiche").empty();
+    $("#ThemeFiche").empty();
+    $("#idUserFiche").empty();
+    $("#AuteurFiche").empty();
+
 });
 
 $(window).resize(function () {

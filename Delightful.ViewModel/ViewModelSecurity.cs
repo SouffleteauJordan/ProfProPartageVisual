@@ -1,5 +1,5 @@
-﻿using ProfProPartage.Function;
-using ProfProPartage.ViewModel.Model;
+﻿using ProfProPartage.Libs;
+using ProfProPartage.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

@@ -1,5 +1,4 @@
-﻿using ProfProPartage.ViewModel.Model;
-using ProfProPartage.Model;
+﻿using ProfProPartage.Model;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;

@@ -5,7 +5,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using ProfProPartage.ViewModel.Model;
+using ProfProPartage.Model;
 using ProfProPartage.Dal;
 using Microsoft.Owin.Security;
 using System.Net.Http;
